@@ -1,0 +1,102 @@
+<template>
+<div>
+<Row>
+  <div class="left-block">
+    <div class="title">管理中心</div>
+    <Menu theme="light" style="height: 500px;overflow: auto">
+      <MenuItem name="1"><Icon type="ios-paper"></Icon>首页</MenuItem>
+      <MenuItem name="2"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
+      <Submenu name="3">
+        <template slot="title"><Icon type="ios-paper"></Icon>公共服务</template>
+        <MenuItem name="3-1">通知发布</MenuItem>
+        <MenuItem name="3-2">通知管理</MenuItem>
+        <MenuItem name="3-3">问卷调查</MenuItem>
+      </Submenu>
+      <Submenu name="4">
+        <template slot="title"><Icon type="ios-people"></Icon>企业资料</template>
+        <MenuItem name="2-1">维修企业信息管理</MenuItem>
+        <MenuItem name="2-2">质量信誉考核管理</MenuItem>
+        <MenuItem name="2-2">质量信誉考核项目设置</MenuItem>
+      </Submenu>
+      <Submenu name="5">
+        <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
+        <MenuItem name="3-1">基本信息</MenuItem>
+        <MenuItem name="3-2">修改密码</MenuItem>
+        <MenuItem name="3-3">退出登录</MenuItem>
+      </Submenu>
+    </Menu>
+  </div>
+
+  <div class="left-block">
+    <div class="title">企业中心</div>
+    <Menu theme="light" style="height: 500px;overflow: auto">
+      <MenuItem name="1"><Icon type="ios-paper"></Icon>首页</MenuItem>
+      <MenuItem name="2"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
+      <Submenu name="3">
+        <template slot="title"><Icon type="ios-paper"></Icon>预约上门管理</template>
+        <MenuItem name="3-1">上门服务管理</MenuItem>
+        <MenuItem name="3-2">预约管理</MenuItem>
+      </Submenu>
+      <Submenu name="4">
+        <template slot="title"><Icon type="ios-people"></Icon>信息管理</template>
+        <MenuItem name="2-1">通知管理</MenuItem>
+        <MenuItem name="2-2">投诉管理</MenuItem>
+      </Submenu>
+      <Submenu name="4">
+        <template slot="title"><Icon type="ios-people"></Icon>业务管理</template>
+        <MenuItem name="2-1">维修数据上报查询</MenuItem>
+        <MenuItem name="2-2">行业报表申报系统</MenuItem>
+      </Submenu>
+      <Submenu name="5">
+        <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
+        <MenuItem name="3-1">基本信息</MenuItem>
+        <MenuItem name="3-2">修改密码</MenuItem>
+        <MenuItem name="3-3">退出登录</MenuItem>
+      </Submenu>
+    </Menu>
+  </div>
+
+  <div class="right-block">
+  </div>
+</Row>
+</div>
+</template>
+
+<script>
+
+</script>
+
+<style scoped lang="scss">
+.left-block{
+  float: left;
+  border-right: 1px solid #dddee1;
+  .title{
+    width: 215px;
+    height: 45px;
+    background: url(../assets/leftmenu/banner.png) no-repeat;
+    margin: 15px auto 0 auto;
+    position: relative;
+    color: #FFF;
+    font-size: 16px;
+    padding-left: 40px;
+    line-height: 38px;
+  }
+  .title:after {
+    content: "";
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    background: url(../assets/leftmenu/book.png) no-repeat;
+  }
+  .ivu-menu::-webkit-scrollbar{
+
+  }
+}
+
+
+.ivu-menu-vertical.ivu-menu-light:after{
+  background: none;
+}
+</style>
