@@ -1,12 +1,15 @@
 <template>
 <div>
 <div class="topbar">
-  <div class="greet"><span>您好，欢迎光临本站！</span><a>请登录</a>|<a>快速注册</a></div>
+  <div class="greet"><span>您好，欢迎光临本站！</span>
+    <router-link tag="a" :to="{ name: 'login'}">请登录</router-link>|
+    <router-link tag="a" :to="{ name: 'register'}">快速注册</router-link>
+  </div>
 </div>
 <div class="midbar">
   <img class="logo" src="../assets/header/logo1.png">
   <div class="title">
-    <p>上海市机动车维修公共服务网</p><p>Shanghai Automobile Maintenance public Service  Website</p>
+    <p>上海市机动车维修公共服务平台</p><p>Shanghai Automobile Maintenance public Service  Website</p>
   </div>
   <div class="wx" @mouseover="showqr" @mouseout="hideqr">
     <img src="../assets/header/vx.png"><span>关注微信公众号</span>
@@ -73,6 +76,7 @@ export default {
 <style scoped lang="scss">
 .topbar{
   width: 100%;
+  min-width: 800px;
   height: 40px;
   line-height: 40px;
   font-size: 14px;
@@ -89,6 +93,7 @@ export default {
 .midbar{
   margin-top: 20px;
   position: relative;
+  min-width: 800px;
   .logo{
     width: 60px;
     margin: 0 20px;
@@ -161,6 +166,7 @@ export default {
 .ivu-menu li{
   height: 40px;
   line-height: 40px;
+  padding: 0 18px;
 }
 </style>
 

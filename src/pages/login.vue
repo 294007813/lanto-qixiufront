@@ -28,7 +28,7 @@
         </Form-item>
         <Form-item label="验证码">
           <Input size="large" type="text" v-model="regForm.code" placeholder="验证码" >
-            <p slot="append" class="get-code" @click="getCode">获取验证码</p>
+            <p slot="append" class="get-code" @click="getCode">{{getCodeButton}}</p>
           </Input>
         </Form-item>
         <Form-item label="密码">
@@ -73,18 +73,188 @@ export default {
         password:"",
         repass:"",
         type:"1"
-      }
+      },
+      getCodeButton:"获取验证码",
+      count: 0,
+      timer: null
     }
+  },
+  beforeCreate(){
+    if(!localStorage.getItem("SYSTEMTOKEN")){
+      let data = {
+        device: uuid(),
+        password: "k5pg8kkN",
+        username: "pcqixiu"
+      }
+      this.axios({
+        method: 'post',
+        url: '/system/terminalsystem/login',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        data: JSON.stringify(data)
+      }).then(function (response) {
+        localStorage.setItem("SYSTEMTOKEN", response.data.data.systemToken)
+      })
+    }
+
+    function  uuid() {
+      var s = [];
+      var hexDigits = "0123456789abcdef";
+      for (var i = 0; i < 32; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+      }
+      s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+      s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+      // s[8] = s[13] = s[18] = s[23] = "-";
+
+      var uuid = s.join("");
+      return uuid;
+    }
+  },
+  mounted(){
+    if(this.$route.query.redirect){
+      this.$Message.warning('请登录');
+    }
+    this.$Message.config({
+      top: 300,
+    });
   },
   methods:{
     handleLogin(){
+      if(!this.loginForm.loginName){
+        this.$Message.error('请输入用户名');
+        return
+      }
+      if(!this.loginForm.password){
+        this.$Message.error('请输入密码');
+        return
+      }
+      let self=this
+      let data={
+        loginaccount: this.loginForm.loginName,
+        userpassword: this.loginForm.password,
+        systemToken: localStorage.getItem("SYSTEMTOKEN")
+      }
+      this.axios({
+        method: 'post',
+        url: '/user/useraccount/login',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        data: JSON.stringify(data)
+      }).then(function (response) {
+        console.log(response)
+        if(response.data.code=='000000'){
+          self.$Message.success('登录成功')
+          localStorage.setItem("ACCESSTOKEN",response.data.data.accessToken);
+          localStorage.setItem("USERINFO",JSON.stringify(response.data.data));
+          if(self.$route.query.redirect){
+            self.$router.replace({
+              path:self.$route.query.redirect
+            })
+          }else{
+            self.$router.replace({
+              name: 'index'
+            })
+          }
 
+
+        }else{
+          self.$Message.error(response.data.status);
+        }
+      })
     },
     handlereg(){
+      if( !/^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|17[0-9]{9}$|18[0-9]{9}$/.test(this.regForm.loginName) ){
+        this.$Message.error('手机号不正确！');
+        return
+      }
+      if(! /(.+){6,18}$/.test(this.regForm.password)){
+        this.$Message.error('密码必须6到18位！');
+        return
+      }
+      if(this.regForm.password!= this.regForm.repass){
+        this.$Message.error('两次密码不一致！');
+        return
+      }
+      if(!this.regForm.code){
+        this.$Message.error('请输入验证码！');
+        return
+      }
+      let self= this
+      let data={
+        "captcha": this.regForm.code,
+        "systemToken": localStorage.getItem('SYSTEMTOKEN'),
+        "useroleid": this.regForm.type,
+        "userpassword": this.regForm.password,
+        "usertel": this.regForm.loginName
+      }
+      this.axios({
+        method: 'post',
+        url: '/user/useraccount/register',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        data: JSON.stringify(data)
+      }).then(function (response) {
+        console.log(response)
+        if(response.data.code=='000000'){
+          self.$Modal.success({
+            title: '成功',
+            content: '注册成功',
+            onOk: () => {
+              self.$router.push({
+                path:'/login'
+              })
+            },
+          });
+        }else {
+          self.$Message.error(response.data.status);
+        }
 
+      })
     },
     getCode(){
-      
+      if( !/^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|17[0-9]{9}$|18[0-9]{9}$/.test(this.regForm.loginName) ){
+        this.$Message.error('手机号不正确！');
+        return
+      }
+      if(this.timer) return;
+      let self= this
+      this.axios({
+        method: 'post',
+        url: '/message/sms/sendcaptcha/'+ localStorage.getItem('SYSTEMTOKEN') + '/' + this.regForm.loginName,
+        headers: {
+          'Content-type': 'application/json'
+        }
+      }).then(function (response) {
+        console.log(response)
+        if(response.data.code=='000000'){
+          self.$Message.success('发送成功，请查收！');
+        }else {
+          self.$Message.error(response.data.status);
+        }
+      })
+
+
+      //计时器
+      const TIME_COUNT = 60;
+      let num= 0;
+      if (!this.timer) {
+        this.count = TIME_COUNT;
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= TIME_COUNT) {
+            num= this.count
+            this.getCodeButton= num+ "s"
+            this.count--;
+          } else {
+            clearInterval(this.timer);
+            this.getCodeButton= '获取验证码'
+            this.timer = null;
+          }
+        }, 1000)
+      }
     }
   }
 }
