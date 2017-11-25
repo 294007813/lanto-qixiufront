@@ -9,6 +9,7 @@ import 'iview/dist/styles/iview.css';
 // import 'element-ui/lib/theme-chalk/index.css'
 import './login.js'
 import axios from './myaxios.js'
+import store from './store/store'
 
 Vue.use(iView);
 // Vue.use(ElementUI)
@@ -20,6 +21,7 @@ new Vue({
   el: '#app',
   axios,
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

@@ -147,8 +147,11 @@ export default {
         console.log(response)
         if(response.data.code=='000000'){
           self.$Message.success('登录成功')
+
           localStorage.setItem("ACCESSTOKEN",response.data.data.accessToken);
           localStorage.setItem("USERINFO",JSON.stringify(response.data.data));
+          self.$store.commit("putUserInfo",response.data.data)
+
           if(self.$route.query.redirect){
             self.$router.replace({
               path:self.$route.query.redirect

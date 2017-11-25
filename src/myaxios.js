@@ -36,6 +36,8 @@ axios.interceptors.response.use(
       }
       case '130412':{
         localStorage.removeItem("ACCESSTOKEN");
+        localStorage.removeItem("USERINFO");
+        this.$store.commit("putUserInfo",{})
         router.replace({
           path: '/login',
           query: {redirect: router.currentRoute.fullPath}

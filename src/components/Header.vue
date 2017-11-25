@@ -1,9 +1,15 @@
 <template>
 <div>
 <div class="topbar">
-  <div class="greet"><span>您好，欢迎光临本站！</span>
+  <div v-if="!userName()" class="greet"><span>您好，欢迎光临本站！</span>
     <router-link tag="a" :to="{ name: 'login'}">请登录</router-link>|
     <router-link tag="a" :to="{ name: 'register'}">快速注册</router-link>
+  </div>
+  <div v-if="userName()" class="greet"><span>欢迎您，</span><span>{{userName()}}</span>
+    <span v-if="userType()==1" class="button">车主中心</span>
+    <span v-if="userType()==2" class="button">企业中心</span>
+    <span v-if="userType()==3" class="button">管理中心</span>
+    <a @click="logout">注销</a>
   </div>
 </div>
 <div class="midbar">
@@ -61,7 +67,41 @@ export default {
       qr: false
     }
   },
+  computed:{
+
+  },
   methods:{
+    userName(){
+      let name= this.$store.getters.userName, localInfo= localStorage.getItem('USERINFO')
+      if (!name){
+        if (localInfo){
+          this.$store.commit("putUserInfo",JSON.parse(localInfo))
+        }
+      }
+      return this.$store.getters.userName
+    },
+    userType(){
+      return this.$store.getters.userType
+    },
+    logout(){
+      let self= this
+      this.$Modal.confirm({
+        title: '退出',
+        content: '确定退出登录？',
+        onOk: () => {
+          this.$Message.success('退出成功');
+          localStorage.removeItem("ACCESSTOKEN");
+          localStorage.removeItem("USERINFO");
+          self.$store.commit("putUserInfo",{})
+          self.$router.replace({
+            path: '/login',
+          });
+        },
+        onCancel: () => {
+//          this.$Message.info('Clicked cancel');
+        }
+      });
+    },
     showqr(){
       this.qr=true
     },
@@ -87,6 +127,14 @@ export default {
     margin-right: 10px;
     a{
       padding: 0 5px;
+    }
+    .button{
+      background: #4ba7f5;
+      color: white;
+      padding: 2px 5px;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
     }
   }
 }
