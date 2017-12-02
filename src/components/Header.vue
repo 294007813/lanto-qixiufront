@@ -29,8 +29,8 @@
   <div class="right">上海蓝速汽车技术有限公司</div>
 </div>
 
-  <Menu mode="horizontal" theme="primary" active-name="1">
-    <MenuItem name="1">首页</MenuItem>
+  <Menu mode="horizontal" theme="primary" active-name="1" @on-select="select">
+    <MenuItem name="/index">首页</MenuItem>
     <MenuItem name="2">公共管理</MenuItem>
     <MenuItem name="3">电子健康档案</MenuItem>
     <Submenu name="4">
@@ -107,6 +107,12 @@ export default {
     },
     hideqr(){
       this.qr=false
+    },
+    select(name){
+      console.log(name)
+      this.$router.push({
+        path: name
+      })
     }
   }
 
