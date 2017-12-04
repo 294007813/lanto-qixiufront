@@ -313,10 +313,10 @@ export default {
       }
       .reg{
         border-bottom: 1px solid #dddddd;
-        background: url(../assets/login/register.png) no-repeat left center;
+        background: url(../../assets/login/register.png) no-repeat left center;
       }
       .log{
-        background: url(../assets/login/login.png) no-repeat left center;
+        background: url(../../assets/login/login.png) no-repeat left center;
       }
     }
   }
