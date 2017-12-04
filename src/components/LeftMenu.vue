@@ -90,6 +90,7 @@ export default {
 .left-block{
   float: left;
   border-right: 1px solid #dddee1;
+  border-bottom: 1px solid #dddee1;
   .title{
     width: 215px;
     height: 45px;

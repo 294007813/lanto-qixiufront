@@ -10,6 +10,9 @@ import About from '@/pages/about'
 //manage
 import ManageHome from '@/pages/manager/home'
 
+//company
+import CompanyHome from '@/pages/company/home'
+
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +28,8 @@ export default new Router({
         {path: '/about', name: 'about', component: About,},
         {path: '/center', name: 'center', component: LeftMenu, children:[
             {path: '/center/manHome', name: 'manHome', component: ManageHome, meta: { requiresAuth: true }},
+
+            {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
         ]},
 
 

@@ -6,9 +6,9 @@
     <router-link tag="a" :to="{ name: 'register'}">快速注册</router-link>
   </div>
   <div v-if="userName()" class="greet"><span>欢迎您，</span><span>{{userName()}}</span>
-    <span v-if="userType()==1" class="button">车主中心</span>
-    <span v-if="userType()==2" class="button">企业中心</span>
-    <span v-if="userType()==3" class="button">管理中心</span>
+    <router-link tag="span" :to="{ name: 'perHome'}" v-if="userType()==1" class="button">车主中心</router-link>
+    <router-link tag="span" :to="{ name: 'comHome'}" v-if="userType()==2" class="button">企业中心</router-link>
+    <router-link tag="span" :to="{ name: 'manHome'}" v-if="userType()==3" class="button">管理中心</router-link>
     <a @click="logout">注销</a>
   </div>
 </div>
