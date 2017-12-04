@@ -240,7 +240,6 @@ export default {
         }
       })
 
-
       //计时器
       const TIME_COUNT = 60;
       let num= 0;

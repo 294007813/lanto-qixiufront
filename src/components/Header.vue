@@ -15,7 +15,7 @@
 <div class="midbar">
   <img class="logo" src="../assets/header/logo1.png">
   <div class="title">
-    <p>上海市机动车维修公共服务平台</p><p>Shanghai Automobile Maintenance public Service  Website</p>
+    <p>上海市机动车维修公共服务平台</p><p>Shanghai Automobile Maintenance public Service  Platform</p>
   </div>
   <div class="wx" @mouseover="showqr" @mouseout="hideqr">
     <img src="../assets/header/vx.png"><span>关注微信公众号</span>
@@ -29,7 +29,7 @@
   <div class="right">上海蓝速汽车技术有限公司</div>
 </div>
 
-  <Menu mode="horizontal" theme="primary" active-name="1" @on-select="select">
+  <Menu mode="horizontal" theme="primary" :active-name="this.$route.path" @on-select="select">
     <MenuItem name="/index">首页</MenuItem>
     <MenuItem name="2">公共管理</MenuItem>
     <MenuItem name="3">电子健康档案</MenuItem>
@@ -53,7 +53,7 @@
       <MenuItem name="7-3">保险服务</MenuItem>
       <MenuItem name="7-4">合作伙伴</MenuItem>
     </Submenu>
-    <MenuItem name="8">关于我们</MenuItem>
+    <MenuItem name="/about">关于我们</MenuItem>
   </Menu>
 
 </div>
@@ -64,7 +64,7 @@
 export default {
   data(){
     return{
-      qr: false
+      qr: false,
     }
   },
   computed:{

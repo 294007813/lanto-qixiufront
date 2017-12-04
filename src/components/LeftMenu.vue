@@ -1,10 +1,11 @@
 <template>
 <div>
 <Row>
-  <div class="left-block">
+  <div class="left-block" v-if="userType()==3">
     <div class="title">管理中心</div>
-    <Menu theme="light" style="height: 500px;overflow: auto">
-      <MenuItem name="1"><Icon type="ios-paper"></Icon>首页</MenuItem>
+    <Menu theme="light" class="left-menu"
+          :active-name="this.$route.path" @on-select="select" :open-names="['3','4','5']">
+      <MenuItem name="/center/manHome"><Icon type="ios-paper"></Icon>首页</MenuItem>
       <MenuItem name="2"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>公共服务</template>
@@ -27,9 +28,10 @@
     </Menu>
   </div>
 
-  <div class="left-block">
+  <div class="left-block" v-if="userType()==2">
     <div class="title">企业中心</div>
-    <Menu theme="light" style="height: 500px;overflow: auto">
+    <Menu theme="light" class="left-menu"
+          :active-name="this.$route.path" @on-select="select">
       <MenuItem name="1"><Icon type="ios-paper"></Icon>首页</MenuItem>
       <MenuItem name="2"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
@@ -57,13 +59,31 @@
   </div>
 
   <div class="right-block">
+    <router-view/>
   </div>
 </Row>
 </div>
 </template>
 
 <script>
+export default {
+  data(){
+    return{
 
+    }
+  },
+  methods:{
+    userType(){
+      return this.$store.getters.userType
+    },
+    select(name){
+      console.log(name)
+      this.$router.push({
+        path: name
+      })
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -90,11 +110,20 @@
     left: 10px;
     background: url(../assets/leftmenu/book.png) no-repeat;
   }
+  .left-menu{
+    min-height: 520px;
+  }
   .ivu-menu::-webkit-scrollbar{
 
   }
 }
-
+.right-block{
+  margin: 10px 10px 10px 250px;
+  padding: 0 10px;
+  border: 1px solid #dddee1;
+  min-height: 560px;
+  min-width: 550px;
+}
 
 .ivu-menu-vertical.ivu-menu-light:after{
   background: none;

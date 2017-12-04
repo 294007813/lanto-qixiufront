@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import myMap from './map.vue'
+import myMap from '../components/Map.vue'
 export default {
   name: 'index',
   data(){

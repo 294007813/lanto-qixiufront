@@ -3,13 +3,14 @@ import router from './router'
 
 // axios 配置
 axios.defaults.timeout = 10000;
-axios.defaults.baseURL = 'http://product.qixiu.shanghaiqixiu.org/';
+axios.defaults.baseURL = 'http://dev.qixiu.shanghaiqixiu.org/';
 
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
     // console.log(response);
     switch (response.data.code){
+      //系统票据失效
       case '130411':{
 
         localStorage.removeItem("SYSTEMTOKEN")
@@ -30,10 +31,11 @@ axios.interceptors.response.use(
           localStorage.setItem("SYSTEMTOKEN", response.data.data.systemToken)
 
         })
-
-
         break
       }
+      //该票据不存在
+      case '130405':{}
+      //用户票据失效
       case '130412':{
         localStorage.removeItem("ACCESSTOKEN");
         localStorage.removeItem("USERINFO");
