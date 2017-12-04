@@ -7,6 +7,13 @@ import router from './router'
 import './assets/style.css'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+import ECharts from 'vue-echarts/components/ECharts.vue'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/legend'
+import 'echarts/lib/component/title'
+import 'echarts/lib/component/tooltip'
+
 //import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 import './login.js'
@@ -20,6 +27,7 @@ Vue.use(iView);
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;
 Vue.component('sub-title', SubTitle)
+Vue.component('chart', ECharts)
 
 /* eslint-disable no-new */
 new Vue({

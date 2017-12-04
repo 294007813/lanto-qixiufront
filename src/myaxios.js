@@ -1,6 +1,6 @@
 import axios from 'axios'
 import router from './router'
-
+import store from './store/store'
 // axios 配置
 axios.defaults.timeout = 10000;
 axios.defaults.baseURL = 'http://dev.qixiu.shanghaiqixiu.org/';
@@ -39,7 +39,7 @@ axios.interceptors.response.use(
       case '130412':{
         localStorage.removeItem("ACCESSTOKEN");
         localStorage.removeItem("USERINFO");
-        this.$store.commit("putUserInfo",{})
+        store.commit("putUserInfo",{})
         router.replace({
           path: '/login',
           query: {redirect: router.currentRoute.fullPath}

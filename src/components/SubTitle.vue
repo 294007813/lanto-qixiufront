@@ -12,7 +12,7 @@ export default {
   name: "sub-title",
   props:['title', 'link'],
   mounted(){
-    console.log( this.link)
+    // console.log( this.link)
   }
 }
 </script>
