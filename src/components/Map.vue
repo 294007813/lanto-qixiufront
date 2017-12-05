@@ -73,7 +73,7 @@
     position: relative;
     padding: 5px;
     background: #FFF;
-    z-index: 9999;
+    z-index: 888;
     width: 380px;
     height: 600px;
     .select-bar{

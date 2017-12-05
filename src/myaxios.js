@@ -10,6 +10,8 @@ axios.interceptors.response.use(
   response => {
     // console.log(response);
     switch (response.data.code){
+      //该票据不存在
+      case '130405':{}
       //系统票据失效
       case '130411':{
 
@@ -33,8 +35,10 @@ axios.interceptors.response.use(
         })
         break
       }
+      //票据非法
+      case '130408':{}
       //该票据不存在
-      case '130405':{}
+      // case '130405':{}
       //用户票据失效
       case '130412':{
         localStorage.removeItem("ACCESSTOKEN");

@@ -31,8 +31,8 @@
   <div class="left-block" v-if="userType()==2">
     <div class="title">企业中心</div>
     <Menu theme="light" class="left-menu"
-          :active-name="this.$route.path" @on-select="select">
-      <MenuItem name="1"><Icon type="ios-paper"></Icon>首页</MenuItem>
+          :active-name="this.$route.path" @on-select="select" :open-names="['3','4','5','6']">
+      <MenuItem name="/center/comHome"><Icon type="ios-paper"></Icon>首页</MenuItem>
       <MenuItem name="2"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>预约上门管理</template>
@@ -44,12 +44,12 @@
         <MenuItem name="2-1">通知管理</MenuItem>
         <MenuItem name="2-2">投诉管理</MenuItem>
       </Submenu>
-      <Submenu name="4">
+      <Submenu name="5">
         <template slot="title"><Icon type="ios-people"></Icon>业务管理</template>
         <MenuItem name="2-1">维修数据上报查询</MenuItem>
         <MenuItem name="2-2">行业报表申报系统</MenuItem>
       </Submenu>
-      <Submenu name="5">
+      <Submenu name="6">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
         <MenuItem name="3-1">基本信息</MenuItem>
         <MenuItem name="3-2">修改密码</MenuItem>
