@@ -6,7 +6,7 @@
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" :open-names="['3','4','5']">
       <MenuItem name="/center/manHome"><Icon type="ios-paper"></Icon>首页</MenuItem>
-      <MenuItem name="2"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
+      <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>公共服务</template>
         <MenuItem name="3-1">通知发布</MenuItem>
@@ -33,7 +33,7 @@
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" :open-names="['3','4','5','6']">
       <MenuItem name="/center/comHome"><Icon type="ios-paper"></Icon>首页</MenuItem>
-      <MenuItem name="2"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
+      <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>预约上门管理</template>
         <MenuItem name="3-1">上门服务管理</MenuItem>
