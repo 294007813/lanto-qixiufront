@@ -13,18 +13,18 @@
         <MenuItem name="/center/notes">通知管理</MenuItem>
         <MenuItem name="/center/complain">投诉管理</MenuItem>
         <MenuItem name="/center/survey">问卷调查</MenuItem>
-        <MenuItem name="">统计报表</MenuItem>
-        <MenuItem name="">文件下载</MenuItem>
+        <MenuItem name=""><!--<a style='color: #333' href="http://218.242.195.69:3320/hytjglxt/login.vm" target="_blank">统计报表</a>-->统计报表</MenuItem>
+        <MenuItem name="/center/download">文件下载</MenuItem>
       </Submenu>
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>企业资料</template>
         <MenuItem name="">维修企业信息管理</MenuItem>
-        <MenuItem name="">质量信誉考核管理</MenuItem>
+        <MenuItem name="/center/quality">质量信誉考核管理</MenuItem>
       </Submenu>
       <Submenu name="5">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
-        <MenuItem name="">基本信息</MenuItem>
-        <MenuItem name="">修改密码</MenuItem>
+        <MenuItem name="/center/baseInfo">基本信息</MenuItem>
+        <MenuItem name="/center/resetPassword">修改密码</MenuItem>
         <MenuItem name="">退出登录</MenuItem>
       </Submenu>
     </Menu>
