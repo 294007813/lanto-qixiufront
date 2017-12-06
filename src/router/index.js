@@ -20,6 +20,7 @@ import Complain from '@/pages/manager/complain'
 import Survey from '@/pages/manager/survey'
 import Download from '@/pages/manager/download'
 import Quality from '@/pages/manager/quality'
+import CompanyInfo from '@/pages/manager/companyInfo'
 
 //company
 import CompanyHome from '@/pages/company/home'
@@ -45,6 +46,7 @@ export default new Router({
             {path: '/center/manDownload', name: 'download', component: Download},
             {path: '/center/manSurvey', name: 'survey', component: Survey, meta: { requiresAuth: true }},
             {path: '/center/manQuality', name: 'quality', component: Quality, meta: { requiresAuth: true}},
+            {path: '/center/manCompanyInfo', name: 'companyInfo', component: CompanyInfo, meta: { requiresAuth: true}},
 
             //企业中心
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},

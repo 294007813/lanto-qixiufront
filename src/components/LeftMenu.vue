@@ -20,8 +20,8 @@
       </Submenu>
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>企业资料</template>
-        <MenuItem name="">维修企业信息管理</MenuItem>
-        <MenuItem name="/center/quality">质量信誉考核管理</MenuItem>
+        <MenuItem name="/center/manCompanyInfo">维修企业信息管理</MenuItem>
+        <MenuItem name="/center/manQuality">质量信誉考核管理</MenuItem>
       </Submenu>
       <Submenu name="5">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
