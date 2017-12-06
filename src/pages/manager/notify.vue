@@ -1,6 +1,6 @@
 <template>
 <div>
-  <sub-title title="首页" :link="[{name:'管理中心',to: '/center/manHome'},{name:'通知发布',to:''}]"></sub-title>
+  <sub-title title="通知发布" :link="[{name:'管理中心',to: '/center/manHome'},{name:'通知发布',to:''}]"></sub-title>
   <Form :model="formItem" :label-width="80" style="width: 500px;overflow: hidden;margin: 10px 0">
     <FormItem label="通知标题">
       <Input v-model="formItem.title" placeholder="请输入"></Input>

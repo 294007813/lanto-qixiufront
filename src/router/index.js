@@ -12,6 +12,8 @@ import Notes from '@/pages/public/notes'
 //manage
 import ManageHome from '@/pages/manager/home'
 import Notify from '@/pages/manager/notify'
+import Complain from '@/pages/manager/complain'
+import Survey from '@/pages/manager/survey'
 
 //company
 import CompanyHome from '@/pages/company/home'
@@ -37,9 +39,9 @@ export default new Router({
 
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
             {path: '/center/notes', name: 'notes', component: Notes, meta: { requiresAuth: true }},
+            {path: '/center/complain', name: 'complain', component: Complain, meta: { requiresAuth: true }},
+            {path: '/center/survey', name: 'survey', component: Survey, meta: { requiresAuth: true }},
         ]},
-
-
       ]
     }
   ]

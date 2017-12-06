@@ -11,8 +11,8 @@
         <template slot="title"><Icon type="ios-paper"></Icon>公共服务</template>
         <MenuItem name="/center/manNotify">通知发布</MenuItem>
         <MenuItem name="/center/notes">通知管理</MenuItem>
-        <MenuItem name="">投诉管理</MenuItem>
-        <MenuItem name="">问卷调查</MenuItem>
+        <MenuItem name="/center/complain">投诉管理</MenuItem>
+        <MenuItem name="/center/survey">问卷调查</MenuItem>
         <MenuItem name="">统计报表</MenuItem>
         <MenuItem name="">文件下载</MenuItem>
       </Submenu>
@@ -44,7 +44,7 @@
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>信息管理</template>
         <MenuItem name="/center/notes">通知管理</MenuItem>
-        <MenuItem name="">投诉管理</MenuItem>
+        <MenuItem name="/center/survey">投诉管理</MenuItem>
       </Submenu>
       <Submenu name="5">
         <template slot="title"><Icon type="ios-people"></Icon>业务管理</template>
