@@ -38,3 +38,7 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+Vue.prototype.userType = function () {
+  return store.getters.userType
+}

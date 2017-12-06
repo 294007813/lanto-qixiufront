@@ -8,6 +8,7 @@ import Index from '@/pages/index'
 import Login from '@/pages/public/login'
 import About from '@/pages/public/about'
 import RecordList from '@/pages/public/eRecordList'
+import RecordDetail from '@/pages/public/eRecordDetail'
 import Notes from '@/pages/public/notes'
 import NoteDetail from '@/pages/public/noteDetail'
 import BaseInfo from '@/pages/public/baseInfo'
@@ -53,6 +54,7 @@ export default new Router({
 
             //共用组件
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
+            {path: '/center/eRecordDetail', name: 'eRecordDetail', component: RecordDetail, meta: { requiresAuth: true }},
             {path: '/center/notes', name: 'notes', component: Notes, meta: { requiresAuth: true }},
             {path: '/center/noteDetail', name: 'noteDetail', component: NoteDetail, meta: { requiresAuth: true }},
             {path: '/center/baseInfo', name: 'baseInfo', component: BaseInfo, meta: { requiresAuth: true}},
