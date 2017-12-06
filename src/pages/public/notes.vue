@@ -13,7 +13,17 @@
 
 <script>
 	export default {
-		name: "notes"
+		name: "notes",
+    data(){
+		  return{
+		    
+      }
+    },
+    methods:{
+      userType(){
+        return this.$store.getters.userType
+      },
+    }
 	}
 </script>
 
