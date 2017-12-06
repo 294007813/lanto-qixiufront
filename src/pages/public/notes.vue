@@ -40,6 +40,10 @@
                   on: {
                     click: () => {
                       console.log(params.row.id)
+                      this.$router.push({
+                        path:'/center/noteDetail',
+                        query:{id: params.row.id, from: 'my'}
+                      })
                     }
                   }
                 }, '查看'),
@@ -65,6 +69,10 @@
                   on: {
                     click: () => {
                       console.log(params.row.id)
+                      this.$router.push({
+                        path:'/center/noteDetail',
+                        query:{id: params.row.id}
+                      })
                     }
                   }
                 }, '查看'),

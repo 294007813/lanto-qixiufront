@@ -79,16 +79,16 @@ export default {
             }
           },
           data:[
-            {value:4380, name:'维修数据完成对接'},
-            {value:1620, name:'维修数据未完成对接'},
+            {value:4380, name:'维修企业完成对接'},
+            {value:1620, name:'维修企业未完成对接'},
           ]
         }],
-        // legend: {
-        //   orient: 'vertical',
-        //   // x: 'left',
-        //   bottom: 0,
-        //   data:['维修数据完成对接','维修数据未完成对接']
-        // },
+        legend: {
+          orient: 'vertical',
+          // x: 'left',
+          bottom: 0,
+          data:['维修企业完成对接','维修企业未完成对接']
+        },
       },
 
       bar1:{
