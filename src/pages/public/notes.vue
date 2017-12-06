@@ -16,7 +16,7 @@
 		name: "notes",
     data(){
 		  return{
-		    
+
       }
     },
     methods:{
