@@ -13,7 +13,7 @@
         <MenuItem name="/center/notes">通知管理</MenuItem>
         <MenuItem name="/center/complain">投诉管理</MenuItem>
         <MenuItem name="/center/survey">问卷调查</MenuItem>
-        <MenuItem name=""><!--<a style='color: #333' href="http://218.242.195.69:3320/hytjglxt/login.vm" target="_blank">统计报表</a>-->统计报表</MenuItem>
+        <MenuItem name=""><a style='color: #333' href="http://218.242.195.69:3320/hytjglxt/login.vm" target="_blank">统计报表</a></MenuItem>
         <MenuItem name="/center/download">文件下载</MenuItem>
       </Submenu>
       <Submenu name="4">

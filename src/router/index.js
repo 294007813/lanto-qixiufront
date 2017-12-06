@@ -39,6 +39,7 @@ export default new Router({
         {path: '/center', name: 'center', component: LeftMenu, children:[
             {path: '/center/manHome', name: 'manHome', component: ManageHome, meta: { requiresAuth: true }},
             {path: '/center/manNotify', name: 'notify', component: Notify, meta: { requiresAuth: true }},
+           
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
             {path: '/center/notes', name: 'notes', component: Notes, meta: { requiresAuth: true }},
