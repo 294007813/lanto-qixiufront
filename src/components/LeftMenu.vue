@@ -9,21 +9,23 @@
       <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>公共服务</template>
-        <MenuItem name="3-1">通知发布</MenuItem>
-        <MenuItem name="3-2">通知管理</MenuItem>
-        <MenuItem name="3-3">问卷调查</MenuItem>
+        <MenuItem name="/center/manNotify">通知发布</MenuItem>
+        <MenuItem name="/center/notes">通知管理</MenuItem>
+        <MenuItem name="">投诉管理</MenuItem>
+        <MenuItem name="">问卷调查</MenuItem>
+        <MenuItem name="">统计报表</MenuItem>
+        <MenuItem name="">文件下载</MenuItem>
       </Submenu>
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>企业资料</template>
-        <MenuItem name="2-1">维修企业信息管理</MenuItem>
-        <MenuItem name="2-2">质量信誉考核管理</MenuItem>
-        <MenuItem name="2-2">质量信誉考核项目设置</MenuItem>
+        <MenuItem name="">维修企业信息管理</MenuItem>
+        <MenuItem name="">质量信誉考核管理</MenuItem>
       </Submenu>
       <Submenu name="5">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
-        <MenuItem name="3-1">基本信息</MenuItem>
-        <MenuItem name="3-2">修改密码</MenuItem>
-        <MenuItem name="3-3">退出登录</MenuItem>
+        <MenuItem name="">基本信息</MenuItem>
+        <MenuItem name="">修改密码</MenuItem>
+        <MenuItem name="">退出登录</MenuItem>
       </Submenu>
     </Menu>
   </div>
@@ -36,25 +38,42 @@
       <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>预约上门管理</template>
-        <MenuItem name="3-1">上门服务管理</MenuItem>
-        <MenuItem name="3-2">预约管理</MenuItem>
+        <MenuItem name="">上门服务管理</MenuItem>
+        <MenuItem name="">预约管理</MenuItem>
       </Submenu>
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>信息管理</template>
-        <MenuItem name="2-1">通知管理</MenuItem>
-        <MenuItem name="2-2">投诉管理</MenuItem>
+        <MenuItem name="/center/notes">通知管理</MenuItem>
+        <MenuItem name="">投诉管理</MenuItem>
       </Submenu>
       <Submenu name="5">
         <template slot="title"><Icon type="ios-people"></Icon>业务管理</template>
-        <MenuItem name="2-1">维修数据上报查询</MenuItem>
-        <MenuItem name="2-2">行业报表申报系统</MenuItem>
+        <MenuItem name="">维修数据上报查询</MenuItem>
+        <MenuItem name="">行业报表申报系统</MenuItem>
       </Submenu>
       <Submenu name="6">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
-        <MenuItem name="3-1">基本信息</MenuItem>
-        <MenuItem name="3-2">修改密码</MenuItem>
-        <MenuItem name="3-3">退出登录</MenuItem>
+        <MenuItem name="">基本信息</MenuItem>
+        <MenuItem name="">修改密码</MenuItem>
+        <MenuItem name="">退出登录</MenuItem>
       </Submenu>
+    </Menu>
+  </div>
+
+  <div class="left-block" v-if="userType()==1">
+    <div class="title">车主中心</div>
+    <Menu theme="light" class="left-menu"
+          :active-name="this.$route.path" @on-select="select" >
+      <MenuItem name=""><Icon type="ios-paper"></Icon>爱车档案</MenuItem>
+      <MenuItem name=""><Icon type="ios-paper"></Icon>绑定车辆</MenuItem>
+      <MenuItem name="/center/notes"><Icon type="ios-paper"></Icon>通知管理</MenuItem>
+      <MenuItem name=""><Icon type="ios-paper"></Icon>我的咨询</MenuItem>
+      <MenuItem name=""><Icon type="ios-paper"></Icon>我的上门服务</MenuItem>
+      <MenuItem name=""><Icon type="ios-paper"></Icon>我的预约服务</MenuItem>
+      <MenuItem name=""><Icon type="ios-paper"></Icon>基本信息</MenuItem>
+      <MenuItem name=""><Icon type="ios-paper"></Icon>修改密码</MenuItem>
+      <MenuItem name=""><Icon type="ios-paper"></Icon>退出登录</MenuItem>
+
     </Menu>
   </div>
 
@@ -78,9 +97,12 @@ export default {
     },
     select(name){
       console.log(name)
-      this.$router.push({
-        path: name
-      })
+      if(name){
+        this.$router.push({
+          path: name
+        })
+      }
+
     }
   }
 }

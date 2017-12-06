@@ -8,8 +8,10 @@ import Index from '@/pages/index'
 import Login from '@/pages/public/login'
 import About from '@/pages/public/about'
 import RecordList from '@/pages/public/eRecordList'
+import Notes from '@/pages/public/notes'
 //manage
 import ManageHome from '@/pages/manager/home'
+import Notify from '@/pages/manager/notify'
 
 //company
 import CompanyHome from '@/pages/company/home'
@@ -29,10 +31,12 @@ export default new Router({
         {path: '/about', name: 'about', component: About,},
         {path: '/center', name: 'center', component: LeftMenu, children:[
             {path: '/center/manHome', name: 'manHome', component: ManageHome, meta: { requiresAuth: true }},
+            {path: '/center/manNotify', name: 'notify', component: Notify, meta: { requiresAuth: true }},
 
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
 
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
+            {path: '/center/notes', name: 'notes', component: Notes, meta: { requiresAuth: true }},
         ]},
 
 

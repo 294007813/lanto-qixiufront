@@ -31,27 +31,27 @@
 
   <Menu mode="horizontal" theme="primary" :active-name="this.$route.path" @on-select="select">
     <MenuItem name="/index">首页</MenuItem>
-    <MenuItem name="2">公共管理</MenuItem>
-    <MenuItem name="3">电子健康档案</MenuItem>
+    <MenuItem name="">公共管理</MenuItem>
+    <MenuItem name="/center/eRecordList">电子健康档案</MenuItem>
     <Submenu name="4">
       <template slot="title">公共服务</template>
-      <MenuItem name="4-1">车大夫</MenuItem>
-      <MenuItem name="4-2">救援服务</MenuItem>
-      <MenuItem name="4-3">新能源汽车维修</MenuItem>
-      <MenuItem name="4-4">危险品运输车辆维修</MenuItem>
+      <MenuItem name="">车大夫</MenuItem>
+      <MenuItem name="">救援服务</MenuItem>
+      <MenuItem name="">新能源汽车维修</MenuItem>
+      <MenuItem name="">危险品运输车辆维修</MenuItem>
     </Submenu>
-    <MenuItem name="5">行业治理</MenuItem>
+    <MenuItem name="">行业治理</MenuItem>
     <Submenu name="6">
       <template slot="title">公众监督</template>
-      <MenuItem name="6-1">满意度调查</MenuItem>
-      <MenuItem name="6-2">投诉举报</MenuItem>
+      <MenuItem name="">满意度调查</MenuItem>
+      <MenuItem name="">投诉举报</MenuItem>
     </Submenu>
     <Submenu name="7">
       <template slot="title">在线商务</template>
-      <MenuItem name="7-1">维修保养</MenuItem>
-      <MenuItem name="7-2">备件商城</MenuItem>
-      <MenuItem name="7-3">保险服务</MenuItem>
-      <MenuItem name="7-4">合作伙伴</MenuItem>
+      <MenuItem name="">维修保养</MenuItem>
+      <MenuItem name="">备件商城</MenuItem>
+      <MenuItem name="">保险服务</MenuItem>
+      <MenuItem name="">合作伙伴</MenuItem>
     </Submenu>
     <MenuItem name="/about">关于我们</MenuItem>
   </Menu>
@@ -110,9 +110,12 @@ export default {
     },
     select(name){
       console.log(name)
-      this.$router.push({
-        path: name
-      })
+      if(name){
+        this.$router.push({
+          path: name
+        })
+      }
+
     }
   }
 

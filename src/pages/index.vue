@@ -35,7 +35,7 @@
     </Carousel>
   </div>
   <div class="map">
-    <div class="tit">维修服务</div>
+    <div class="tit">维修服务</div><br/>
     <my-map></my-map>
   </div>
   <div class="cdf">

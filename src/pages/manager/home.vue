@@ -263,7 +263,7 @@ export default {
         'Content-type': 'application/json'
       },
     }).then(function (res) {
-      console.log(res)
+      // console.log(res)
       let data= res.data.statisticsDataPO,td= self.data1
       td[0].sum= data.repairCompanySum; td[0].count= data.repairCompany; td[0].odds= data.repairCompanyrate+"%";
       td[1].sum= data.companyISum; td[1].count= data.companyIcount; td[1].odds= data.companyIrate+"%";
@@ -278,6 +278,24 @@ export default {
       ]
       // self.$refs.pie11.mergeOptions(self.pie1)
       $("#pie1").append("<div style='position: absolute;left: 75px;top: 130px;font-size: 28px'>总数："+data.repairCompanySum+"</div>")
+    })
+
+    //区域对接情况
+    this.axios({
+      method: 'get',
+      url: '/statistics/admin/areaStatistics/'+ acctok,
+      headers: {
+        'Content-type': 'application/json'
+      },
+    }).then(function (res) {
+      // console.log(res)
+      let area=[], num=[]
+      for (let i in res.data.data){
+        area.push(res.data.data[i].statisticsArea);
+        num.push(res.data.data[i].dataNum)
+      }
+      self.bar1.xAxis[0].data= area;
+      self.bar1.series[0].data=num
     })
   },
   methods:{
