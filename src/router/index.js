@@ -9,6 +9,7 @@ import Login from '@/pages/public/login'
 import About from '@/pages/public/about'
 import RecordList from '@/pages/public/eRecordList'
 import Notes from '@/pages/public/notes'
+import NoteDetail from '@/pages/public/noteDetail'
 import BaseInfo from '@/pages/public/baseInfo'
 import ResetPassword from '@/pages/public/resetPassword'
 
@@ -37,18 +38,25 @@ export default new Router({
         {path: '/register', name: 'register', component: Login,},
         {path: '/about', name: 'about', component: About,},
         {path: '/center', name: 'center', component: LeftMenu, children:[
+            //管理中心
             {path: '/center/manHome', name: 'manHome', component: ManageHome, meta: { requiresAuth: true }},
             {path: '/center/manNotify', name: 'notify', component: Notify, meta: { requiresAuth: true }},
-           
+            {path: '/center/manComplain', name: 'complain', component: Complain, meta: { requiresAuth: true }},
+            {path: '/center/manDownload', name: 'download', component: Download},
+            {path: '/center/manSurvey', name: 'survey', component: Survey, meta: { requiresAuth: true }},
+            {path: '/center/manQuality', name: 'quality', component: Quality, meta: { requiresAuth: true}},
+
+            //企业中心
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
+
+            //车主中心
+
+            //共用组件
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
             {path: '/center/notes', name: 'notes', component: Notes, meta: { requiresAuth: true }},
-            {path: '/center/complain', name: 'complain', component: Complain, meta: { requiresAuth: true }},
-            {path: '/center/survey', name: 'survey', component: Survey, meta: { requiresAuth: true }},
-            {path: '/center/download', name: 'download', component: Download},
-            {path: '/center/quality', name: 'quality', component: Quality},
-            {path: '/center/baseInfo', name: 'baseInfo', component: BaseInfo},
-            {path: '/center/resetPassword', name: 'resetPassword', component: ResetPassword, meta: { requiresAuth: true }},
+            {path: '/center/noteDetail', name: 'noteDetail', component: NoteDetail, meta: { requiresAuth: true }},
+            {path: '/center/baseInfo', name: 'baseInfo', component: BaseInfo, meta: { requiresAuth: true}},
+            {path: '/center/resetPassword', name: 'resetPassword', component: ResetPassword, meta: { requiresAuth: true}},
         ]},
       ]
     }

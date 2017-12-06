@@ -11,10 +11,12 @@
         <template slot="title"><Icon type="ios-paper"></Icon>公共服务</template>
         <MenuItem name="/center/manNotify">通知发布</MenuItem>
         <MenuItem name="/center/notes">通知管理</MenuItem>
-        <MenuItem name="/center/complain">投诉管理</MenuItem>
-        <MenuItem name="/center/survey">问卷调查</MenuItem>
-        <MenuItem name=""><a style='color: #333' href="http://218.242.195.69:3320/hytjglxt/login.vm" target="_blank">统计报表</a></MenuItem>
-        <MenuItem name="/center/download">文件下载</MenuItem>
+        <MenuItem name="/center/manComplain">投诉管理</MenuItem>
+        <MenuItem name="/center/manSurvey">问卷调查</MenuItem>
+        <MenuItem name="">
+          <a style='color: #333' href="http://218.242.195.69:3320/hytjglxt/login.vm" target="_blank">统计报表</a>
+        </MenuItem>
+        <MenuItem name="/center/manDownload">文件下载</MenuItem>
       </Submenu>
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>企业资料</template>
@@ -44,7 +46,7 @@
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>信息管理</template>
         <MenuItem name="/center/notes">通知管理</MenuItem>
-        <MenuItem name="/center/survey">投诉管理</MenuItem>
+        <MenuItem name="">投诉管理</MenuItem>
       </Submenu>
       <Submenu name="5">
         <template slot="title"><Icon type="ios-people"></Icon>业务管理</template>
@@ -53,7 +55,7 @@
       </Submenu>
       <Submenu name="6">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
-        <MenuItem name="">基本信息</MenuItem>
+        <MenuItem name="/center/baseInfo">基本信息</MenuItem>
         <MenuItem name="">修改密码</MenuItem>
         <MenuItem name="">退出登录</MenuItem>
       </Submenu>

@@ -30,14 +30,7 @@ export default {
           key: 'companyAddress'
         }
       ],
-      data1: [
-        {
-          man: '张三',
-          tel: 15000000000,
-          companyName: '百度',
-          companyAddress: '上海市浦东新区'
-        }
-      ]
+      data1: []
     }
   }
 }
