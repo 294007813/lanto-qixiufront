@@ -29,6 +29,9 @@ Vue.prototype.axios = axios;
 Vue.component('sub-title', SubTitle)
 Vue.component('chart', ECharts)
 
+Vue.prototype.userType = function () {
+  return store.getters.userType
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -38,3 +41,5 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+

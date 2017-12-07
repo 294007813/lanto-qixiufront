@@ -15,7 +15,7 @@
     </FormItem>
   </Form>
 
-  <Table :columns="columns" :data="data"></Table>
+  <Table :columns="columns" :data="data" border></Table>
   <Page :total="total" show-sizer style="margin: 10px 0" @on-change="onchange" @on-page-size-change="sizechange"></Page>
 </div>
 </template>
@@ -34,9 +34,29 @@ export default {
       columns:[
         {title: '序号', key: 'order'},
         {title: '车牌号码', key: 'card'},
-        {title: '车辆品牌', key: 'brand'},
-        {title: '车系', key: 'type'},
         {title: '车架号', key: 'vin'},
+        {title: '维修企业名称', key: 'comname'},
+        {title: '查看详情', key: 'id', width: 150, align: 'center',
+          render: (h, params) => {
+            return h('div', [
+              h('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    console.log(params.row.id)
+                    this.$router.push({
+                      path:'/center/eRecordDetail',
+                      query:{id: params.row.id}
+                    })
+                  }
+                }
+              }, '查看'),
+            ]);
+          }
+        }
       ],
       data:[],
       total:0,
@@ -66,9 +86,11 @@ export default {
         self.data=[]
         for (let i in datas){
           self.data.push({
+            id: datas[i].repairbasicinfoId,
             order:  parseInt(i)+1,
             card: datas[i].vehicleplatenumber,
-            vin: datas[i].vin
+            vin: datas[i].vin,
+            comname: datas[i].companyname
           })
         }
       })
