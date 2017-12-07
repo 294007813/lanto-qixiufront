@@ -48,10 +48,18 @@
     </Submenu>
     <Submenu name="7">
       <template slot="title">在线商务</template>
-      <MenuItem name="">维修保养</MenuItem>
-      <MenuItem name="">备件商城</MenuItem>
-      <MenuItem name="">保险服务</MenuItem>
-      <MenuItem name="">合作伙伴</MenuItem>
+      <MenuItem name="/business/fittings">汽车配件</MenuItem>
+      <MenuItem name="/business/equipment">汽保设备</MenuItem>
+      <MenuItem name="/business/insurance">汽车保险</MenuItem>
+      <MenuItem name="/business/sell">汽车销售</MenuItem>
+      <MenuItem name="/business/train">相关培训</MenuItem>
+      <MenuItem name="/business/goods">汽车用品</MenuItem>
+      <MenuItem name="/business/books">汽车读物</MenuItem>
+      <MenuItem name="/business/beautify">洗车美容</MenuItem>
+      <MenuItem name="/business/check">车辆年检</MenuItem>
+      <MenuItem name="/business/study">学驾推荐</MenuItem>
+      <MenuItem name="/business/help">故障救援</MenuItem>
+      <MenuItem name="/business/service">我们来为您服务</MenuItem>
     </Submenu>
     <MenuItem name="/about">关于我们</MenuItem>
   </Menu>

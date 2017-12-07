@@ -25,6 +25,27 @@ import CompanyInfo from '@/pages/manager/companyInfo'
 //company
 import CompanyHome from '@/pages/company/home'
 
+// 在线商务
+import Fittings from '@/pages/business/fittings'
+import Equipment from '@/pages/business/equipment'
+import Insurance from '@/pages/business/insurance'
+import Sell from '@/pages/business/sell'
+import Sell1 from '@/pages/business/sell1'
+import Sell2 from '@/pages/business/sell2'
+import Sell3 from '@/pages/business/sell3'
+import Train from '@/pages/business/train'
+import Goods from '@/pages/business/goods'
+import Books from '@/pages/business/books'
+import Beautify from '@/pages/business/beautify'
+import Check from '@/pages/business/check'
+import Study from '@/pages/business/study'
+import Study1 from '@/pages/business/study1'
+import Study2 from '@/pages/business/study2'
+import Study3 from '@/pages/business/study3'
+import Help from '@/pages/business/help'
+import Service from '@/pages/business/service'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +81,26 @@ export default new Router({
             {path: '/center/baseInfo', name: 'baseInfo', component: BaseInfo, meta: { requiresAuth: true}},
             {path: '/center/resetPassword', name: 'resetPassword', component: ResetPassword, meta: { requiresAuth: true}},
         ]},
+        
+        // 在线商务
+        {path: '/business/fittings', name: 'business', component: Fittings},
+        {path: '/business/equipment', name: 'equipment', component: Equipment},
+        {path: '/business/insurance', name: 'insurance', component: Insurance},
+        {path: '/business/sell', name: 'sell', component: Sell},
+        {path: '/business/sell1', name: 'sell1', component: Sell1},
+        {path: '/business/sell2', name: 'sell2', component: Sell2},
+        {path: '/business/sell3', name: 'sell3', component: Sell3},
+        {path: '/business/train', name: 'train', component: Train},
+        {path: '/business/goods', name: 'goods', component: Goods},
+        {path: '/business/books', name: 'books', component: Books},
+        {path: '/business/beautify', name: 'beautify', component: Beautify},
+        {path: '/business/check', name: 'check', component: Check},
+        {path: '/business/study', name: 'study', component: Study},
+        {path: '/business/study1', name: 'study1', component: Study1},
+        {path: '/business/study2', name: 'study2', component: Study2},
+        {path: '/business/study3', name: 'study3', component: Study3},
+        {path: '/business/help', name: 'help', component: Help},
+        {path: '/business/service', name: 'service', component: Service},
       ]
     }
   ]
