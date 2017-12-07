@@ -56,7 +56,7 @@
       <Submenu name="6">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
         <MenuItem name="/center/baseInfo">基本信息</MenuItem>
-        <MenuItem name="">修改密码</MenuItem>
+        <MenuItem name="/center/resetPassword">修改密码</MenuItem>
         <MenuItem name="">退出登录</MenuItem>
       </Submenu>
     </Menu>
@@ -66,14 +66,14 @@
     <div class="title">车主中心</div>
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" >
-      <MenuItem name=""><Icon type="ios-paper"></Icon>爱车档案</MenuItem>
+      <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>爱车档案</MenuItem>
       <MenuItem name=""><Icon type="ios-paper"></Icon>绑定车辆</MenuItem>
       <MenuItem name="/center/notes"><Icon type="ios-paper"></Icon>通知管理</MenuItem>
       <MenuItem name=""><Icon type="ios-paper"></Icon>我的咨询</MenuItem>
       <MenuItem name=""><Icon type="ios-paper"></Icon>我的上门服务</MenuItem>
       <MenuItem name=""><Icon type="ios-paper"></Icon>我的预约服务</MenuItem>
-      <MenuItem name=""><Icon type="ios-paper"></Icon>基本信息</MenuItem>
-      <MenuItem name=""><Icon type="ios-paper"></Icon>修改密码</MenuItem>
+      <MenuItem name="/center/baseInfo"><Icon type="ios-paper"></Icon>基本信息</MenuItem>
+      <MenuItem name="/center/resetPassword"><Icon type="ios-paper"></Icon>修改密码</MenuItem>
       <MenuItem name=""><Icon type="ios-paper"></Icon>退出登录</MenuItem>
 
     </Menu>

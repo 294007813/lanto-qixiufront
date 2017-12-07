@@ -146,7 +146,7 @@ export default {
       }).then(function (response) {
         console.log(response)
         if(response.data.code=='000000'){
-          self.$Message.success('登录成功')
+          self.$Message.success({content:'登录成功', duration:5})
 
           localStorage.setItem("ACCESSTOKEN",response.data.data.accessToken);
           localStorage.setItem("USERINFO",JSON.stringify(response.data.data));
