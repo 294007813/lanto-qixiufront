@@ -1,36 +1,45 @@
 <template>
 <div class="map-frame">
 <div class="left">
-  <Input v-model="search1" placeholder="输入维修企业名称/地址/车型">
+  <Input v-model="inputV" placeholder="输入维修企业名称/地址">
     <Button slot="append" icon="ios-search"></Button>
   </Input>
   <div class="select-bar">
-    <Select v-model="search2">
-      <Option value="1"></Option>
+    <Select v-model="sortV" placeholder="企业排序" clearable @on-change="changeSelect">
+      <Option value="信誉等级"></Option>
+      <Option value="服务评价"></Option>
+      <Option value="分数等级"></Option>
     </Select>
-    <Select v-model="search3">
-      <Option value="1"></Option>
+    <Select v-model="categoryV" placeholder="企业类型" clearable @on-change="changeSelect">
+      <Option value="43">一类维修企业</Option>
+      <Option value="44">二类维修企业</Option>
+      <Option value="45">三类维修业户</Option>
+      <Option value="46">摩托车维修业户</Option>
+      <Option value="47">汽车快修业户</Option>
     </Select>
-    <Select v-model="search4">
-      <Option value="1"></Option>
+    <Select v-model="areaV" placeholder="企业区域" clearable @on-change="changeSelect">
+      <Option v-for="(item, key) in area" :value="item.areakey" :key="key">{{item.areaname}}</Option>
     </Select>
-    <Select v-model="search5">
-      <Option value="1"></Option>
+    <Select v-model="brandV" placeholder="车辆品牌" clearable @on-change="changeSelect">
+      <Option value="宝马"></Option>
+      <Option value="别克"></Option>
+      <Option value="大众"></Option>
     </Select>
   </div>
-  <div class="res">查询结果：共<span>{{resnum}}</span>条记录，请在企业列表或地图中选择查看</div>
+  <div class="res">查询结果：共<span>{{sum}}</span>条记录，请在企业列表或地图中选择查看</div>
   <ul>
-    <li>
+    <li class="info" v-for="(item, key) in list" :key="key">
       <img src="../assets/map/nopic.jpg">
       <div class="list-right">
-      <span class="name">上海申海汽车修理有限公司</span>
-      <span>地址：徐汇区上中路509号</span>
-      <span>电话：15601816098</span>
+      <span class="name">{{item.corpName}}</span>
+      <span>地址：{{item.corpAdd}}</span>
+      <span>电话：{{item.linkTel}}</span>
       <span>星级：</span>
       <div class="appraise">我要评价</div>
       </div>
     </li>
   </ul>
+  <Page :total="sum" :current="page" :page-size="limit" show-elevator class-name="paging" @on-change="changePage"></Page>
 </div>
 <div class="right" id="map"></div>
 </div>
@@ -40,18 +49,131 @@
   export default {
     data(){
       return{
-        search1:"",
-        search2:"",
-        search3:"",
-        search4:"",
-        search5:"",
-        resnum:"0"
+        inputV:"",
+        sortV:"",
+        categoryV:"",
+        areaV:"",
+        brandV:"",
+        sum: 0,
+        area:[],
+        list:[],
+        limit: 4,
+        page: 1,
+        point:[]
       }
     },
     mounted(){
       let map = new BMap.Map("map");
       let point = new BMap.Point(121.480201, 31.236336);// 上海
       map.centerAndZoom(point, 12);
+
+      let systok= localStorage.getItem("SYSTEMTOKEN"),self= this
+      if(systok){
+        this.getArea(systok)
+        this.getList(systok)
+        this.getPoint(systok)
+      }else{
+        let data = {
+          device: uuid(),
+          password: "k5pg8kkN",
+          username: "pcqixiu"
+        }
+        this.axios({
+          method: 'post',
+          url: '/system/terminalsystem/login',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          data: JSON.stringify(data)
+        }).then(function (response) {
+          let systok= response.data.data.systemToken
+          localStorage.setItem("SYSTEMTOKEN", systok)
+          self.getArea(systok)
+          self.getList(systok)
+          self.getPoint(systok)
+        })
+      }
+
+      function  uuid() {
+        var s = [];
+        var hexDigits = "0123456789abcdef";
+        for (var i = 0; i < 32; i++) {
+          s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        // s[8] = s[13] = s[18] = s[23] = "-";
+
+        var uuid = s.join("");
+        return uuid;
+      }
+    },
+    methods:{
+      getArea(systok){
+        let self=this
+        this.axios({
+          method: 'get',
+          url: '/area/county/'+ systok+'/310100'
+        }).then(function (res) {
+          // console.log(res)
+          self.area= res.data.data
+        })
+      },
+      getList(systok){
+        let self= this,
+          param = {
+          companycategory: this.categoryV,
+          systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
+          corpAreaEq: this.areaV,
+          corpName: this.inputV,
+          magorBrandsLk: this.brandV,
+          iSort: (this.sortV=='信誉等级'),
+          starLevel:'',
+          type: '164',
+          limit: this.limit,
+          page: this.page
+        }
+        this.axios({
+          method: 'post',
+          url: '/maintain/getRangeCorps',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          data: JSON.stringify(param)
+        }).then(function (res) {
+          // console.log(res.data)
+          self.list= [];
+          self.list= res.data.data.content;
+          self.sum= res.data.data.totalElements
+        })
+      },
+      getPoint(systok){
+        let self= this,
+          param = {
+            systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
+            type: '164',
+            limit: 400,
+            page: 1
+          }
+        this.axios({
+          method: 'post',
+          url: '/maintain/getRangeCorps',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          data: JSON.stringify(param)
+        }).then(function (res) {
+          console.log(res.data)
+        })
+      },
+      changePage(page){
+        this.page= page
+        this.getList()
+      },
+      changeSelect(){
+        this.page=1
+        this.getList()
+      }
     }
   }
 </script>
@@ -93,7 +215,7 @@
       }
     }
     ul{
-      li{
+      li.info{
         overflow: hidden;
         border: 1px solid #ededed;
         margin-bottom: 5px;
@@ -119,7 +241,7 @@
           }
           .name{
             background: url(../assets/map/house.png) no-repeat left center;
-            color: #4ba7f5;
+            color: #252525;
             padding-left: 20px;
             background-size: 15px;
           }
@@ -145,6 +267,15 @@
     position: relative;
     margin-left: 380px;
     min-width: 400px;
+  }
+
+}
+</style>
+<style lang="scss">
+.paging {
+  text-align: center;
+  li{
+    margin: 2px 0;
   }
 }
 </style>

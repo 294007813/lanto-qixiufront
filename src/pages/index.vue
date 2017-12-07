@@ -173,6 +173,9 @@ export default {
       banner:0
     }
   },
+  beforeCreate(){
+
+  },
   components: {
     myMap
   }

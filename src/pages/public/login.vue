@@ -143,14 +143,14 @@ export default {
           'Content-type': 'application/json'
         },
         data: JSON.stringify(data)
-      }).then(function (response) {
-        console.log(response)
-        if(response.data.code=='000000'){
+      }).then(function (res) {
+        console.log(res)
+        if(res.data.code=='000000'){
           self.$Message.success({content:'登录成功', duration:5})
 
-          localStorage.setItem("ACCESSTOKEN",response.data.data.accessToken);
-          localStorage.setItem("USERINFO",JSON.stringify(response.data.data));
-          self.$store.commit("putUserInfo",response.data.data)
+          localStorage.setItem("ACCESSTOKEN",res.data.data.accessToken);
+          localStorage.setItem("USERINFO",JSON.stringify(res.data.data));
+          self.$store.commit("putUserInfo",res.data.data)
 
           if(self.$route.query.redirect){
             self.$router.replace({
@@ -164,7 +164,7 @@ export default {
 
 
         }else{
-          self.$Message.error(response.data.status);
+          self.$Message.error(res.data.status);
         }
       })
     },
