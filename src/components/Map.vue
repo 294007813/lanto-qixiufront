@@ -1,8 +1,8 @@
 <template>
 <div class="map-frame">
 <div class="left">
-  <Input v-model="inputV" placeholder="输入维修企业名称/地址">
-    <Button slot="append" icon="ios-search"></Button>
+  <Input v-model="inputV" placeholder="输入企业名称/地址">
+    <Button slot="append" icon="ios-search" @click="changeSelect"></Button>
   </Input>
   <div class="select-bar">
     <Select v-model="sortV" placeholder="企业排序" clearable @on-change="changeSelect">
@@ -59,13 +59,15 @@
         list:[],
         limit: 4,
         page: 1,
-        point:[]
+        points:{},
+        map: null,
+
       }
     },
     mounted(){
-      let map = new BMap.Map("map");
+      this.map = new BMap.Map("map");
       let point = new BMap.Point(121.480201, 31.236336);// 上海
-      map.centerAndZoom(point, 12);
+      this.map.centerAndZoom(point, 13);
 
       let systok= localStorage.getItem("SYSTEMTOKEN"),self= this
       if(systok){
@@ -152,7 +154,7 @@
           param = {
             systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
             type: '164',
-            limit: 400,
+            limit: 50,
             page: 1
           }
         this.axios({
@@ -164,7 +166,59 @@
           data: JSON.stringify(param)
         }).then(function (res) {
           console.log(res.data)
+          let datas= res.data.data.content
+          for (let i in datas){
+            let corp= datas[i]
+            self.point(corp)
+
+          }
         })
+      },
+      point(corp){
+        let self=this, point= new BMap.Point(corp.lng, corp.lat);
+        let mar= new BMap.Marker(point )
+        let html=  '<div class="info-block" style="margin:0px;border:0px;">' +
+          '<div class="info">' +
+          '<div class="img" style="float:right;width:170px;">' +
+          '<img src="/static/img/nopic.jpg" width="168" height="150" alt="">' +
+          '</div>' +
+          '<ul style="float:left;width:310px;">' +
+          '<li><span>企业名称：</span>' + (corp.corpName?corp.corpName:"") + '</li>' +
+          '<li><span>经营范围：</span>' + (corp.companybusinessscope? corp.companybusinessscope: '') + '</li>' +
+          // '<li><span>服务星级：</span>' + getStar(corp.STAR_LEVEL) + '</li>' +
+          '<li><span>信誉等级：</span>' + (corp.creditLevel?corp.creditLevel:"" )+ '</li>' +
+          '<li><span>主修品牌：</span>' + (corp.brand!="否"?corp.brand: "") + '</li>' +
+          '<li><span>营业时间：</span>' + (corp.time?corp.time:"" )+ '</li>' +
+          '<li><span>经营地址：</span>' + (corp.corpAdd? corp.corpAdd: "") + '</li>' +
+          // '<li><span>联系电话：</span>' + (corp.linkTel?corp.linkTel:"") + '</li>' +
+          '<li><span>联系电话：</span>' + '******' + '</li>' +
+          '<li><span>经营状况：</span></li>' +
+          '</ul>' +
+          '</div>' +
+          '</div>' +
+          '<div style="text-align:right;width:500px;margin:15px 0px;">' +
+          '<a class=""  href="/maintain/visit" ><i class="layui-icon"></i>上门服务</a>' +
+          '<a class=""  href="javascript:void(0);" ><i class="layui-icon"></i>预约服务</a>' +
+          '<a class=""  href="/maintain/detail/' + corp.corpId + '" target="_blank"><i class="layui-icon"></i> 查看详情</a>' +
+
+          '</div>';
+        mar.searchInfoWindow =new BMapLib.SearchInfoWindow(self.map, html, {
+          title: '<b>' + corp.corpName + '</b>', // 标题
+          width: 530, // 宽度
+          panel: "panel", // 检索结果面板
+          enableAutoPan: true, // 自动平移
+          enableSendToPhone: false,
+          //enableMessage : false,
+          searchTypes: [
+            BMAPLIB_TAB_FROM_HERE,// 从这里出发
+            BMAPLIB_TAB_SEARCH, // 周边检索
+            BMAPLIB_TAB_TO_HERE // 到这里去
+          ]
+        });
+        mar.addEventListener("click", function () {
+          this.searchInfoWindow.open(mar);
+        });
+        this.map.addOverlay(mar);
       },
       changePage(page){
         this.page= page
@@ -215,6 +269,9 @@
       }
     }
     ul{
+      li.info:hover{
+        border: 1px solid #1E9FFF;
+      }
       li.info{
         overflow: hidden;
         border: 1px solid #ededed;
@@ -277,5 +334,11 @@
   li{
     margin: 2px 0;
   }
+}
+.map-frame .right .BMapLib_SearchInfoWindow table td:first-child{
+  width: 40px;
+}
+.map-frame .right .BMapLib_SearchInfoWindow table td:last-child{
+  width: 120px;
 }
 </style>
