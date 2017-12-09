@@ -28,7 +28,7 @@
   </div>
   <div class="res">查询结果：共<span>{{sum}}</span>条记录，请在企业列表或地图中选择查看</div>
   <ul>
-    <li class="info" v-for="(item, key) in list" :key="key">
+    <li class="info" v-for="(item, key) in list" :key="key" @click="openMapInfo(item.corpId)">
       <img src="../assets/map/nopic.jpg">
       <div class="list-right">
       <span class="name">{{item.corpName}}</span>
@@ -144,9 +144,15 @@
           data: JSON.stringify(param)
         }).then(function (res) {
           // console.log(res.data)
+          let datas= res.data.data.content
           self.list= [];
-          self.list= res.data.data.content;
+          self.list= datas;
           self.sum= res.data.data.totalElements
+          for (let i in datas){
+            if(!self.points.hasOwnProperty( datas[i].corpId)){
+              self.point(datas[i])
+            }
+          }
         })
       },
       getPoint(systok){
@@ -154,7 +160,7 @@
           param = {
             systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
             type: '164',
-            limit: 50,
+            limit: 100,
             page: 1
           }
         this.axios({
@@ -177,12 +183,12 @@
       point(corp){
         let self=this, point= new BMap.Point(corp.lng, corp.lat);
         let mar= new BMap.Marker(point )
-        let html=  '<div class="info-block" style="margin:0px;border:0px;">' +
+        let html=
           '<div class="info">' +
-          '<div class="img" style="float:right;width:170px;">' +
+          '<div class="img">' +
           '<img src="/static/img/nopic.jpg" width="168" height="150" alt="">' +
           '</div>' +
-          '<ul style="float:left;width:310px;">' +
+          '<ul>' +
           '<li><span>企业名称：</span>' + (corp.corpName?corp.corpName:"") + '</li>' +
           '<li><span>经营范围：</span>' + (corp.companybusinessscope? corp.companybusinessscope: '') + '</li>' +
           // '<li><span>服务星级：</span>' + getStar(corp.STAR_LEVEL) + '</li>' +
@@ -195,16 +201,15 @@
           '<li><span>经营状况：</span></li>' +
           '</ul>' +
           '</div>' +
-          '</div>' +
-          '<div style="text-align:right;width:500px;margin:15px 0px;">' +
-          '<a class=""  href="/maintain/visit" ><i class="layui-icon"></i>上门服务</a>' +
-          '<a class=""  href="javascript:void(0);" ><i class="layui-icon"></i>预约服务</a>' +
-          '<a class=""  href="/maintain/detail/' + corp.corpId + '" target="_blank"><i class="layui-icon"></i> 查看详情</a>' +
+          '<div class="button">' +
+          '<a class=""  href="/maintain/visit" >上门服务</a>' +
+          '<a class=""  href="javascript:void(0);" >预约服务</a>' +
+          '<a class="blue"  href="/maintain/detail/' + corp.corpId + '">查看详情</a>' +
 
           '</div>';
         mar.searchInfoWindow =new BMapLib.SearchInfoWindow(self.map, html, {
           title: '<b>' + corp.corpName + '</b>', // 标题
-          width: 530, // 宽度
+          width: 500, // 宽度
           panel: "panel", // 检索结果面板
           enableAutoPan: true, // 自动平移
           enableSendToPhone: false,
@@ -219,6 +224,10 @@
           this.searchInfoWindow.open(mar);
         });
         this.map.addOverlay(mar);
+        this.points[corp.corpId]= mar
+      },
+      openMapInfo(id){
+        this.points[id].searchInfoWindow.open(this.points[id])
       },
       changePage(page){
         this.page= page
@@ -324,6 +333,7 @@
     position: relative;
     margin-left: 380px;
     min-width: 400px;
+
   }
 
 }
@@ -333,6 +343,42 @@
   text-align: center;
   li{
     margin: 2px 0;
+  }
+}
+.map-frame .right{
+  .info{
+    padding: 10px;
+    .img{
+      float: right;
+      width: 150px;
+      height: 150px;
+      img{
+        width: 100%;
+      }
+    }
+    ul li{
+      line-height: 30px;
+    }
+  }
+  .button{
+    padding: 10px;
+    text-align: right;
+    a{
+      display: inline-block;
+      height: 35px;
+      line-height: 35px;
+      color: #1E9FFF;
+      border: 1px solid #1E9FFF;
+      font-size: 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      padding: 0 10px;
+      margin-left: 10px;
+    }
+    .blue{
+      background-color: #1e9fff;
+      color: white;
+    }
   }
 }
 .map-frame .right .BMapLib_SearchInfoWindow table td:first-child{
