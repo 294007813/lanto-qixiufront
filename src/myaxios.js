@@ -31,7 +31,7 @@ axios.interceptors.response.use(
         }).then(function (response) {
 //        console.log(response)
           localStorage.setItem("SYSTEMTOKEN", response.data.data.systemToken)
-
+          router.go(0)
         })
         break
       }

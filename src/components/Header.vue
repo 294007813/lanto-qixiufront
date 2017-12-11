@@ -35,10 +35,15 @@
     <MenuItem name="/center/eRecordList">电子健康档案</MenuItem>
     <Submenu name="4">
       <template slot="title">公共服务</template>
-      <MenuItem name="">车大夫</MenuItem>
-      <MenuItem name="">救援服务</MenuItem>
-      <MenuItem name="">新能源汽车维修</MenuItem>
+      <MenuItem name="/maintain?type=maintain">维修服务查选</MenuItem>
+      <MenuItem name="">车大夫门诊</MenuItem>
+      <MenuItem name="">上门服务</MenuItem>
+      <MenuItem name="">在线预约维修</MenuItem>
+      <MenuItem name="">维修相关产业服务</MenuItem>
+      <MenuItem name="">专业检测、等级评定</MenuItem>
       <MenuItem name="">危险品运输车辆维修</MenuItem>
+      <MenuItem name="">新能源汽车维修</MenuItem>
+      <MenuItem name="">维修救援服务</MenuItem>
     </Submenu>
     <MenuItem name="">行业治理</MenuItem>
     <Submenu name="6">

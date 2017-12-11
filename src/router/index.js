@@ -13,7 +13,7 @@ import Notes from '@/pages/public/notes'
 import NoteDetail from '@/pages/public/noteDetail'
 import BaseInfo from '@/pages/public/baseInfo'
 import ResetPassword from '@/pages/public/resetPassword'
-
+import Maintain from '@/pages/public/maintain'
 //manage
 import ManageHome from '@/pages/manager/home'
 import Notify from '@/pages/manager/notify'
@@ -83,7 +83,7 @@ export default new Router({
             {path: '/center/baseInfo', name: 'baseInfo', component: BaseInfo, meta: { requiresAuth: true}},
             {path: '/center/resetPassword', name: 'resetPassword', component: ResetPassword, meta: { requiresAuth: true}},
         ]},
-        
+
         // 在线商务
         {path: '/business/fittings', name: 'business', component: Fittings},
         {path: '/business/equipment', name: 'equipment', component: Equipment},
@@ -103,6 +103,9 @@ export default new Router({
         {path: '/business/study3', name: 'study3', component: Study3},
         {path: '/business/help', name: 'help', component: Help},
         {path: '/business/service', name: 'service', component: Service},
+
+        //维修服务
+        {path: '/maintain', name: 'maintain', component: Maintain},
       ]
     }
   ]
