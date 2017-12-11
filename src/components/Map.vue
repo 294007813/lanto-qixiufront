@@ -49,6 +49,9 @@
   <Page :total="sum" :current="page" :page-size="limit" show-elevator class-name="paging" @on-change="changePage"></Page>
 </div>
 <div class="right" id="map"></div>
+<div class="rate">
+  
+</div>
 </div>
 </template>
 
@@ -298,16 +301,9 @@
       // this.map= null
       // delete this.map
       // this.$destroy()
+      // window.location.reload()
+      this.$router.go(0)
     },
-    beforeRouteUpdate (to, from, next) {
-      // 导航离开该组件的对应路由时调用
-      // 可以访问组件实例 `this`
-      next(vm => {
-        // 通过 `vm` 访问组件实例
-        window.location.reload()
-      })
-
-    }
   }
 </script>
 
