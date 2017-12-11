@@ -36,7 +36,7 @@
   </div>
   <div class="map">
     <div class="tit">维修服务</div><br/>
-    <my-map></my-map>
+    <my-map type="index" :tolimit="4"></my-map>
   </div>
   <div class="cdf">
     <div class="title">

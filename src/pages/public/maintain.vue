@@ -1,6 +1,6 @@
 <template>
 <div class="maintain">
-<my-map></my-map>
+<my-map type="maintain" :tolimit="6"></my-map>
 </div>
 </template>
 
@@ -15,5 +15,8 @@ export default {
 </script>
 
 <style scoped>
-
+.maintain{
+  text-align: center;
+  padding: 10px;
+}
 </style>

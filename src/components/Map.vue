@@ -1,7 +1,14 @@
 <template>
-<div class="map-frame">
+<div class="map-frame" :class="{high: this.type=='maintain'}">
 <div class="left">
-  <Input v-model="inputV" placeholder="输入企业名称/地址">
+  <Select v-model="sortV" placeholder="查询类别" @on-change="changeSelect" class="inline">
+    <Option value="">维修企业</Option>
+    <Option value="">综合检测站</Option>
+    <Option value="">危运车辆维修</Option>
+    <Option value="">新能源汽车维修</Option>
+    <Option value="">汽车救援</Option>
+  </Select>
+  <Input v-model="inputV" placeholder="输入企业名称/地址" class="inline">
     <Button slot="append" icon="ios-search" @click="changeSelect"></Button>
   </Input>
   <div class="select-bar">
@@ -47,6 +54,7 @@
 
 <script>
   export default {
+    props:['type','tolimit'],
     data(){
       return{
         inputV:"",
@@ -57,7 +65,7 @@
         sum: 0,
         area:[],
         list:[],
-        limit: 4,
+        limit: this.tolimit,
         page: 1,
         points:{},
         map: null,
@@ -253,7 +261,7 @@
 <style scoped lang="scss">
 .map-frame{
   width: 100%;
-  padding: 10px;
+  /*padding: 10px;*/
   overflow: hidden;
   position: relative;
   min-width: 800px;
@@ -261,15 +269,16 @@
   display: inline-block;
   text-align: left;
   box-sizing: border-box;
+  border: 1px solid #e6e6e6;
   .left{
     float: left;
-    border: 1px solid #e6e6e6;
+
     position: relative;
     padding: 5px;
     background: #FFF;
     z-index: 888;
     width: 380px;
-    height: 600px;
+    /*height: 600px;*/
     .select-bar{
       display: flex;
       margin-top: 10px;
@@ -337,15 +346,19 @@
   }
   .right{
     height: 600px;
-    border: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
     border-left: 0;
     position: relative;
     margin-left: 380px;
     min-width: 400px;
-
   }
-
 }
+.map-frame.high{
+  .right{
+    height: 800px;
+  }
+}
+
 </style>
 <style lang="scss">
 .paging {
