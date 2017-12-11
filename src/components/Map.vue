@@ -61,13 +61,22 @@
         page: 1,
         points:{},
         map: null,
-
+        icon:null
       }
     },
     mounted(){
       this.map = new BMap.Map("map");
       let point = new BMap.Point(121.480201, 31.236336);// 上海
       this.map.centerAndZoom(point, 13);
+      let top_left_control = new BMap.ScaleControl({
+        anchor : BMAP_ANCHOR_BOTTOM_RIGHT
+      });//添加比例尺
+      let top_left_navigation = new BMap.NavigationControl({offset: new BMap.Size(20, 20)}); // 添加缩放平移控件
+      this.icon=new BMap.Icon("static/img/point-icon.png", new BMap.Size(20, 32));//自定义点图标
+      this.icon.imageSize= new BMap.Size(20, 32)
+
+      this.map.addControl(top_left_control);
+      this.map.addControl(top_left_navigation);
 
       let systok= localStorage.getItem("SYSTEMTOKEN"),self= this
       if(systok){
@@ -160,7 +169,7 @@
           param = {
             systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
             type: '164',
-            limit: 100,
+            limit: 300,
             page: 1
           }
         this.axios({
@@ -182,7 +191,7 @@
       },
       point(corp){
         let self=this, point= new BMap.Point(corp.lng, corp.lat);
-        let mar= new BMap.Marker(point )
+        let mar= new BMap.Marker(point, {icon: self.icon})
         let html=
           '<div class="info">' +
           '<div class="img">' +
