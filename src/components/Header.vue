@@ -40,10 +40,10 @@
       <MenuItem name="">上门服务</MenuItem>
       <MenuItem name="">在线预约维修</MenuItem>
       <MenuItem name="">维修相关产业服务</MenuItem>
-      <MenuItem name="">专业检测、等级评定</MenuItem>
-      <MenuItem name="">危险品运输车辆维修</MenuItem>
-      <MenuItem name="">新能源汽车维修</MenuItem>
-      <MenuItem name="">维修救援服务</MenuItem>
+      <MenuItem name="/maintain?type=check">专业检测、等级评定</MenuItem>
+      <MenuItem name="/maintain?type=danger">危险品运输车辆维修</MenuItem>
+      <MenuItem name="/maintain?type=newenergy">新能源汽车维修</MenuItem>
+      <MenuItem name="/maintain?type=rescue">维修救援服务</MenuItem>
     </Submenu>
     <MenuItem name="">行业治理</MenuItem>
     <Submenu name="6">
