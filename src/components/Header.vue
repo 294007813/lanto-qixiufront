@@ -36,10 +36,15 @@
     <Submenu name="4">
       <template slot="title">公共服务</template>
       <MenuItem name="/maintain?type=maintain">维修服务查选</MenuItem>
-      <MenuItem name="">车大夫门诊</MenuItem>
-      <MenuItem name="">上门服务</MenuItem>
-      <MenuItem name="">在线预约维修</MenuItem>
-      <MenuItem name="">维修相关产业服务</MenuItem>
+      <MenuItem name="/service/carDoctor">车大夫门诊</MenuItem>
+      <MenuItem name="/service/visitingService">上门服务</MenuItem>
+      <MenuItem name="/service/reservationFix">在线预约维修</MenuItem>
+      <!--<MenuItem name="">维修相关产业服务</MenuItem>-->
+      <!--<Submenu name="11" mode='vertical'>-->
+        <!--<template slot="title">维修相关产业服务</template>-->
+        <!--<MenuItem name="">汽车配件</MenuItem>-->
+        <!--<MenuItem name="">汽保设备</MenuItem>-->
+      <!--</Submenu>-->
       <MenuItem name="">专业检测、等级评定</MenuItem>
       <MenuItem name="">危险品运输车辆维修</MenuItem>
       <MenuItem name="">新能源汽车维修</MenuItem>
@@ -48,8 +53,8 @@
     <MenuItem name="">行业治理</MenuItem>
     <Submenu name="6">
       <template slot="title">公众监督</template>
-      <MenuItem name="">满意度调查</MenuItem>
-      <MenuItem name="">投诉举报</MenuItem>
+      <MenuItem name="/supervision/satisfaction">满意度调查</MenuItem>
+      <MenuItem name="/supervision/complaint">维修投诉</MenuItem>
     </Submenu>
     <Submenu name="7">
       <template slot="title">在线商务</template>

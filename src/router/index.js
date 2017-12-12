@@ -46,6 +46,16 @@ import Study3 from '@/pages/business/study3'
 import Help from '@/pages/business/help'
 import Service from '@/pages/business/service'
 
+// 公众监督
+import Satisfaction from '@/pages/supervision/satisfaction'
+import Satisfaction1 from '@/pages/supervision/satisfaction1'
+import Complaint from '@/pages/supervision/complaint'
+
+
+// 公共服务
+import VisitingService from '@/pages/service/visitingService'
+import ReservationFix from '@/pages/service/reservationFix'
+import CarDoctor from '@/pages/service/carDoctor'
 
 Vue.use(Router)
 
@@ -103,6 +113,16 @@ export default new Router({
         {path: '/business/study3', name: 'study3', component: Study3},
         {path: '/business/help', name: 'help', component: Help},
         {path: '/business/service', name: 'service', component: Service},
+        
+        // 公众监督
+        {path: '/supervision/satisfaction', name: 'satisfaction', component: Satisfaction},
+        {path: '/supervision/Satisfaction1', name: 'Satisfaction1', component: Satisfaction1},
+        {path: '/supervision/complaint', name: 'complaint', component: Complaint},
+        
+        // 公共服务
+        {path: '/service/visitingService', name: 'visitingService', component: VisitingService},
+        {path: '/service/reservationFix', name: 'reservationFix', component: ReservationFix},
+        {path: '/service/carDoctor', name: 'carDoctor', component: CarDoctor},
 
         //维修服务
         {path: '/maintain', name: 'maintain', component: Maintain},

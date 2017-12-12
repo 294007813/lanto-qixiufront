@@ -72,6 +72,9 @@
         icon:null
       }
     },
+    destroyed(){
+      window.location.reload()
+    },
     mounted(){
       this.map = new BMap.Map("map");
       let point = new BMap.Point(121.480201, 31.236336);// 上海
@@ -358,7 +361,6 @@
     height: 800px;
   }
 }
-
 </style>
 <style lang="scss">
 .paging {

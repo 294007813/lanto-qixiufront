@@ -22,6 +22,7 @@ import store from './store/store'
 
 import SubTitle from './components/SubTitle'
 
+
 Vue.use(iView);
 // Vue.use(ElementUI)
 Vue.config.productionTip = false
