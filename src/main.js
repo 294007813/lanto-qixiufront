@@ -22,6 +22,7 @@ import store from './store/store'
 
 import SubTitle from './components/SubTitle'
 
+
 Vue.use(iView);
 Vue.use(Rate) //评价组件
 Vue.config.productionTip = false
