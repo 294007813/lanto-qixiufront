@@ -67,11 +67,11 @@
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" >
       <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>爱车档案</MenuItem>
-      <MenuItem name=""><Icon type="ios-paper"></Icon>绑定车辆</MenuItem>
+      <MenuItem name="/center/perBindcar"><Icon type="ios-paper"></Icon>绑定车辆</MenuItem>
       <MenuItem name="/center/notes"><Icon type="ios-paper"></Icon>通知管理</MenuItem>
-      <MenuItem name=""><Icon type="ios-paper"></Icon>我的咨询</MenuItem>
-      <MenuItem name=""><Icon type="ios-paper"></Icon>我的上门服务</MenuItem>
-      <MenuItem name=""><Icon type="ios-paper"></Icon>我的预约服务</MenuItem>
+      <MenuItem name="/center/perMyquestion"><Icon type="ios-paper"></Icon>我的咨询</MenuItem>
+      <MenuItem name="/center/perMyvisit"><Icon type="ios-paper"></Icon>我的上门服务</MenuItem>
+      <MenuItem name="/center/perMyappoint"><Icon type="ios-paper"></Icon>我的预约服务</MenuItem>
       <MenuItem name="/center/baseInfo"><Icon type="ios-paper"></Icon>基本信息</MenuItem>
       <MenuItem name="/center/resetPassword"><Icon type="ios-paper"></Icon>修改密码</MenuItem>
       <MenuItem name=""><Icon type="ios-paper"></Icon>退出登录</MenuItem>

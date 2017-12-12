@@ -26,6 +26,12 @@ import CompanyInfo from '@/pages/manager/companyInfo'
 //company
 import CompanyHome from '@/pages/company/home'
 
+//personal
+import BindCar from '@/pages/personal/bindcar'
+import MyQuestion from '@/pages/personal/myquestion'
+import MyVisit from '@/pages/personal/myvisit'
+import MyAppoint from '@/pages/personal/myappoint'
+
 // 在线商务
 import Fittings from '@/pages/business/fittings'
 import Equipment from '@/pages/business/equipment'
@@ -84,7 +90,10 @@ export default new Router({
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
 
             //车主中心
-            {path: '/center/perBindcar', name: 'perBindcar', component: CompanyHome, meta: { requiresAuth: true }},
+            {path: '/center/perBindcar', name: 'perBindcar', component: BindCar, meta: { requiresAuth: true }},
+            {path: '/center/perMyquestion', name: 'perMyquestion', component: MyQuestion, meta: { requiresAuth: true }},
+            {path: '/center/perMyvisit', name: 'perMyvisit', component: MyVisit, meta: { requiresAuth: true }},
+            {path: '/center/perMyappoint', name: 'perMyappoint', component: MyAppoint, meta: { requiresAuth: true }},
 
             //共用组件
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
@@ -114,12 +123,12 @@ export default new Router({
         {path: '/business/study3', name: 'study3', component: Study3},
         {path: '/business/help', name: 'help', component: Help},
         {path: '/business/service', name: 'service', component: Service},
-        
+
         // 公众监督
         {path: '/supervision/satisfaction', name: 'satisfaction', component: Satisfaction},
         {path: '/supervision/Satisfaction1', name: 'Satisfaction1', component: Satisfaction1},
         {path: '/supervision/complaint', name: 'complaint', component: Complaint},
-        
+
         // 公共服务
         {path: '/service/visitingService', name: 'visitingService', component: VisitingService},
         {path: '/service/reservationFix', name: 'reservationFix', component: ReservationFix},
