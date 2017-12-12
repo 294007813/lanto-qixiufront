@@ -13,7 +13,7 @@ import 'echarts/lib/chart/pie'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/tooltip'
-
+import { Rate } from 'element-ui'
 //import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 import './login.js'
@@ -24,11 +24,12 @@ import SubTitle from './components/SubTitle'
 
 
 Vue.use(iView);
-// Vue.use(ElementUI)
+Vue.use(Rate) //评价组件
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;
 Vue.component('sub-title', SubTitle)
 Vue.component('chart', ECharts)
+
 
 Vue.prototype.userType = function () {
   return store.getters.userType
