@@ -74,6 +74,7 @@ export default new Router({
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
 
             //车主中心
+            {path: '/center/perBindcar', name: 'perBindcar', component: CompanyHome, meta: { requiresAuth: true }},
 
             //共用组件
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
