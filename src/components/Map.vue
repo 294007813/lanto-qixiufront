@@ -8,7 +8,8 @@
     <Option value="215">新能源汽车维修</Option>
     <Option value="213">汽车救援</Option>
   </Select>
-  <Input v-model="inputV" placeholder="输入企业名称/地址" :class="{inline: this.type=='maintain'}">
+  <Input v-model="inputV" placeholder="输入企业名称/地址" :class="{inline: this.type=='maintain'}"
+         @on-enter="changeSelect">
     <Button slot="append" icon="ios-search" @click="changeSelect"></Button>
   </Input>
   <div class="select-bar">
@@ -35,28 +36,32 @@
   </div>
   <div class="res">查询结果：共<span>{{sum}}</span>条记录，请在企业列表或地图中选择查看</div>
   <ul>
-    <li class="info" v-for="(item, key) in list" :key="key" @click.stop="openMapInfo(item.corpId)">
+    <li class="info" v-for="(item, key) in list" :key="key" @click.stop="openMapInfo(item.corpId,)">
       <img src="../assets/map/nopic.jpg">
       <div class="list-right">
       <span class="name">{{item.corpName}}</span>
       <span>地址：{{item.corpAdd}}</span>
       <span>电话：{{item.linkTel}}</span>
       <span>星级：</span>
-      <div class="appraise" @click.stop="appraise(item.corpId)">我要评价</div>
+      <div class="appraise" @click.stop="appraise(item.corpId, item.corpName)">我要评价</div>
       </div>
     </li>
   </ul>
   <Page :total="sum" :current="page" :page-size="limit" show-elevator class-name="paging" @on-change="changePage"></Page>
 </div>
 <div class="right" id="map"></div>
-<div class="rate">
-  
+<div class="rates">
+  <i @click="closeRates">×</i>
+  <rate :comname="rateName" :comid="rateId" @success="closeRates"></rate>
 </div>
 </div>
 </template>
 
 <script>
+  import Rate from "./Rate";
+  import $ from 'jquery'
   export default {
+    components: {Rate},
     props:['type','tolimit'],
     data(){
       return{
@@ -73,7 +78,9 @@
         page: 1,
         points:{},
         map: null,
-        icon:null
+        icon:null,
+        rateName:"",
+        rateId: ""
       }
     },
     watch:{
@@ -287,13 +294,18 @@
           this.getPoint()
         }
       },
-      appraise(id){
+      appraise(id,name){
         let acctok= localStorage.getItem("ACCESSTOKEN"), self= this ;
         if(!acctok) {
           this.$Message.error({content:'请登录后评价'})
           return
         }
-
+        this.rateId= id
+        this.rateName= name
+        $(".rates").show()
+      },
+      closeRates(){
+        $(".rates").hide()
       }
     },
     destroyed() {
@@ -400,6 +412,32 @@
     position: relative;
     margin-left: 380px;
     min-width: 400px;
+  }
+  .rates{
+    width: 500px;
+    height: 450px;
+    position: absolute;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 890;
+    border:  1px solid #e6e6e6;
+    display: none;
+    i{
+      font-size: 20px;
+      width: 500px;
+      text-align: right;
+      display: block;
+      padding-right: 10px;
+      line-height: 20px;
+      height: 25px;
+      border-bottom:  1px solid #e6e6e6;
+      cursor: pointer;
+    }
   }
 }
 .map-frame.high{
