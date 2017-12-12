@@ -27,7 +27,7 @@
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
         <MenuItem name="/center/baseInfo">基本信息</MenuItem>
         <MenuItem name="/center/resetPassword">修改密码</MenuItem>
-        <MenuItem name="">退出登录</MenuItem>
+        <MenuItem name="exit">退出登录</MenuItem>
       </Submenu>
     </Menu>
   </div>
@@ -40,24 +40,24 @@
       <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>预约上门管理</template>
-        <MenuItem name="">上门服务管理</MenuItem>
-        <MenuItem name="">预约管理</MenuItem>
+        <MenuItem name="/center/comVisit">上门服务管理</MenuItem>
+        <MenuItem name="/center/comAppoint">预约管理</MenuItem>
       </Submenu>
       <Submenu name="4">
         <template slot="title"><Icon type="ios-people"></Icon>信息管理</template>
         <MenuItem name="/center/notes">通知管理</MenuItem>
-        <MenuItem name="">投诉管理</MenuItem>
+        <MenuItem name="/center/comComplain">投诉管理</MenuItem>
       </Submenu>
       <Submenu name="5">
         <template slot="title"><Icon type="ios-people"></Icon>业务管理</template>
-        <MenuItem name="">维修数据上报查询</MenuItem>
-        <MenuItem name="">行业报表申报系统</MenuItem>
+        <MenuItem name="/center/comUpload">维修数据上报查询</MenuItem>
+        <MenuItem name=""><a style='color: #333' href="http://218.242.195.69:3320/hytjglxt/login.vm" target="_blank">行业报表申报系统</a></MenuItem>
       </Submenu>
       <Submenu name="6">
         <template slot="title"><Icon type="stats-bars"></Icon>账号管理</template>
         <MenuItem name="/center/baseInfo">基本信息</MenuItem>
         <MenuItem name="/center/resetPassword">修改密码</MenuItem>
-        <MenuItem name="">退出登录</MenuItem>
+        <MenuItem name="exit">退出登录</MenuItem>
       </Submenu>
     </Menu>
   </div>
@@ -74,7 +74,7 @@
       <MenuItem name="/center/perMyappoint"><Icon type="ios-paper"></Icon>我的预约服务</MenuItem>
       <MenuItem name="/center/baseInfo"><Icon type="ios-paper"></Icon>基本信息</MenuItem>
       <MenuItem name="/center/resetPassword"><Icon type="ios-paper"></Icon>修改密码</MenuItem>
-      <MenuItem name=""><Icon type="ios-paper"></Icon>退出登录</MenuItem>
+      <MenuItem name="exit"><Icon type="ios-paper"></Icon>退出登录</MenuItem>
 
     </Menu>
   </div>
@@ -99,13 +99,37 @@ export default {
     },
     select(name){
       console.log(name)
-      if(name){
-        this.$router.push({
-          path: name
-        })
+      switch (name){
+        case 'exit':{
+          this.logout()
+          break
+        }
+        default:
+          this.$router.push({
+            path: name
+          })
       }
 
-    }
+    },
+    logout(){
+      let self= this
+      this.$Modal.confirm({
+        title: '退出',
+        content: '确定退出登录？',
+        onOk: () => {
+          this.$Message.success('退出成功');
+          localStorage.removeItem("ACCESSTOKEN");
+          localStorage.removeItem("USERINFO");
+          self.$store.commit("putUserInfo",{})
+          self.$router.replace({
+            path: '/login',
+          });
+        },
+        onCancel: () => {
+//          this.$Message.info('Clicked cancel');
+        }
+      });
+    },
   }
 }
 </script>

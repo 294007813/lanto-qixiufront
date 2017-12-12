@@ -25,6 +25,10 @@ import CompanyInfo from '@/pages/manager/companyInfo'
 
 //company
 import CompanyHome from '@/pages/company/home'
+import ComVisit from '@/pages/company/comvisit'
+import ComAppoint from '@/pages/company/comappoint'
+import ComComplain from '@/pages/company/comcomplain'
+import ComUpload from '@/pages/company/comupload'
 
 //personal
 import BindCar from '@/pages/personal/bindcar'
@@ -88,6 +92,10 @@ export default new Router({
 
             //企业中心
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
+            {path: '/center/comVisit', name: 'comVisit', component: ComVisit, meta: { requiresAuth: true }},
+            {path: '/center/comAppoint', name: 'comAppoint', component: ComAppoint, meta: { requiresAuth: true }},
+            {path: '/center/comComplain', name: 'comComplain', component: ComComplain, meta: { requiresAuth: true }},
+            {path: '/center/comUpload', name: 'comUpload', component: ComUpload, meta: { requiresAuth: true }},
 
             //车主中心
             {path: '/center/perBindcar', name: 'perBindcar', component: BindCar, meta: { requiresAuth: true }},
