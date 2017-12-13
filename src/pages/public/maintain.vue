@@ -1,6 +1,8 @@
 <template>
 <div class="maintain">
-<my-map type="maintain" :tolimit="6"></my-map>
+  <keep-alive>
+  <my-map type="maintain" :tolimit="6"></my-map>
+  </keep-alive>
 </div>
 </template>
 

@@ -104,9 +104,6 @@
         case 'rescue': this.typeV= '213';break;
       }
     },
-    destroyed(){
-      window.location.reload()
-    },
     mounted(){
       this.map = new BMap.Map("map");
       let point = new BMap.Point(121.480201, 31.236336);// 上海
@@ -115,8 +112,8 @@
         anchor : BMAP_ANCHOR_BOTTOM_RIGHT
       });//添加比例尺
       let top_left_navigation = new BMap.NavigationControl({offset: new BMap.Size(20, 20)}); // 添加缩放平移控件
-      this.icon=new BMap.Icon("static/img/point-icon.png", new BMap.Size(20, 32));//自定义点图标
-      this.icon.imageSize= new BMap.Size(20, 32)
+      this.icon=new BMap.Icon("static/img/point-icon.png", new BMap.Size(32, 32));//自定义点图标
+      this.icon.imageSize= new BMap.Size(32, 32)
 
       this.map.addControl(top_left_control);
       this.map.addControl(top_left_navigation);
@@ -212,7 +209,7 @@
           param = {
             systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
             type: this.typeV,
-            limit: 300,
+            limit: 200,
             page: 1
           }
         this.axios({
@@ -311,13 +308,17 @@
         $(".rates").hide()
       }
     },
+    beforeDestroy(){
+      this.map= null
+      $("#map").remove()
+    },
     destroyed() {
       // this.map.reset();
       // this.map= null
       // delete this.map
       // this.$destroy()
       // window.location.reload()
-      this.$router.go(0)
+      // this.$router.go(0)
     },
   }
 </script>
