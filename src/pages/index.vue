@@ -8,7 +8,7 @@
             <img src="../assets/index/banner1.jpg"/>
             <div class="words">
               <p>上海市机动车维修公共服务平台</p>
-              <p>足不出户，为您的爱车排忧解难</p>
+              <p>为您的美好汽车生活服务</p>
             </div>
             <router-link class="tomore" tag="a" :to="{name: 'about'}">了解更多</router-link>
           </div>
@@ -90,13 +90,13 @@
               </li>
               <li>
                 <a href="javascript:;">
-                  <p ><span>[传动转向]</span>我的汽车排气管冒黑烟，请问怎么回事？该怎么处理？</p>
+                  <p ><span>[传动转向]</span>转向灯开起来不闪，过几秒就不亮了是什么原因？</p>
                   <span>2017-06-23</span>
                 </a>
               </li>
               <li>
                 <a href="javascript:;">
-                  <p ><span>[传动转向]</span>我的汽车排气管冒黑烟，请问怎么回事？该怎么处理？</p>
+                  <p ><span>[传动转向]</span>我的宝迪依维柯22000公里左右，后右刹车片只要下雨天刹车轻轻的踩上去就抱死，维修站去了二次，就搓搓沙皮打打没几天又毛病重犯了！</p>
                   <span>2017-06-23</span>
                 </a>
               </li>
@@ -120,10 +120,10 @@
         </div>
       </div>
       <div class="right">
-        <a class="car_record" href="javascript:;"></a>
-        <a class="download" href="javascript:;"></a>
-        <a class="mall" href="javascript:;"></a>
-        <a class="lanto_share" href="javascript:;"></a>
+        <router-link tag="a" :to="{name: 'eRecordList'}" class="car_record" ></router-link>
+        <a class="download" ></a>
+        <router-link tag="a" :to="{path: '/business/fittings'}" class="mall" ></router-link>
+        <a class="lanto_share" href="http://www.lantoev.com/" target="_blank"></a>
       </div>
     </div>
   </div>

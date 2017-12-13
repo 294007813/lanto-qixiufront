@@ -40,13 +40,13 @@
           name: '',
           tel: '',
           address: '',
-          content: ''
+          content: []
         }
       }
     },
     methods: {
       Submit(){
-      
+
       }
     }
   }

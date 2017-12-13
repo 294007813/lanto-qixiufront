@@ -4,6 +4,22 @@ li{list-style:none}
 
 img{vertical-align:top;border:none}
 
+.my-frame{
+  width: 980px;
+  min-height: 700px;
+  margin: 10px auto;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.my-frame .content {
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 10px;
+  min-height: 620px;
+}
+
 .dblock{
   margin-top: 10px;
   margin-bottom: 30px;

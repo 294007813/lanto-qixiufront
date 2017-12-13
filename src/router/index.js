@@ -13,7 +13,7 @@ import Notes from '@/pages/public/notes'
 import NoteDetail from '@/pages/public/noteDetail'
 import BaseInfo from '@/pages/public/baseInfo'
 import ResetPassword from '@/pages/public/resetPassword'
-import Maintain from '@/pages/public/maintain'
+
 //manage
 import ManageHome from '@/pages/manager/home'
 import Notify from '@/pages/manager/notify'
@@ -63,6 +63,8 @@ import Complaint from '@/pages/supervision/complaint'
 
 
 // 公共服务
+import Maintain from '@/pages/service/maintain'
+import MaintainDetail from '@/pages/service/maintainDetail'
 import VisitingService from '@/pages/service/visitingService'
 import ReservationFix from '@/pages/service/reservationFix'
 import CarDoctor from '@/pages/service/carDoctor'
@@ -141,9 +143,8 @@ export default new Router({
         {path: '/service/visitingService', name: 'visitingService', component: VisitingService},
         {path: '/service/reservationFix', name: 'reservationFix', component: ReservationFix},
         {path: '/service/carDoctor', name: 'carDoctor', component: CarDoctor},
-
-        //维修服务
         {path: '/maintain', name: 'maintain', component: Maintain},
+        {path: '/maintainDetail', name: 'maintainDetail', component: MaintainDetail},
       ]
     }
   ]

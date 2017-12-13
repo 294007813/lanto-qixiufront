@@ -251,9 +251,9 @@
           '</ul>' +
           '</div>' +
           '<div class="button">' +
-          '<a class=""  href="/maintain/visit" >上门服务</a>' +
-          '<a class=""  href="javascript:void(0);" >预约服务</a>' +
-          '<a class="blue"  href="/maintain/detail/' + corp.corpId + '">查看详情</a>' +
+          '<a class=""  href="/#/service/visitingService" >上门服务</a>' +
+          '<a class=""  href="/#/service/reservationFix" >预约服务</a>' +
+          '<a class="blue"  href="/#/maintainDetail?id=' + corp.corpId + '">查看详情</a>' +
 
           '</div>';
         mar.searchInfoWindow =new BMapLib.SearchInfoWindow(self.map, html, {
