@@ -17,16 +17,19 @@
   <div class="title">
     <p>上海市机动车维修公共服务平台</p><p>Shanghai Automobile Maintenance public Service  Platform</p>
   </div>
-  <div class="wx" @mouseover="showqr" @mouseout="hideqr">
+  <div class="wx" @mouseover="showqr2" @mouseout="hideqr2">
     <img src="../assets/header/vx.png"><span>关注微信公众号</span>
   </div>
-  <div class="app"><img src="../assets/header/sj.png"><span>手机APP下载</span></div>
-  <img class="qrcode" src="../assets/header/lantoShare.jpg" v-show="qr" @mouseover="showqr" @mouseout="hideqr"/>
+  <div class="app" @mouseover="showqr1" @mouseout="hideqr1">
+    <img src="../assets/header/sj.png"><span>手机APP下载</span>
+  </div>
+  <img class="qrcode1" src="../assets/header/qr2.jpg" v-show="qr1" @mouseover="showqr1" @mouseout="hideqr1"/>
+  <img class="qrcode2" src="../assets/header/qr2.jpg" v-show="qr2" @mouseover="showqr2" @mouseout="hideqr2"/>
 </div>
 <div class="comp">
-  <div class="left"><img src="../assets/header/gh.png"/><div>上海市城市交通运输管理处</div></div>
-  <div class="mid">上海市汽车维修行业协会</div>
-  <div class="right">上海蓝速汽车技术有限公司</div>
+  <div class="left"><img src="../assets/header/tlogo1.png"/><div>指导部门：上海市城市交通运输管理处</div></div>
+  <div class="mid"><img src="../assets/header/tlogo2.png"/><div>主办单位：上海市汽车维修行业协会</div></div>
+  <div class="right"><img src="../assets/header/logo1.png"/><div>承办单位：上海蓝速汽车技术有限公司</div></div>
 </div>
 
   <Menu mode="horizontal" theme="primary" :active-name="this.$route.path" @on-select="select">
@@ -77,7 +80,8 @@
 export default {
   data(){
     return{
-      qr: false,
+      qr1: false,
+      qr2: false,
     }
   },
   computed:{
@@ -115,11 +119,17 @@ export default {
         }
       });
     },
-    showqr(){
-      this.qr=true
+    showqr1(){
+      this.qr1=true
     },
-    hideqr(){
-      this.qr=false
+    hideqr1(){
+      this.qr1=false
+    },
+    showqr2(){
+      this.qr2=true
+    },
+    hideqr2(){
+      this.qr2=false
     },
     select(name){
       console.log(name)
@@ -194,17 +204,24 @@ export default {
       float: left;
     }
   }
-  .qrcode{
+  .qrcode1{
     position: absolute;
     width: 160px;
-    right: 10px;
+    right: 110px;
+    top: 30px;
+    z-index: 901;
+  }
+  .qrcode2{
+    position: absolute;
+    width: 160px;
+    right: 0;
     top: 30px;
     z-index: 901;
   }
 
 }
 .comp{
-  width: 800px;
+  width: 900px;
   height: 30px;
   margin: 10px auto;
   text-align: center;
@@ -213,15 +230,19 @@ export default {
     float: left;
     height: 30px;
     line-height: 30px;
-    font-size: 16px;
-  }
-  .left{
+    font-size: 14px;
     img{
       float: left;
+      width: 30px;
     }
     div{
       float: left;
       line-height: 30px;
+    }
+  }
+  .mid{
+    img{
+      width: 35px;
     }
   }
 }

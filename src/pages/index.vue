@@ -1,38 +1,49 @@
 <template>
 <div class="index">
   <div class="banner">
-    <Carousel v-model="banner" loop>
-      <CarouselItem>
-        <div class="content">
-          <img src="../assets/index/banner1.jpg"/>
-          <div class="words">
-            <p>上海市机动车维修公共服务平台</p>
-            <p>足不出户，为您的爱车排忧解难</p>
+    <div class="frame">
+      <Carousel v-model="banner" loop autoplay :autoplay-speed="8000">
+        <CarouselItem>
+          <div class="content">
+            <img src="../assets/index/banner1.jpg"/>
+            <div class="words">
+              <p>上海市机动车维修公共服务平台</p>
+              <p>足不出户，为您的爱车排忧解难</p>
+            </div>
+            <router-link class="tomore" tag="a" :to="{name: 'about'}">了解更多</router-link>
           </div>
-          <div class="tomore">了解更多</div>
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="content">
-          <img src="../assets/index/banner2.jpg"/>
-          <div class="words">
-            <p>上海市汽车维修电子健康档案</p>
-            <p>为每辆汽车建立“一车一档”维修电子健康档案 </p>
+        </CarouselItem>
+        <CarouselItem>
+          <div class="content">
+            <img src="../assets/index/banner2.jpg"/>
+            <div class="words">
+              <p>上海市汽车维修电子健康档案</p>
+              <p>为每辆汽车建立“一车一档”维修电子健康档案 </p>
+            </div>
+            <router-link class="tomore" tag="a" :to="{name: 'eRecordList'}">了解更多</router-link>
           </div>
-          <div class="tomore">了解更多</div>
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="content">
-          <img src="../assets/index/banner3.jpg"/>
-          <div class="words">
-            <p>蓝途共享配件速运平台</p>
-            <p>匹配汽车备件城市配送的多样化、个性化需求，降低物流成本，实现柔性配送</p>
+        </CarouselItem>
+        <CarouselItem>
+          <div class="content">
+            <img src="../assets/index/banner3.jpg"/>
+            <div class="words">
+              <p>蓝途共享配件速运平台</p>
+              <p>匹配汽车备件城市配送的多样化、个性化需求，降低物流成本，实现柔性配送</p>
+            </div>
+            <a class="tomore" href="http://www.lantoev.com/" target="_blank">了解更多</a>
           </div>
-          <div class="tomore">了解更多</div>
+        </CarouselItem>
+      </Carousel>
+
+      <div class="big-button">
+        <div class="button">
+          <router-link tag="span" :to="{name: 'eRecordList'}">上海市汽车维修电子健康档案登录</router-link>
         </div>
-      </CarouselItem>
-    </Carousel>
+        <div class="button">
+          <router-link tag="span" :to="{name: 'login'}">管理部门和行业协会登录</router-link>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="map">
     <div class="tit">维修服务</div><br/>
@@ -461,60 +472,94 @@ export default {
 <style  lang="scss">
   .banner{
     text-align: center;
-    .ivu-carousel{
+    .frame{
+      position: relative;
       width: 100%;
-      height: 300px;
       min-width: 800px;
       max-width: 1200px;
       display: inline-block;
-      text-align: left;
-      overflow: hidden;
-      .content{
+      .ivu-carousel{
         width: 100%;
         height: 300px;
+        text-align: left;
         overflow: hidden;
         position: relative;
-        .words {
-          position: absolute;
-          left: 10%;
-          top: 80px;
-          color: white;
-          font-size: 32px;
-          padding: 5px 25px 5px 0;
-          text-align: left;
-          p:last-child {
-            font-size: 12px;
-            margin-top: 10px;
+        .content{
+          width: 100%;
+          height: 300px;
+          overflow: hidden;
+          position: relative;
+          .words {
+            position: absolute;
+            left: 10%;
+            top: 80px;
+            color: white;
+            font-size: 32px;
+            padding: 5px 25px 5px 0;
+            text-align: left;
+            p:last-child {
+              font-size: 12px;
+              margin-top: 10px;
+            }
+          }
+          .tomore {
+            position: absolute;
+            display: block;
+            left: 10%;
+            top: 180px;
+            color: white;
+            font-size: 14px;
+            padding: 5px 25px;
+            border: 1px solid white;
+          }
+          .tomore:hover{
+            background-color: white;
+            color: #2d8cf0;
           }
         }
-        .tomore {
-          position: absolute;
-          left: 10%;
-          top: 180px;
-          color: white;
-          font-size: 14px;
-          padding: 5px 25px;
-          border: 1px solid white;
+        img{
+          width: auto;
+          height: 100%;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
         }
-        .tomore:hover{
-          background-color: white;
-          color: #2d8cf0;
+        .ivu-carousel-dots{
+          bottom: 10px;
+          li button{
+            background-color: white;
+          }
         }
       }
-      img{
-        width: auto;
-        height: 100%;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      .ivu-carousel-dots{
-        bottom: 10px;
-        li button{
-          background-color: white;
+      .big-button{
+        width: 250px;
+        overflow: hidden;
+        height: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        .button{
+          display: table;
+          height: 145px;
+          width: 100%;
+          color: #FFF;
+          cursor: pointer;
+          text-align: center;
+          background: #01e4a7;
+          font-size: 24px;
+          span{
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+          }
+        }
+        .button:last-child{
+          background-color: #03a0f1;
+          margin-top: 10px;
         }
       }
     }
+
   }
   .map{
     text-align: center;

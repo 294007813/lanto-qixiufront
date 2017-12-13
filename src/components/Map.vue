@@ -235,7 +235,7 @@
         let html=
           '<div class="info">' +
           '<div class="img">' +
-          '<img src="/static/img/nopic.jpg" width="168" height="150" alt="">' +
+          '<img src="/static/img/nopic.jpg" width="170" height="140" alt="">' +
           '</div>' +
           '<ul>' +
           '<li><span>企业名称：</span>' + (corp.corpName?corp.corpName:"") + '</li>' +
@@ -472,8 +472,8 @@
     padding: 10px;
     .img{
       float: right;
-      width: 150px;
-      height: 150px;
+      width: 170px;
+      height: 140px;
       img{
         width: 100%;
       }
