@@ -42,7 +42,7 @@
       <span class="name">{{item.corpName}}</span>
       <span>地址：{{item.corpAdd}}</span>
       <span>电话：{{item.linkTel}}</span>
-      <span>星级：</span>
+      <span v-show="item.apart">距离：{{calcApart(item.apart)}}</span>
       <div class="appraise" @click.stop="appraise(item.corpId, item.corpName)">我要评价</div>
       </div>
     </li>
@@ -274,6 +274,14 @@
         });
         this.map.addOverlay(mar);
         this.points[corp.corpId]= mar
+      },
+      calcApart(ap){
+        let flap= parseFloat(ap)
+        if(flap>=1000){
+          return (flap/1000).toFixed(1)+' km'
+        }else{
+          return ap+' 米'
+        }
       },
       openMapInfo(id){
         this.points[id].searchInfoWindow.open(this.points[id])
