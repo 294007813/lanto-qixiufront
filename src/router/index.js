@@ -29,6 +29,7 @@ import ComVisit from '@/pages/company/comvisit'
 import ComAppoint from '@/pages/company/comappoint'
 import ComComplain from '@/pages/company/comcomplain'
 import ComUpload from '@/pages/company/comupload'
+import CompleteInfo from '@/pages/company/completeInfo'
 
 //personal
 import BindCar from '@/pages/personal/bindcar'
@@ -81,7 +82,9 @@ export default new Router({
         {path: '/index', alias: '', name: 'index', component: Index,},
         {path: '/login', name: 'login', component: Login,},
         {path: '/register', name: 'register', component: Login,},
+        {path: '/forget', name: 'forget', component: Login,},
         {path: '/about', name: 'about', component: About,},
+        {path: '/completeInfo', name: 'completeInfo', component: CompleteInfo,},
         {path: '/center', name: 'center', component: LeftMenu, children:[
             //管理中心
             {path: '/center/manHome', name: 'manHome', component: ManageHome, meta: { requiresAuth: true }},

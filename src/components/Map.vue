@@ -6,7 +6,7 @@
     <Option value="166">综合检测站</Option>
     <Option value="214">危运车辆维修</Option>
     <Option value="215">新能源汽车维修</Option>
-    <Option value="213">汽车救援</Option>
+    <Option value="213">施救牵引企业</Option>
   </Select>
   <Input v-model="inputV" placeholder="输入企业名称/地址" :class="{inline: this.type=='maintain'}"
          @on-enter="changeSelect">
@@ -36,15 +36,15 @@
   </div>
   <div class="res">查询结果：共<span>{{sum}}</span>条记录，请在企业列表或地图中选择查看</div>
   <ul>
-    <li class="info" v-for="(item, key) in list" :key="key" @click.stop="openMapInfo(item.corpId,)">
+    <li class="info" v-for="(item, key) in list" :key="key" @click.stop="openMapInfo(item.corpId)">
       <img src="../assets/map/nopic.jpg">
       <div class="list-right">
-      <span class="name">{{item.corpName}}</span>
-      <span>地址：{{item.corpAdd}}</span>
-      <span>电话：{{item.linkTel}}</span>
-      <span v-show="item.apart">距离：{{calcApart(item.apart)}}</span>
-      <div class="appraise" @click.stop="appraise(item.corpId, item.corpName)">我要评价</div>
+        <span class="name">{{item.corpName}}</span>
+        <span>地址：{{item.corpAdd}}</span>
+        <span>电话：{{item.linkTel}}</span>
+        <span v-show="item.apart">距离：{{calcApart(item.apart)}}</span>
       </div>
+      <div class="appraise" @click.stop="appraise(item.corpId, item.corpName)">我要评价</div>
     </li>
   </ul>
   <Page :total="sum" :current="page" :page-size="limit" show-elevator class-name="paging" @on-change="changePage"></Page>
@@ -374,6 +374,7 @@
         overflow: hidden;
         border: 1px solid #ededed;
         margin-bottom: 5px;
+        position: relative;
         img{
           float: left;
           margin: 8px;
@@ -401,18 +402,18 @@
             padding-left: 20px;
             background-size: 15px;
           }
-          .appraise{
-            position: absolute;
-            right: 10px;
-            bottom: 0;
-            background-color: white;
-            color: #1E9FFF;
-            border: 1px solid #1E9FFF;
-            font-size: 12px;
-            padding: 2px 10px;
-            border-radius: 2px;
-            cursor: pointer;
-          }
+        }
+        .appraise{
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          background-color: white;
+          color: #1E9FFF;
+          border: 1px solid #1E9FFF;
+          font-size: 12px;
+          padding: 2px 10px;
+          border-radius: 2px;
+          cursor: pointer;
         }
       }
     }

@@ -15,7 +15,7 @@
 <div class="midbar">
   <img class="logo" src="../assets/header/logo1.png">
   <div class="title">
-    <p>上海市机动车维修公共服务平台</p><p>Shanghai Automobile Maintenance public Service  Platform</p>
+    <p>上海市机动车维修公共服务平台（试运行）</p><p>Shanghai Automobile Maintenance public Service  Platform</p>
   </div>
   <div class="wx" @mouseover="showqr2" @mouseout="hideqr2">
     <img src="../assets/header/vx.png"><span>关注微信公众号</span>

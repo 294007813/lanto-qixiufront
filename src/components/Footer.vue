@@ -4,13 +4,13 @@
       <div class="footer_l">
         <p class="yqlj">
           友情链接：<a href="http://www.mot.gov.cn/" target="_Blank">中华人民共和国交通运输部</a>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
           <a href="http://www.jt.sh.cn" target="_Blank">上海交通网</a>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
           <a href="http://www.shygc.net" target="_Blank">上海市城市交通运输管理处</a>
-          <!--&nbsp&nbsp&nbsp&nbsp&nbsp|
-				   <a href="http://www.samra.org.cn/jsp/index/indexList.jsp" target="_Blank">上海市汽车维修行业协会</a> -->
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          <a href="http://www.shjtzf.com/" target="_Blank">上海市交通委执法总队</a>
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
           <a href="http://www.lantoev.com" target="_Blank">蓝途共享</a>
         </p>
         <p>copyright 2017 上海蓝速汽车技术有限公司 All rights reserved. 沪ICP备17039665号-1</p>

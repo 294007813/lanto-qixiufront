@@ -19,7 +19,10 @@ const getters = {
   },
   userType: function (state) {
     return state.userInfo.userRoleId;
-  }
+  },
+  isDisabled: function (state) {
+    return state.userInfo.isdisabled;
+  },
 }
 
 export default new Vuex.Store({

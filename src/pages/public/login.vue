@@ -3,6 +3,7 @@
   <div class="title"><h1>会员注册/登录</h1></div>
   <div class="under">
     <div class="left">
+      <!--登录-->
       <Form ref="loginForm" :model="loginForm"  class="card-box login-form" v-show="this.$route.name=='login'">
         <Form-item prop="email">
           <Input size="large" type="text" v-model="loginForm.loginName" placeholder="用户名" >
@@ -13,7 +14,7 @@
           <Input size="large" type="password" v-model="loginForm.password" placeholder="密码" >
           <Icon type="ios-locked-outline" slot="prepend"></Icon>
           </Input>
-          <a class="forget">忘记密码？</a>
+          <router-link tag="a" class="forget" :to="{name: 'forget'}">忘记密码？</router-link>
         </Form-item>
 
         <Form-item>
@@ -21,6 +22,7 @@
         </Form-item>
       </Form>
 
+      <!--注册-->
       <Form ref="regForm"
             :model="regForm"  class="card-box reg-form" :label-width="60" v-show="this.$route.name=='register'">
         <Form-item label="手机">
@@ -50,6 +52,26 @@
         </Form-item>
       </Form>
 
+      <!--忘记密码-->
+      <Form ref="forgetFrom"
+            :model="forgetFrom"  class="card-box reg-form" :label-width="60" v-show="this.$route.name=='forget'">
+        <Form-item label="手机">
+          <Input size="large" type="text" v-model="forgetFrom.loginName" placeholder="用户名" ></Input>
+        </Form-item>
+        <Form-item label="验证码">
+          <Input size="large" type="text" v-model="forgetFrom.code" placeholder="验证码" >
+          <p slot="append" class="get-code" @click="getCode">{{getCodeButton}}</p>
+          </Input>
+        </Form-item>
+        <Form-item label="密码">
+          <Input size="large" type="password" v-model="forgetFrom.password" placeholder="密码" ></Input>
+        </Form-item>
+
+        <Form-item>
+          <Button size="large" type="primary" @click="handleForget('forgetFrom')" long>修改密码</Button>
+        </Form-item>
+      </Form>
+
     </div>
     <div class="right">
       <router-link tag="a" :to="{ name: 'register'}"  class="reg">注册</router-link>
@@ -73,6 +95,11 @@ export default {
         password:"",
         repass:"",
         type:"1"
+      },
+      forgetFrom:{
+        loginName:"",
+        password:"",
+        code:""
       },
       getCodeButton:"获取验证码",
       count: 0,
@@ -218,6 +245,7 @@ export default {
 
       })
     },
+    handleForget(){},
     getCode(){
       if( !/^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|17[0-9]{9}$|18[0-9]{9}$/.test(this.regForm.loginName) ){
         this.$Message.error('手机号不正确！');

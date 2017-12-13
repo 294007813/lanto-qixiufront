@@ -1,4 +1,5 @@
 import router from './router'
+import store from './store/store'
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -10,7 +11,15 @@ router.beforeEach((to, from, next) => {
         query: { redirect: to.fullPath }
       })
     } else {
-      next()
+      if(store.getters.isDisabled){
+        //如果是企业用户，还未填写资料的
+        next({
+          path: '/completeInfo',
+        })
+      }else{
+        next()
+      }
+
     }
   } else {
     next() // 确保一定要调用 next()
