@@ -48,7 +48,7 @@
       <MenuItem name="/maintain?type=newenergy">新能源汽车维修</MenuItem>
       <MenuItem name="/maintain?type=rescue">维修救援服务</MenuItem>
     </Submenu>
-    <MenuItem name="">行业治理</MenuItem>
+    <MenuItem name="">协会治理</MenuItem>
     <Submenu name="6">
       <template slot="title">公众监督</template>
       <MenuItem name="/supervision/satisfaction">满意度调查</MenuItem>
