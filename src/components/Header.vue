@@ -71,7 +71,7 @@
     </Submenu>
     <MenuItem name="/about">关于我们</MenuItem>
   </Menu>
-
+  <BackTop></BackTop>
 </div>
 </template>
 

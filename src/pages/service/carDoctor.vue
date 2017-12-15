@@ -5,11 +5,14 @@
         <sub-title title="车大夫门诊" :link="[{name:'公共服务',to: ''},{name:'车大夫门诊',to:''}]"></sub-title>
         <div class="problem_ask clearFix">
           <p>问题咨询</p>
-          <textarea name="" id=""></textarea>
+          <textarea name="" id="" v-model="content"></textarea>
           <span style="margin-right: 10px;">选择问题分类:</span>
-          <div :data-code="index+207" class="problem_category_item" @click="chooseCategory($event)"
-               v-for="(item, index) in problems" :key="index">{{ item }}
-          </div>
+          <!--<div :data-code="index+207" class="problem_category_item" @click="chooseCategory($event)"-->
+               <!--v-for="(item, index) in problems" :key="index">{{ item }}-->
+          <!--</div>-->
+          <RadioGroup v-model="problemCategory" type="button" size="small">
+            <Radio v-for="(item, index) in problems" :key="index" :label="item.dictId">{{item.value}}</Radio>
+          </RadioGroup>
           <div class="problem_select" style="float: right;">
             <span style="margin-right: 10px">问题类别:</span>
             <Select v-model="problemCategory2" style="width:120px">
@@ -17,7 +20,7 @@
               <Option :value="'车辆维修指导'">车辆维修指导</Option>
             </Select>
           </div>
-          <Button type="primary" size="large" style="position: absolute; right: 10px; bottom: 10px;">提交问题</Button>
+          <Button type="primary" size="large" @click="submit" style="position: absolute; right: 10px; bottom: 10px;">提交问题</Button>
         </div>
         <div class="sub_title clearFix">
           <p class="">问题集锦</p>
@@ -62,21 +65,16 @@
     name: "carDoctor",
     data(){
       return {
-        problems: [
-          '发动机',
-          '变速箱',
-          '空调',
-          '传动转向',
-          '车身车架',
-        ],
-        problemCategory: null,
+        content: '',
+        problems: [],
+        problemCategory: '',
         problemCategory2: '',
         problemList: ["车辆故障诊断", "车辆维修指导"],
         columns: [
           {
             title: '问题',
             key: 'problem',
-            width: 450
+            width: 400
           },
           {
             title: '时间',
@@ -87,43 +85,67 @@
             title: '查看次数',
             key: 'count',
             align: 'center'
+          },
+          {title: '查看详情', key: 'id', align: 'center',
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'primary',
+                    size: 'small'
+                  },
+                  on: {
+                    click: () => {
+                      console.log(params.row.id)
+                      this.$router.push({
+                        path:'',
+                        query:{id: params.row.id}
+                      })
+                    }
+                  }
+                }, '查看'),
+              ]);
+            }
           }
         ],
-        tableData: [
-          {
-            problem: '新车怎么保养?',
-            date: '201712-07',
-            count: '0',
-            align: 'left'
-          },
-          {
-            problem: '我的汽车排气管冒黑烟,请问怎么回事?该怎么处理?',
-            date: '201712-07',
-            count: '0'
-          },
-          {
-            problem: '新车开了5个月左右,四千多公里,还没拉过高速,4S店电话催我快去做首保.请问这...',
-            date: '201712-07',
-            count: '0'
-          }
-        ]
+        tableData: []
       }
+    },
+    created(){
+      let self=this, systok=localStorage.getItem("SYSTEMTOKEN")
+      this.axios({
+        method: 'get',
+        url: '/cdf/questype/'+ systok,
+      }).then(function (res) {
+        self.problems= res.data.data
+      })
+
+      this.getList()
     },
     methods: {
-      Submit(){
-      
+      submit(){
+
       },
-      chooseCategory(e){
-        $(e.target).addClass("active").siblings().removeClass("active")
-        this.problemCategory = $(e.target).attr("data-code")
-        console.log(this.problemCategory)
+      getList(){
+        let self=this, systok=localStorage.getItem("SYSTEMTOKEN")
+        this.axios({
+          method: 'get',
+          url: '/cdf/queryquestionlist/'+ systok,
+        }).then(function (res) {
+          console.log(res.data)
+          let datas= res.data.data
+          self.tableData= []
+          for(let i in datas){
+            self.tableData.push({
+              problem: datas[i].content,
+              date: (new Date( datas[i].publish).toISOString().split(".")[0].split("T")[0]),
+              count: datas[i].views,
+              id: datas[i].questionId
+            })
+          }
+        })
       }
     },
-    watch: {
-      problemCategory2() {
-        console.log(this.problemCategory2);
-      }
-    }
   }
 </script>
 
@@ -212,7 +234,7 @@
           border: 1px solid #d4d4d4;
           padding: 10px;
           margin-top: 10px;
-          
+
         }
       }
       .problem_right {

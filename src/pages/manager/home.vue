@@ -8,7 +8,13 @@
   </div>
   <div class="dblock">
     <h1 class="dtitle">区域对接状况</h1>
-    <chart :options="bar1" class="bar"></chart>
+    <chart :options="bar1" class="bar" @click="clickArea"></chart>
+    <div class="comList"><p>
+      <Select v-model="areaV" style="width:100px" @on-change="queryComp">
+        <Option v-for="item in areas" :value="item.areakey" :key="item.areakey">{{item.areaname}}</Option>
+      </Select>
+      <span>对接企业名单：</span></p><ul class="list"><li v-for="(item, key) in comList" :key="key">{{item.companyname}}</li></ul>
+    </div>
   </div>
   <div class="dblock">
     <h1 class="dtitle">ERP公司对接情况</h1>
@@ -104,7 +110,7 @@ export default {
         xAxis : [
           {
             type : 'category',
-            data : ['黄浦区', '徐汇区', '长宁区', '静安区', '普陀区',  '虹口区', '杨浦区', '闵行区', '宝山区', '嘉定区', '浦东新区', '金山区', '松江区', '青浦区',  '奉贤区', '崇明区'],
+            // data : ['黄浦区', '徐汇区', '长宁区', '静安区', '普陀区',  '虹口区', '杨浦区', '闵行区', '宝山区', '嘉定区', '浦东新区', '金山区', '松江区', '青浦区',  '奉贤区', '崇明区'],
             axisTick: {
               alignWithLabel: true
             },
@@ -130,10 +136,13 @@ export default {
             name:'对接数',
             type:'bar',
             //barWidth: '60%',
-            data:[6, 7, 6, 8, 5,  10, 6, 88, 7, 14, 24, 6, 9, 5, 4, 9]
+            data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
+      areas:[],
+      areaV:"",
+      comList:[],
 
       columns2:[
         {title:'完成对接名单(9家)',key:'fin'},
@@ -284,9 +293,6 @@ export default {
     this.axios({
       method: 'get',
       url: '/statistics/admin/areaStatistics/'+ acctok,
-      headers: {
-        'Content-type': 'application/json'
-      },
     }).then(function (res) {
       // console.log(res)
       let area=[], num=[]
@@ -297,14 +303,62 @@ export default {
       self.bar1.xAxis[0].data= area;
       self.bar1.series[0].data=num
     })
+
+    this.axios({
+      method: 'get',
+      url: '/area/county/'+ acctok+ '/310100',
+    }).then(function (res) {
+      console.log(res)
+      self.areas=res.data.data
+    })
+
   },
   methods:{
+    clickArea(val){
+      // console.log(val)
+      for(let i in this.areas){
+        if(this.areas[i].areaname==val.name)
+          this.areaV=this.areas[i].areakey
+      }
+    },
+    queryComp(val){
+      let self= this, acctok= localStorage.getItem("ACCESSTOKEN");
+      console.log(val)
+      this.axios({
+        method: 'get',
+        url: '/statistics/admin/areaCompany/'+ acctok+ '/'+ val,
+      }).then(function (res) {
+        console.log(res)
+        self.comList=res.data.data
 
+      })
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.comList{
+  width: 600px;
+  ul.list{
+    li{
+      display: inline-block;
+      margin: 0 5px;
+      line-height: 25px;
+    }
+    li:before{
+      content: '';
+      width: 5px;
+      height: 5px;
+      margin-right: 2px;
+      background-color: #6eb4f2;
+      display: inline-block;
+      line-height: 25px;
+      position: relative;
+      top: -2px;
+    }
+  }
+}
 .pie {
   width: 300px;
   height: 300px;

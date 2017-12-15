@@ -6,10 +6,10 @@
         <FormItem label="车主姓名" style="width: 450px;">
           <Input v-model="formItem.name" style="margin-left: -30px" placeholder="请输入姓名"></Input>
         </FormItem>
-        <FormItem label="联系方式" style="width: 450px;">
+        <FormItem label="联系电话" style="width: 450px;">
           <Input v-model="formItem.tel" style="margin-left: -30px"  placeholder="请输入联系方式"></Input>
         </FormItem>
-        <FormItem label="地址" style="width: 450px;">
+        <FormItem label="联系地址" style="width: 450px;">
           <Input v-model="formItem.address" style="margin-left: -30px"  placeholder="请输入详细地址"></Input>
         </FormItem>
         <FormItem label="服务内容">
