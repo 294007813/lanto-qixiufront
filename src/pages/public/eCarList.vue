@@ -27,7 +27,7 @@ export default {
     return{
       formItem:{
         accessToken: localStorage.getItem('ACCESSTOKEN'),
-        vin: this.$route.query.id,
+        vehicleplatenumber:"",
         limit: 10,
         page: 1
       },
@@ -74,7 +74,7 @@ export default {
       let self= this
       this.axios({
         method: 'post',
-        url: '/vehicle/carfile/query',
+        url: '/vehicle/owner/queryVehicelist',
         headers: {
           'Content-type': 'application/json'
         },

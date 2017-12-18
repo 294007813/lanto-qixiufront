@@ -2,11 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 //components
 import Bone from '@/components/Bone'
+import ArticleMenu from '@/components/ArticleMenu'
+import ArticleList from '@/components/ArticleList'
+import Article from '@/components/Article'
 import LeftMenu from '@/components/LeftMenu'
 //public
 import Index from '@/pages/index'
 import Login from '@/pages/public/login'
 import About from '@/pages/public/about'
+import CarList from '@/pages/public/eCarList'
 import RecordList from '@/pages/public/eRecordList'
 import RecordDetail from '@/pages/public/eRecordDetail'
 import Notes from '@/pages/public/notes'
@@ -85,6 +89,14 @@ export default new Router({
         {path: '/forget', name: 'forget', component: Login,},
         {path: '/about', name: 'about', component: About,},
         {path: '/completeInfo', name: 'completeInfo', component: CompleteInfo,},
+        {path: '/public', name: 'public', component: ArticleMenu, children:[
+            {path: '/public/articleList', name: 'articleList', component: ArticleList},
+            {path: '/public/article', name: 'article', component: Article},
+          ]},
+        {path: '/association', name: 'association', component: ArticleMenu, children:[
+            {path: '/association/articleList', name: 'assArticleList', component: ArticleList},
+            {path: '/association/article', name: 'assArticle', component: Article},
+          ]},
         {path: '/center', name: 'center', component: LeftMenu, children:[
             //管理中心
             {path: '/center/manHome', name: 'manHome', component: ManageHome, meta: { requiresAuth: true }},
@@ -109,6 +121,7 @@ export default new Router({
             {path: '/center/perMyappoint', name: 'perMyappoint', component: MyAppoint, meta: { requiresAuth: true }},
 
             //共用组件
+            {path: '/center/eCarList', name: 'eCarList', component: CarList, meta: { requiresAuth: true }},
             {path: '/center/eRecordList', name: 'eRecordList', component: RecordList, meta: { requiresAuth: true }},
             {path: '/center/eRecordDetail', name: 'eRecordDetail', component: RecordDetail, meta: { requiresAuth: true }},
             {path: '/center/notes', name: 'notes', component: Notes, meta: { requiresAuth: true }},

@@ -28,7 +28,7 @@
     <Select v-model="areaV" placeholder="企业区域" clearable @on-change="changeSelect">
       <Option v-for="(item, key) in area" :value="item.areakey" :key="key">{{item.areaname}}</Option>
     </Select>
-    <Select v-model="brandV" placeholder="输入品牌" clearable @on-change="changeSelect" filterable>
+    <Select v-model="brandV" placeholder="输入品牌" clearable @on-change="changeSelect" filterable class="brand">
       <Option v-for="(item, key) in brands" :value="item" :key="key"></Option>
     </Select>
   </div>
@@ -356,6 +356,7 @@
         width: 25%;
         padding-right: 5px;
       }
+
     }
     .res{
       text-align: center;
@@ -474,6 +475,9 @@
   li{
     margin: 2px 0;
   }
+}
+.map-frame .brand .ivu-select-dropdown{
+  overflow-x: hidden;
 }
 .map-frame .right{
   .info{

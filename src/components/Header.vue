@@ -34,7 +34,7 @@
 
   <Menu mode="horizontal" theme="primary" :active-name="this.$route.path" @on-select="select">
     <MenuItem name="/index">首页</MenuItem>
-    <MenuItem name="">公共管理</MenuItem>
+    <MenuItem name="/public/articleList?id=10">公共管理</MenuItem>
     <MenuItem name="/center/eRecordList">电子健康档案</MenuItem>
     <Submenu name="4">
       <template slot="title">公共服务</template>
@@ -48,7 +48,7 @@
       <MenuItem name="/maintain?type=newenergy">新能源汽车维修</MenuItem>
       <MenuItem name="/maintain?type=rescue">维修救援服务</MenuItem>
     </Submenu>
-    <MenuItem name="">协会治理</MenuItem>
+    <MenuItem name="/association/articleList?id=18">协会治理</MenuItem>
     <Submenu name="6">
       <template slot="title">公众监督</template>
       <MenuItem name="/supervision/satisfaction">满意度调查</MenuItem>

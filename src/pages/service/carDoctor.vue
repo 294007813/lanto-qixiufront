@@ -74,12 +74,13 @@
           {
             title: '问题',
             key: 'problem',
-            width: 400
+            width: 350
           },
           {
             title: '时间',
             key: 'date',
-            align: 'center'
+            align: 'center',
+            width: 100
           },
           {
             title: '查看次数',
@@ -124,7 +125,33 @@
     },
     methods: {
       submit(){
-
+        if(!this.content.trim()){
+          this.$Message.error('请输入问题')
+          return
+        }
+        if(!this.problemCategory){
+          this.$Message.error('请选择问题分类')
+          return
+        }
+        let self=this, systok=localStorage.getItem("SYSTEMTOKEN"), acctok=localStorage.getItem("ACCESSTOKEN"),
+          param={
+            accessToken: acctok? acctok: systok,
+            anonymity: acctok? false: true,
+            content: this.content.trim(),
+            questionTypeId: this.problemCategory
+          }
+        this.axios({
+          method: 'post',
+          url: '/cdf/addquestion/',
+          headers: {'Content-type': 'application/json'},
+          data: JSON.stringify(param)
+        }).then(function (res) {
+          console.log(res.data)
+          if(res.data.code=='000000'){
+            self.$Message.success("添加问题成功")
+            self.getList()
+          }
+        })
       },
       getList(){
         let self=this, systok=localStorage.getItem("SYSTEMTOKEN")
