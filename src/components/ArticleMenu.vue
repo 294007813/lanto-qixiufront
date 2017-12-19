@@ -1,10 +1,10 @@
 <template>
 <div>
 <Row>
-  <div class="left-block" v-if="patch()=='/public'">
+  <div class="left-block" v-show="patch()=='/public'">
     <div class="title">公共管理</div>
     <Menu theme="light" class="left-menu"
-          :active-name="activeName" @on-select="select" :open-names="['1','2','3']">
+          :active-name="activeName" @on-select="select" :open-names="['1']">
       <Submenu name="1">
         <template slot="title"><Icon type="ios-paper"></Icon>政务公开</template>
         <MenuItem name="10">法律法规</MenuItem>
@@ -17,7 +17,7 @@
       <MenuItem name="6"><Icon type="ios-paper"></Icon>行业概况</MenuItem>
       <Submenu name="2">
         <template slot="title"><Icon type="ios-paper"></Icon>管理动态</template>
-        <MenuItem name="">电子维修档案</MenuItem>
+        <MenuItem name="/center/eRecordList">电子维修档案</MenuItem>
         <MenuItem name="">客货运车辆技术管理</MenuItem>
         <MenuItem name="">企业合格证使用信息管理</MenuItem>
         <MenuItem name="14">质量信誉考核信息</MenuItem>
@@ -31,7 +31,7 @@
     </Menu>
   </div>
 
-  <div class="left-block" v-if="patch()=='/association'">
+  <div class="left-block" v-show="patch()=='/association'">
     <div class="title">协会治理</div>
     <Menu theme="light" class="left-menu"
           :active-name="activeName" @on-select="select2" >
@@ -57,7 +57,7 @@
 		name: "article-menu",
     data(){
 		  return{
-        activeName:''
+        activeName: this.$route.query.id
       }
     },
     watch:{
@@ -67,6 +67,7 @@
       }
     },
     beforeMount(){
+      // this.activeName= this.$route.query.id
 		  // console.log(this.$route.matched)
     },
     methods:{
@@ -75,10 +76,21 @@
       },
       select(id){
 		    if(!id) return
-        this.$router.push({
-          path: '/public/articleList',
-          query: {id: id}
-        })
+        switch (id){
+          case '/center/eRecordList':{
+            this.$router.push({
+              path: id,
+            })
+            break
+          }
+          default :{
+            this.$router.push({
+              path: '/public/articleList',
+              query: {id: id}
+            })
+          }
+        }
+
       },
       select2(id){
         if(!id) return

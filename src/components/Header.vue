@@ -132,7 +132,7 @@ export default {
       this.qr2=false
     },
     select(name){
-      console.log(name)
+      // console.log(name)
       if(name){
         this.$router.push({
           path: name

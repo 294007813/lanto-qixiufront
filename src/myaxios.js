@@ -3,14 +3,16 @@ import router from './router'
 import store from './store/store'
 // axios 配置
 axios.defaults.timeout = 10000;
-axios.defaults.baseURL = 'http://product.qixiu.shanghaiqixiu.org';
-// axios.defaults.baseURL = 'http://api.dev.shanghaiqixiu.org:8080/'
+// axios.defaults.baseURL = 'http://product.qixiu.shanghaiqixiu.org';
+axios.defaults.baseURL = 'http://api.dev.shanghaiqixiu.org:8080/'
 
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
     // console.log(response);
     switch (response.data.code){
+      //没有访问权限
+      case '130410':
       //系统票据失效
       case '130411':{
         localStorage.removeItem("SYSTEMTOKEN")

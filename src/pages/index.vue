@@ -138,17 +138,21 @@
           <div class="wrap">
             <img src="../assets/index/car.png" alt="">
             <div class="detail">
-              <h3><a href="javascript:;">机动车维修经营许可办事指南</a></h3>
-              <p>机动车维修经营许可办事指南一、适用范围本办事指南适用于本市机动车维修经营许...<a href="javascript:;">[详情]</a></p>
+              <h3><router-link tag="a"
+                               :to="{path: '/public/article', query: {id: '4', articleId: article1.id}}"
+              >{{article1.title}}</router-link></h3>
+              <p>{{article1.content}}
+                <router-link tag="a"
+                             :to="{path: '/public/article', query: {id: '4', articleId: article1.id}}"
+              >[详情]</router-link></p>
             </div>
           </div>
           <ul>
-            <li><a href="javascript:;">机动车维修结算清单，机动车维修企业经济技术指标月报...</a></li>
-            <li><a href="javascript:;">道路运输车辆综合性能检验报告单申领办事指南</a></li>
-            <li><a href="javascript:;">机动车性能检测检测报告的申领</a></li>
-            <li><a href="javascript:;">机动车维修竣工出厂合格证申领办事指南</a></li>
-            <li><a href="javascript:;">机动车维修结算清单，机动车维修企业经济技术指标月报...</a></li>
-            <li><a href="javascript:;">机动车综合性能检测站备案办事指南</a></li>
+            <li v-for="(item, key) in article1.list" :key="key">
+              <router-link tag="a"
+                           :to="{path: '/public/article', query: {id: '4', articleId: item.articleId}}"
+              >{{item.title}}</router-link>
+            </li>
           </ul>
         </div>
       </li>
@@ -161,14 +165,22 @@
           <div class="wrap">
             <img src="../assets/index/machine.jpg" alt="">
             <div class="detail">
-              <h3><a href="javascript:;">机动车维修经营许可办事指南</a></h3>
-              <p>机动车维修经营许可办事指南一、适用范围本办事指南适用于本市机动车维修经营许...<a href="javascript:;">[详情]</a></p>
+              <h3><router-link tag="a"
+                               :to="{path: '/association/article', query: {id: '22', articleId: article2.id}}">
+                {{article2.title}}</router-link></h3>
+              <p>{{article2.content}}
+                <router-link tag="a"
+                             :to="{path: '/association/article', query: {id: '22', articleId: article2.id}}"
+              >[详情]</router-link></p>
             </div>
           </div>
           <ul>
-            <li><a href="javascript:;">机动车维修结算清单，机动车维修企业经济技术指标月报...</a></li>
-            <li><a href="javascript:;">言传身教做楷模,创新实践育新苗——记第十二届国家技...</a></li>
-            <li><a href="javascript:;">修车妙手回春 维权铁肩担道</a></li>
+            <li v-for="(item, key) in article2.list" :key="key">
+              <router-link tag="a"
+                           :to="{path: '/association/article', query: {id: '22', articleId: item.articleId}}"
+              >{{item.title}}</router-link>
+            </li>
+
           </ul>
         </div>
       </li>
@@ -183,11 +195,57 @@ export default {
   name: 'index',
   data(){
     return{
-      banner:0
+      banner:0,
+      article1:{
+        title: '',
+        content: '',
+        id: '',
+        list: []
+      },
+      article2:{
+        title: '',
+        content: '',
+        id: '',
+        list: []
+      }
     }
   },
-  beforeCreate(){
+  created(){
+    let self=this, systok= localStorage.getItem('SYSTEMTOKEN')
+    // this.axios({
+    //   method: 'get',
+    //   url: '/article/writing/queryDetail/'+systok+'/52',
+    // }).then(function (res) {
+    //   // console.log(res)
+    //   self.article1.title = res.data.data.title
+    //   self.article1.content= res.data.data.content.replace(/<[^>]+>/g,"").substring(0,100)+'...'
+    //   self.article1.id= res.data.data.articleId
+    // })
+    this.axios({
+      method: 'get',
+      url: '/article/writing/querylist/'+systok+'/4',
+    }).then(function (res) {
+      // console.log(res)
+      let datas= res.data.data
+      self.article1.title= datas[0].title
+      self.article1.content= datas[0].content.replace(/<[^>]+>/g,"").substring(0,100)+'...'
+      self.article1.id = datas[0].articleId
+      datas.shift()
+      self.article1.list= datas
+    })
 
+    this.axios({
+      method: 'get',
+      url: '/article/writing/querylist/'+systok+'/22',
+    }).then(function (res) {
+      // console.log(res)
+      let datas= res.data.data
+      self.article2.title= datas[0].title
+      self.article2.content= datas[0].content.replace(/<[^>]+>/g,"").substring(0,100)+'...'
+      self.article2.id = datas[0].articleId
+      datas.shift()
+      self.article2.list= datas
+    })
   },
   components: {
     myMap
@@ -456,10 +514,17 @@ export default {
                 height: 4px;
                 background-color: red;
                 margin-right: 8px;
+                position: relative;
+                top: -7px;
               }
               margin: 10px 0;
               a {
                 color: #333;
+                display: inline-block;
+                width: 80%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
               }
             }
           }
