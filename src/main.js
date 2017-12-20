@@ -21,6 +21,7 @@ import axios from './myaxios.js'
 import store from './store/store'
 
 import SubTitle from './components/SubTitle'
+import ProfessorList from './components/ProfessorList'
 
 
 Vue.use(iView);
@@ -29,7 +30,7 @@ Vue.config.productionTip = false
 Vue.prototype.axios = axios;
 Vue.component('sub-title', SubTitle)
 Vue.component('chart', ECharts)
-
+Vue.component('Professor-list', ProfessorList) // 专家列表组件
 
 Vue.prototype.userType = function () {
   return store.getters.userType

@@ -26,6 +26,7 @@ import Survey from '@/pages/manager/survey'
 import Download from '@/pages/manager/download'
 import Quality from '@/pages/manager/quality'
 import CompanyInfo from '@/pages/manager/companyInfo'
+import CompanyContactCount from '@/pages/manager/companyContactCount'
 
 //company
 import CompanyHome from '@/pages/company/home'
@@ -73,6 +74,8 @@ import MaintainDetail from '@/pages/service/maintainDetail'
 import VisitingService from '@/pages/service/visitingService'
 import ReservationFix from '@/pages/service/reservationFix'
 import CarDoctor from '@/pages/service/carDoctor'
+import QuestionSearch from '@/pages/service/questionSearch'
+import ProfessorDetail from '@/pages/service/professorDetail'
 
 Vue.use(Router)
 
@@ -106,6 +109,7 @@ export default new Router({
             {path: '/center/manSurvey', name: 'survey', component: Survey, meta: { requiresAuth: true }},
             {path: '/center/manQuality', name: 'quality', component: Quality, meta: { requiresAuth: true}},
             {path: '/center/manCompanyInfo', name: 'companyInfo', component: CompanyInfo, meta: { requiresAuth: true}},
+            {path: '/center/companyContactCount', name: 'companyContactCount', component: CompanyContactCount, meta: { requiresAuth: true}},
 
             //企业中心
             {path: '/center/comHome', name: 'comHome', component: CompanyHome, meta: { requiresAuth: true }},
@@ -159,6 +163,8 @@ export default new Router({
         {path: '/service/visitingService', name: 'visitingService', component: VisitingService},
         {path: '/service/reservationFix', name: 'reservationFix', component: ReservationFix},
         {path: '/service/carDoctor', name: 'carDoctor', component: CarDoctor},
+        {path: '/service/questionSearch', name: 'questionSearch', component: QuestionSearch},
+        {path: '/service/professorDetail', name: 'professorDetail', component: ProfessorDetail},
         {path: '/maintain', name: 'maintain', component: Maintain},
         {path: '/maintainDetail', name: 'maintainDetail', component: MaintainDetail},
       ]

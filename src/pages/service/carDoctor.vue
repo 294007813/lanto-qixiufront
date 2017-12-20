@@ -7,55 +7,28 @@
           <p>问题咨询</p>
           <textarea name="" id="" v-model="content"></textarea>
           <span style="margin-right: 10px;">选择问题分类:</span>
-          <!--<div :data-code="index+207" class="problem_category_item" @click="chooseCategory($event)"-->
-               <!--v-for="(item, index) in problems" :key="index">{{ item }}-->
-          <!--</div>-->
           <RadioGroup v-model="problemCategory" type="button" size="small">
             <Radio v-for="(item, index) in problems" :key="index" :label="item.dictId">{{item.value}}</Radio>
           </RadioGroup>
           <div class="problem_select" style="float: right;">
             <span style="margin-right: 10px">问题类别:</span>
             <Select v-model="problemCategory2" style="width:120px">
-              <Option :value="'车辆故障诊断'">车辆故障诊断</Option>
-              <Option :value="'车辆维修指导'">车辆维修指导</Option>
+              <Option :value="'车辆故障诊断'"></Option>
+              <Option :value="'车辆维修指导'"></Option>
             </Select>
           </div>
           <Button type="primary" size="large" @click="submit" style="position: absolute; right: 10px; bottom: 10px;">提交问题</Button>
         </div>
         <div class="sub_title clearFix">
           <p class="">问题集锦</p>
-          <a href="javascript:;">查看更多>></a>
+          <a href="#/service/questionSearch">查看更多>></a>
         </div>
         <div class="problem_jijin">
           <Table border :columns="columns" :data="tableData"></Table>
         </div>
       </div>
-      <div class="problem_right">
-        <div class="title clearFix">
-          <p>问答专家团</p>
-          <a href="javascript:;">更多>></a>
-        </div>
-        <div class="professors_wrap">
-          <ul>
-            <li>
-              <a href="/cdf/expert/6"><img src="http://static.shanghaiqixiu.org/images/2017/11/7/pic_1512642706078.jpg" alt="" width=70 height=70></a>
-              <div class="professor_r">
-                <a class="name" href="/cdf/expert/6">蔡振华<span></span></a>
-                <p>售后经理,注册工程师</p>
-                <a class="askForHe" href="/cdf/expert/6">向TA提问</a>
-              </div>
-            </li>
-            <li>
-              <a href="/cdf/expert/6"><img src="http://static.shanghaiqixiu.org/images/2017/11/7/pic_1512642706078.jpg" alt="" width=70 height=70></a>
-              <div class="professor_r">
-                <a class="name" href="/cdf/expert/6">蔡振华<span></span></a>
-                <p>售后经理,注册工程师</p>
-                <a class="askForHe" href="/cdf/expert/6">向TA提问</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <!-- 专家列表 -->
+      <Professor-list></Professor-list>
     </div>
   </div>
 </template>
@@ -69,7 +42,6 @@
         problems: [],
         problemCategory: '',
         problemCategory2: '',
-        problemList: ["车辆故障诊断", "车辆维修指导"],
         columns: [
           {
             title: '问题',
@@ -199,9 +171,9 @@
         .problem_ask {
           border: 1px solid #d4d4d4;
           margin-top: 10px;
-          padding: 10px;
+          padding: 10px 10px 65px 10px;
           position: relative;
-          height: 370px;
+          min-height: 370px;
           p {
             height: 35px;
             line-height: 35px;
@@ -257,11 +229,10 @@
           }
         }
         .problem_jijin {
-          min-height: 600px;
+          min-height: 261px;
           border: 1px solid #d4d4d4;
           padding: 10px;
           margin-top: 10px;
-
         }
       }
       .problem_right {
@@ -285,38 +256,6 @@
             float: right;
             margin: 5px 0;
             font-size: 14px;
-          }
-        }
-        .professors_wrap {
-          ul li {
-            border-bottom: 1px solid #d4d4d4;
-            padding: 10px 0;
-            .professor_r {
-              float: right;
-              width: 175px;
-              height: 70px;
-              .name {
-                color: #000;
-                display: block;
-                background: url(../../assets/service/r.jpg) no-repeat left center;
-                padding-left: 18px;
-                span {
-                  display: inline-block;
-                  width: 16px;
-                  height: 16px;
-                  background: url(../../assets/service/vip.png) no-repeat left center;
-                  margin-left: 5px;
-                }
-              }
-              p {
-                color: #c2c2c2;
-                line-height: 26px;
-              }
-              .askForHe {
-                border: 1px solid #c2c2c2;
-                padding: 2px 5px;
-              }
-            }
           }
         }
       }

@@ -315,7 +315,13 @@ export default {
   },
   methods:{
     clickArea(val){
-      // console.log(val)
+      console.log("val=", val)
+      this.$router.push({
+        path: "/center/companyContactCount",
+        query: {
+          areaName: val.name
+        }
+      })
       for(let i in this.areas){
         if(this.areas[i].areaname==val.name)
           this.areaV=this.areas[i].areakey
@@ -330,7 +336,6 @@ export default {
       }).then(function (res) {
         console.log(res)
         self.comList=res.data.data
-
       })
     }
   }
