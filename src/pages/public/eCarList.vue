@@ -6,6 +6,7 @@
              :link="[{name:'企业中心',to: '/center/comHome'},{name:'电子健康档案',to:''}]"></sub-title>
   <sub-title v-if="userType()==1" title="首页"
              :link="[{name:'车主中心',to: '/center/perHome'},{name:'电子健康档案',to:''}]"></sub-title>
+
   <Form :model="formItem" :label-width="80" inline style="margin: 20px 0">
     <FormItem label="车牌号">
       <Input v-model="formItem.vehicleplatenumber" placeholder="请输入"></Input>
@@ -35,8 +36,7 @@ export default {
         {title: '序号', key: 'order'},
         {title: '车牌号码', key: 'card'},
         {title: '车架号', key: 'vin'},
-        {title: '维修企业名称', key: 'comname'},
-        {title: '查看详情', key: 'id', width: 150, align: 'center',
+        {title: '操作', key: 'id', width: 150, align: 'center',
           render: (h, params) => {
             return h('div', [
               h('Button', {
@@ -48,8 +48,8 @@ export default {
                   click: () => {
                     console.log(params.row.id)
                     this.$router.push({
-                      path:'/center/eRecordDetail',
-                      query:{id: params.row.id}
+                      path:'/center/eRecordList',
+                      query:{id: params.row.vin}
                     })
                   }
                 }
