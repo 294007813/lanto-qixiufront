@@ -7,8 +7,11 @@
   <sub-title v-if="userType()==1" title="首页"
              :link="[{name:'车主中心',to: '/center/perHome'},{name:'电子健康档案',to:''}]"></sub-title>
   <Form :model="formItem" :label-width="80" inline style="margin: 20px 0">
-    <FormItem label="车牌号">
-      <Input v-model="formItem.vehicleplatenumber" placeholder="请输入"></Input>
+    <FormItem label="送修日期">
+      <DatePicker type="daterange" placement="bottom-end" placeholder="请选择日期范围" style="width: 200px"></DatePicker>
+    </FormItem>
+    <FormItem label="结算日期">
+      <DatePicker type="daterange" placement="bottom-end" placeholder="请选择日期范围" style="width: 200px"></DatePicker>
     </FormItem>
     <FormItem>
       <Button type="primary" @click="search" >搜索</Button>
@@ -17,6 +20,8 @@
 
   <Table :columns="columns" :data="data" border></Table>
   <Page :total="total" show-sizer style="margin: 10px 0" @on-change="onchange" @on-page-size-change="sizechange"></Page>
+
+  <Button type="primary" @click="back" >后退</Button>
 </div>
 </template>
 
@@ -32,11 +37,12 @@ export default {
         page: 1
       },
       columns:[
-        {title: '序号', key: 'order'},
+        {title: '序号', key: 'order', width: 70},
         {title: '车牌号码', key: 'card'},
         {title: '车架号', key: 'vin'},
-        {title: '维修企业名称', key: 'comname'},
-        {title: '查看详情', key: 'id', width: 150, align: 'center',
+        {title: '送修日期', key: 'repairdate'},
+        {title: '结算日期', key: 'settledate'},
+        {title: '操作', key: 'id', width: 90, align: 'center',
           render: (h, params) => {
             return h('div', [
               h('Button', {
@@ -53,7 +59,7 @@ export default {
                     })
                   }
                 }
-              }, '查看'),
+              }, '详情'),
             ]);
           }
         }
@@ -90,7 +96,9 @@ export default {
             order:  parseInt(i)+1,
             card: datas[i].vehicleplatenumber,
             vin: datas[i].vin,
-            comname: datas[i].companyname
+            comname: datas[i].companyname,
+            repairdate: datas[i].repairdate,
+            settledate: datas[i].settledate
           })
         }
       })
@@ -103,11 +111,16 @@ export default {
     sizechange(limit){
       this.formItem.limit= limit
       this.search()
+    },
+    back(){
+      this.$router.go(-1)
     }
   },
 }
 </script>
 
 <style scoped>
-
+  .ivu-page:after{
+    display: inline;
+  }
 </style>

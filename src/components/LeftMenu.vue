@@ -6,7 +6,7 @@
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" :open-names="['3','4','5']">
       <MenuItem name="/center/manHome"><Icon type="ios-paper"></Icon>首页</MenuItem>
-      <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
+      <MenuItem name="/center/eCarList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>公共服务</template>
         <MenuItem name="/center/manNotify">通知发布</MenuItem>
@@ -37,7 +37,7 @@
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" :open-names="['3','4','5','6']">
       <MenuItem name="/center/comHome"><Icon type="ios-paper"></Icon>首页</MenuItem>
-      <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
+      <MenuItem name="/center/eCarList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>预约上门管理</template>
         <MenuItem name="/center/comVisit">上门服务管理</MenuItem>
@@ -66,7 +66,7 @@
     <div class="title">车主中心</div>
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" >
-      <MenuItem name="/center/eRecordList"><Icon type="ios-paper"></Icon>爱车档案</MenuItem>
+      <MenuItem name="/center/eCarList"><Icon type="ios-paper"></Icon>爱车档案</MenuItem>
       <MenuItem name="/center/perBindcar"><Icon type="ios-paper"></Icon>绑定车辆</MenuItem>
       <MenuItem name="/center/notes"><Icon type="ios-paper"></Icon>通知管理</MenuItem>
       <MenuItem name="/center/perMyquestion"><Icon type="ios-paper"></Icon>我的咨询</MenuItem>
