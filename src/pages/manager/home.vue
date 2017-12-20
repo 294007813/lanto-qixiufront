@@ -16,11 +16,11 @@
       <span>对接企业名单：</span></p><ul class="list"><li v-for="(item, key) in comList" :key="key">{{item.companyname}}</li></ul>
     </div>
   </div>
-  <div class="dblock">
-    <h1 class="dtitle">ERP公司对接情况</h1>
-    <Table :columns="columns2" :data="data2" width="500"></Table>
-    <chart :options="pie2" class="pie" ></chart>
-  </div>
+  <!--<div class="dblock">-->
+    <!--<h1 class="dtitle">ERP公司对接情况</h1>-->
+    <!--<Table :columns="columns2" :data="data2" width="500"></Table>-->
+    <!--<chart :options="pie2" class="pie" ></chart>-->
+  <!--</div>-->
   <div class="dblock">
     <h1 class="dtitle">本月投诉维修厂排行榜</h1>
     <Table :columns="columns3" :data="data3" width="500"></Table>

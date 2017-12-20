@@ -212,15 +212,6 @@ export default {
   },
   created(){
     let self=this, systok= localStorage.getItem('SYSTEMTOKEN')
-    // this.axios({
-    //   method: 'get',
-    //   url: '/article/writing/queryDetail/'+systok+'/52',
-    // }).then(function (res) {
-    //   // console.log(res)
-    //   self.article1.title = res.data.data.title
-    //   self.article1.content= res.data.data.content.replace(/<[^>]+>/g,"").substring(0,100)+'...'
-    //   self.article1.id= res.data.data.articleId
-    // })
     this.axios({
       method: 'get',
       url: '/article/writing/querylist/'+systok+'/4',
@@ -255,11 +246,11 @@ export default {
 
 <style lang="scss" scoped>
   .cdf {
-    width: 1200px;
+    min-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     .content {
       width: 100%;
-      height: 400px;
       position: relative;
       .left {
         width: 940px;
@@ -267,13 +258,12 @@ export default {
         border: 1px solid #e6e6e6;
         box-sizing: border-box;
         padding: 10px;
-        float: left;
         .picWrap {
           width: 400px;
           height: 287px;
           margin-top: 20px;
           float: left;
-          position: relative;
+          position: absolute;
           img {
             width: 100%;
             height: 100%;
@@ -315,9 +305,7 @@ export default {
           }
         }
         .problemWrap {
-          width: 500px;
-          float: right;
-          margin-left: 18px;
+          margin-left: 420px;
           h3 {
             width: 92px;
             height: 55px;
@@ -342,19 +330,23 @@ export default {
                 height: 100%;
                 overflow: hidden;
                 color: rgb(2,2,2);
+                position: relative;
                 p {
-                  width: 350px;
+                  /*width: 350px;*/
                   overflow: hidden;
                   text-overflow: ellipsis;
                   white-space: nowrap;
-                  float: left;
+                  /*float: left;*/
+                  margin-right: 65px;
                   > span {
                     color: gray;
                     margin-right: 3px;
                   }
                 }
                 >span {
-                  float: right;
+                  position: absolute;
+                  top: 0;
+                  right: 0;
                 }
               }
             }
@@ -398,6 +390,7 @@ export default {
         width: 250px;
         position: absolute;
         right: 0;
+        top: 0;
         >a {
           display: block;
           width: 100%;
@@ -405,22 +398,22 @@ export default {
           border-bottom: 1px solid #ccc;
         }
         .car_record {
-          background: url(../assets/index/car_record.jpg) no-repeat;
+          background: url(../assets/index/car_record.jpg) no-repeat center;
           -webkit-background-size: contain;
           background-size: contain;
         }
         .download {
-          background: url(../assets/index/download.jpg) no-repeat;
+          background: url(../assets/index/download.jpg) no-repeat center;
           -webkit-background-size: contain;
           background-size: contain;
         }
         .mall {
-          background: url(../assets/index/mall.jpg) no-repeat;
+          background: url(../assets/index/mall.jpg) no-repeat center;
           -webkit-background-size: contain;
           background-size: contain;
         }
         .lanto_share {
-          background: url(../assets/index/lanto_share.jpg) no-repeat;
+          background: url(../assets/index/lanto_share.jpg) no-repeat center;
           -webkit-background-size: contain;
           background-size: contain;
           border-bottom: none;
@@ -452,7 +445,7 @@ export default {
     }
   }
   .bottom {
-    width: 1200px;
+    max-width: 1200px;
     margin: 15px auto 60px;
     >ul {
       width: 940px;
@@ -530,6 +523,33 @@ export default {
           }
         }
       }
+    }
+  }
+
+  /*媒体查询*/
+  @media screen and (max-width: 1200px){
+    .cdf .content .left{
+      width: 100%;
+    }
+    .cdf .content .right{
+      position: relative;
+      width: 100%;
+      border-bottom: 1px solid #e6e6e6;
+      text-align: center;
+      a{
+        width: 24%;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        border-bottom: 0 ;
+        border-right: 1px solid #e6e6e6;
+      }
+      a:last-child{
+        border:0
+      }
+    }
+    .bottom>ul{
+      width: 100%;
     }
   }
 </style>

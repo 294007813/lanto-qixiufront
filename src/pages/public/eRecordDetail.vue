@@ -27,13 +27,13 @@
   </div>
   <div class="dblock">
     <h1 class="dtitle">维修项目</h1>
-    <Table :columns="procolumns" :data="prodata" border size="small"></Table>
+    <Table :columns="procolumns" :data="prodata" border size="small" width="600"></Table>
   </div>
   <div class="dblock">
     <h1 class="dtitle">维修配件</h1>
-    <Table :columns="partcolumns" :data="partdata" border size="small"></Table>
+    <Table :columns="partcolumns" :data="partdata" border size="small" width="600"></Table>
   </div>
-
+  <Button type="primary" @click="back" >后退</Button>
 </div>
 </template>
 
@@ -92,7 +92,9 @@ export default {
     })
   },
   methods:{
-
+    back(){
+      this.$router.go(-1)
+    }
   }
 }
 </script>
