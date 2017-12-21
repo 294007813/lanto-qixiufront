@@ -1,10 +1,10 @@
 <template>
 <div>
-  <sub-title v-if="userType()==3" title="首页"
+  <sub-title v-if="userType()==3" title="汽车维修电子健康档案"
              :link="[{name:'管理中心',to: '/center/manHome'},{name:'电子健康档案',to:''}]"></sub-title>
-  <sub-title v-if="userType()==2" title="首页"
+  <sub-title v-if="userType()==2" title="汽车维修电子健康档案"
              :link="[{name:'企业中心',to: '/center/comHome'},{name:'电子健康档案',to:''}]"></sub-title>
-  <sub-title v-if="userType()==1" title="首页"
+  <sub-title v-if="userType()==1" title="汽车维修电子健康档案"
              :link="[{name:'车主中心',to: '/center/perHome'},{name:'电子健康档案',to:''}]"></sub-title>
   <Form :model="formItem" :label-width="80" inline style="margin: 20px 0">
     <FormItem label="送修日期">
