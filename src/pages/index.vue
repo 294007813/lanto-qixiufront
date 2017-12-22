@@ -20,7 +20,7 @@
               <p>上海市汽车维修电子健康档案</p>
               <p>为每辆汽车建立“一车一档”维修电子健康档案 </p>
             </div>
-            <router-link class="tomore" tag="a" :to="{name: 'eRecordList'}">了解更多</router-link>
+            <router-link class="tomore" tag="a" :to="{name: 'eCarList'}">了解更多</router-link>
           </div>
         </CarouselItem>
         <CarouselItem>
@@ -37,7 +37,7 @@
 
       <div class="big-button">
         <div class="button">
-          <router-link tag="span" :to="{name: 'eRecordList'}">上海市汽车维修电子健康档案登录</router-link>
+          <router-link tag="span" :to="{name: 'eCarList'}">上海市汽车维修电子健康档案登录</router-link>
         </div>
         <div class="button">
           <router-link tag="span" :to="{name: 'login'}">管理部门和行业协会登录</router-link>

@@ -17,7 +17,7 @@
       <MenuItem name="6"><Icon type="ios-paper"></Icon>行业概况</MenuItem>
       <Submenu name="2">
         <template slot="title"><Icon type="ios-paper"></Icon>管理动态</template>
-        <MenuItem name="/center/eRecordList">电子维修档案</MenuItem>
+        <MenuItem name="/center/eCarList">电子维修档案</MenuItem>
         <MenuItem name="">客货运车辆技术管理</MenuItem>
         <MenuItem name="">企业合格证使用信息管理</MenuItem>
         <MenuItem name="14">质量信誉考核信息</MenuItem>

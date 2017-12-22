@@ -35,7 +35,7 @@
   <Menu mode="horizontal" theme="primary" :active-name="this.$route.path" @on-select="select">
     <MenuItem name="/index">首页</MenuItem>
     <MenuItem name="/public/articleList?id=10">公共管理</MenuItem>
-    <MenuItem name="/center/eRecordList">电子健康档案</MenuItem>
+    <MenuItem name="/center/eCarList">电子健康档案</MenuItem>
     <Submenu name="4">
       <template slot="title">公共服务</template>
       <MenuItem name="/maintain?type=maintain">维修服务查选</MenuItem>

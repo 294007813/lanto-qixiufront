@@ -3,8 +3,8 @@ import router from './router'
 import store from './store/store'
 // axios 配置
 axios.defaults.timeout = 10000;
-axios.defaults.baseURL = 'http://product.qixiu.shanghaiqixiu.org';
-// axios.defaults.baseURL = 'http://api.dev.shanghaiqixiu.org:8080/'
+// axios.defaults.baseURL = 'http://product.qixiu.shanghaiqixiu.org';
+axios.defaults.baseURL = 'http://api.dev.shanghaiqixiu.org:8080/'
 // axios.defaults.baseURL = 'http://192.168.169.5:9092/provider/'
 
 // http response 拦截器
