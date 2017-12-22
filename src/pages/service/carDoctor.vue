@@ -74,7 +74,7 @@
                     click: () => {
                       console.log(params.row.id)
                       this.$router.push({
-                        path:'',
+                        path:'/service/carDoctorDetail',
                         query:{id: params.row.id}
                       })
                     }
