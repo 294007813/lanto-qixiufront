@@ -28,13 +28,16 @@
         </div>
       </div>
       <!-- 专家列表 -->
-      <Professor-list></Professor-list>
+      <professor-list></professor-list>
     </div>
   </div>
 </template>
 
 <script>
+  import ProfessorList from "../../components/ProfessorList";
+
   export default {
+    components: {ProfessorList},
     name: "carDoctor",
     data(){
       return {

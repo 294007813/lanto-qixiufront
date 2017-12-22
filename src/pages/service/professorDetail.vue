@@ -54,13 +54,16 @@
           <Table border :columns="columns" :data="tableData"></Table>
         </div>
       </div>
-      <Professor-list></Professor-list>
+      <professor-list></professor-list>
     </div>
   </div>
 </template>
 
 <script>
+import ProfessorList from "../../components/ProfessorList";
+
 export default {
+  components: {ProfessorList},
   name: "professorDetail",
   data(){
     return{
@@ -118,7 +121,7 @@ export default {
     }).then(function (res) {
       self.problems= res.data.data
     })
-    
+
     this.getList()
   },
   methods: {
@@ -229,7 +232,7 @@ export default {
               span {
                 font-weight: 600;
               }
-              
+
             }
           }
         }

@@ -74,6 +74,7 @@ import MaintainDetail from '@/pages/service/maintainDetail'
 import VisitingService from '@/pages/service/visitingService'
 import ReservationFix from '@/pages/service/reservationFix'
 import CarDoctor from '@/pages/service/carDoctor'
+import CarDoctorDetail from '@/pages/service/carDoctorDetail'
 import QuestionSearch from '@/pages/service/questionSearch'
 import ProfessorDetail from '@/pages/service/professorDetail'
 
@@ -163,6 +164,7 @@ export default new Router({
         {path: '/service/visitingService', name: 'visitingService', component: VisitingService},
         {path: '/service/reservationFix', name: 'reservationFix', component: ReservationFix},
         {path: '/service/carDoctor', name: 'carDoctor', component: CarDoctor},
+        {path: '/service/carDoctorDetail', name: 'carDoctorDetail', component: CarDoctorDetail},
         {path: '/service/questionSearch', name: 'questionSearch', component: QuestionSearch},
         {path: '/service/professorDetail', name: 'professorDetail', component: ProfessorDetail},
         {path: '/maintain', name: 'maintain', component: Maintain},
