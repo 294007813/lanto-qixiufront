@@ -22,15 +22,15 @@
     </Form>
   </div>
 
-  <div class="dblock" >
+  <div class="dblock" style="display: block">
     <h1 class="dtitle" v-if="userType()==1">汽车列表</h1>
   <Form :model="formItem" :label-width="80" inline style="margin: 20px 0">
     <FormItem label="车牌号">
       <Input v-model="formItem.vehicleplatenumber" placeholder="请输入"></Input>
     </FormItem>
-    <FormItem>
+    <!--<FormItem>-->
       <Button type="primary" @click="search" >搜索</Button>
-    </FormItem>
+    <!--</FormItem>-->
   </Form>
   <Table :columns="columns" :data="data" border></Table>
   <Page :total="total" show-sizer style="margin: 10px 0" @on-change="onchange" @on-page-size-change="sizechange"></Page>
@@ -84,7 +84,8 @@ export default {
                 },
                 on: {
                   click: () => {
-                    console.log(params.row.id)
+                    // console.log(params.row.id)
+                    this.unBind(params.row.id)
                   }
                 }
               }, '解绑'),
@@ -141,7 +142,7 @@ export default {
         self.data=[]
         for (let i in datas){
           self.data.push({
-            id: datas[i].repairbasicinfoId,
+            id: datas[i].vehicleId,
             order:  parseInt(i)+1,
             card: datas[i].vehicleplatenumber,
             vin: datas[i].vin,
@@ -180,7 +181,20 @@ export default {
         console.log(res)
         if(res.data.code='000000'){
           self.$Message.success(res.data.status)
+          self.search()
         }
+      })
+    },
+    unBind(id){
+      let self= this
+      this.axios({
+        method: 'get',
+        url: '/vehicle/owner/unbund/'+ id+ '/'+ localStorage.getItem('ACCESSTOKEN')
+      }).then(res =>{
+        console.log(res)
+        self.$Message.success('解绑成功')
+        self.formItem.page= 1
+        self.search()
       })
     }
   },

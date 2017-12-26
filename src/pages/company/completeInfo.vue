@@ -32,7 +32,7 @@
     <Row>
       <Col :md="10" :sm="12" :lg="12">
       <Form-item label="企业地址(工商注册地址)">
-        <Input v-model="formItem.companyaddress" placeholder="companyaddress"></Input>
+        <Input v-model="formItem.companyaddress.address" placeholder="companyaddress"></Input>
       </Form-item>
       </Col>
       <Col :md="10" :sm="12" :lg="12">
@@ -147,11 +147,15 @@
     data(){
       return{
         formItem: {
+          accessToken: localStorage.getItem('ACCESSTOKEN'),
           companyname: '',
           companypassword: this.calcPass(),
-          companyroadtransportationlicense:"",
+          companyroadtransportationlicense:"31" +
+          "",
           companyunifiedsocialcreditidentifier:"",
-          companyaddress:"",
+          companyaddress:{
+            address: ''
+          },
           companypostalcode:"",
           companyeconomiccategory:"",
           companycategory:"",
@@ -187,7 +191,7 @@
         }
         this.axios({
           method: 'post',
-          url: '/company/repaircompany/add',
+          url: '/company/repaircompany/edit',
           headers: {'Content-type': 'application/json'},
           data: JSON.stringify(this.formItem)
         }).then(function (response) {
@@ -200,7 +204,7 @@
           }else{
             self.$Modal.success({
               title: "提交成功",
-              content: "companycode: "+JSON.stringify(response.data.companycode)
+              content: "提交成功，请等待审核"
             })
           }
 

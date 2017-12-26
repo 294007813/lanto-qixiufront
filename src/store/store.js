@@ -14,6 +14,9 @@ const mutations={
 }
 
 const getters = {
+  loginName: function (state) {
+    return state.userInfo.telphone
+  },
   userName: function (state){
     return (state.userInfo.userName? state.userInfo.userName: state.userInfo.telphone);
   },

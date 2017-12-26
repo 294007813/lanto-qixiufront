@@ -1,6 +1,6 @@
 <template>
   <div id="baseInfo">
-    <sub-title title="基本信息" :link="[{name:'管理中心',to: '/center/manHome'},{name:'基本信息',to:''}]"></sub-title>
+    <sub-title title="基本信息" :link="[{name:'车主中心',to: '/center/manHome'},{name:'基本信息',to:''}]"></sub-title>
     <Form :model="formItem" :label-width="100" style='margin-left: 15px; height: 220px'>
       <FormItem label="用户账户" style='height: 32px; margin: 15px 0;'>
         <Input readonly v-model="formItem.account" style='width: 300px;'></Input>
@@ -18,7 +18,7 @@
     <div class='line'>
       <div class='uploadHead'>上传头像</div>
     </div>
-    <Upload :action="hehe"
+    <Upload :action="this.axios.defaults.baseURL+'/image/add/'+ acctok"
             :format="['jpg','png','jpeg','bmp']"
             :on-success="upsuccess"
             ref="upload">
@@ -34,15 +34,16 @@ export default {
   data(){
     return{
       formItem: {
-        account: '15033333333',
+        account: this.$store.getters.loginName,
         userName: '',
         email: ''
-      }
+      },
+      acctok: localStorage.getItem('ACCESSTOKEN')
     }
   },
   methods:{
     upsuccess(){
-    
+
     }
   }
 }

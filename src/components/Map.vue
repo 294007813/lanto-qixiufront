@@ -14,9 +14,9 @@
   </Input>
   <div class="select-bar">
     <Select v-model="sortV" placeholder="企业排序" clearable @on-change="changeSelect">
-      <Option value="信誉等级"></Option>
-      <Option value="服务评价"></Option>
-      <Option value="分数等级"></Option>
+      <Option value="1">信誉等级</Option>
+      <Option value="2">服务评价</Option>
+      <Option value="3">分数等级</Option>
     </Select>
     <Select v-model="categoryV" placeholder="企业类型" clearable @on-change="changeSelect">
       <Option value="43">一类维修企业</Option>
@@ -71,7 +71,18 @@
         brandV:"",
         brands:['奥迪','阿尔法·罗密欧','阿斯顿·马丁','AC Schnitzer','安凯','ALPINA','标致','本田','宝马','北京','奔驰','布加迪','别克','宾利','保时捷','比亚迪','奔腾','宝骏','巴博斯','北汽威旺','北汽制造','北汽绅宝','北汽幻速','北汽新能源','宝沃','比速汽车','长安','长城','昌河','长安欧尚','成功汽车','长安轻型车','大众','东风','道奇','东南','大发','东风风神','东风小康','东风风行','DS','东风风度','东风风光','丰田','福特','菲亚特','法拉利','福田','福迪','福汽启腾','福田乘用车','广汽传祺','广汽吉奥','GMC','光冈','观致','哈飞','悍马','华普','海马','华泰','红旗','黄海','海格','恒天','哈弗','华颂','华利','华凯','华泰新能源','汉腾汽车','Icona','吉利汽车','捷豹','Jeep','金杯','江淮','江铃','金龙','九龙','金旅','江铃集团轻汽','江铃集团新能源','克莱斯勒','凯迪拉克','科尼塞克','开瑞','KTM','卡尔森','卡威','凯翼','康迪全球鹰','卡升','雷诺','兰博基尼','路虎','路特斯','林肯','雷克萨斯','铃木','劳斯莱斯','猎豹汽车','力帆汽车','陆风','莲花汽车','Lorinser','理念','陆地方舟','LOCAL MOTORS','名爵','迈巴赫','MINI','玛莎拉蒂','马自达','迈凯伦','摩根','纳智捷','南京金龙','欧宝','讴歌','欧朗','帕加尼','奇瑞','起亚','启辰','前途','荣威','日产','瑞麒','如虎','瑞驰新能源','smart','萨博','斯巴鲁','世爵','斯柯达','三菱','双龙','双环','陕汽通家','上汽大通','思铭','赛麒','斯达泰克','SWM斯威汽车','特斯拉','腾势','泰卡特','沃尔沃','威兹曼','威麟','五菱汽车','五十铃','潍柴英致','WEY','蔚来','现代','雪佛兰','雪铁龙','西雅特','新凯','英菲尼迪','永源','一汽','野马汽车','依维柯','驭胜','中华','中兴','众泰','芝诺','知豆'],
         sum: 0,
-        area:[],
+        area:[
+          {areakey: '310000', areaname: '市辖区'},
+          {areakey: '310115', areaname: '浦东新区'},
+          {areakey: '310112', areaname: '闵行区'},
+          {areakey: '310113', areaname: '宝山区'},
+          {areakey: '310116', areaname: '金山区'},
+          {areakey: '310114', areaname: '嘉定区'},
+          {areakey: '310118', areaname: '青浦区'},
+          {areakey: '310230', areaname: '崇明区'},
+          {areakey: '310117', areaname: '松江区'},
+          {areakey: '310120', areaname: '奉贤区'},
+          ],
         list:[],
         limit: this.tolimit,
         page: 1,
@@ -119,7 +130,7 @@
 
       let systok= localStorage.getItem("SYSTEMTOKEN"),self= this
       if(systok){
-        this.getArea(systok)
+        // this.getArea(systok)
         this.getList(systok)
         this.getPoint(systok)
       }else{
@@ -138,7 +149,7 @@
         }).then(function (response) {
           let systok= response.data.data.systemToken
           localStorage.setItem("SYSTEMTOKEN", systok)
-          self.getArea(systok)
+          // self.getArea(systok)
           self.getList(systok)
           self.getPoint(systok)
         })
@@ -177,7 +188,7 @@
           corpAreaEq: this.areaV,
           corpName: this.inputV,
           magorBrandsLk: this.brandV,
-          iSort: (this.sortV=='信誉等级'),
+          isort: parseInt(this.sortV),
           starLevel:'',
           type: this.typeV,
           limit: this.limit,
@@ -241,7 +252,7 @@
           '<li><span>经营范围：</span>' + (corp.companybusinessscope? corp.companybusinessscope: '') + '</li>' +
           // '<li><span>服务星级：</span>' + getStar(corp.STAR_LEVEL) + '</li>' +
           '<li><span>信誉等级：</span>' + (corp.creditLevel?corp.creditLevel:"" )+ '</li>' +
-          '<li><span>主修品牌：</span>' + (corp.brand!="否"?corp.brand: "") + '</li>' +
+          '<li><span>主修品牌：</span>' + (corp.vehicleband!="否"?corp.vehicleband: "") + '</li>' +
           '<li><span>营业时间：</span>' + (corp.time?corp.time:"" )+ '</li>' +
           '<li><span>经营地址：</span>' + (corp.corpAdd? corp.corpAdd: "") + '</li>' +
           // '<li><span>联系电话：</span>' + (corp.linkTel?corp.linkTel:"") + '</li>' +

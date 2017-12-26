@@ -9,12 +9,12 @@
   <div class="dblock">
     <h1 class="dtitle">区域对接状况</h1>
     <chart :options="bar1" class="bar" @click="clickArea"></chart>
-    <div class="comList"><p>
-      <Select v-model="areaV" style="width:100px" @on-change="queryComp">
-        <Option v-for="item in areas" :value="item.areakey" :key="item.areakey">{{item.areaname}}</Option>
-      </Select>
-      <span>对接企业名单：</span></p><ul class="list"><li v-for="(item, key) in comList" :key="key">{{item.companyname}}</li></ul>
-    </div>
+    <!--<div class="comList"><p>-->
+      <!--<Select v-model="areaV" style="width:100px" @on-change="queryComp">-->
+        <!--<Option v-for="item in areas" :value="item.areakey" :key="item.areakey">{{item.areaname}}</Option>-->
+      <!--</Select>-->
+      <!--<span>对接企业名单：</span></p><ul class="list"><li v-for="(item, key) in comList" :key="key">{{item.companyname}}</li></ul>-->
+    <!--</div>-->
   </div>
   <!--<div class="dblock">-->
     <!--<h1 class="dtitle">ERP公司对接情况</h1>-->
@@ -304,13 +304,13 @@ export default {
       self.bar1.series[0].data=num
     })
 
-    this.axios({
-      method: 'get',
-      url: '/area/county/'+ acctok+ '/310100',
-    }).then(function (res) {
-      console.log(res)
-      self.areas=res.data.data
-    })
+    // this.axios({
+    //   method: 'get',
+    //   url: '/area/county/'+ acctok+ '/310100',
+    // }).then(function (res) {
+    //   console.log(res)
+    //   self.areas=res.data.data
+    // })
 
   },
   methods:{
@@ -322,22 +322,22 @@ export default {
           areaName: val.name
         }
       })
-      for(let i in this.areas){
-        if(this.areas[i].areaname==val.name)
-          this.areaV=this.areas[i].areakey
-      }
+      // for(let i in this.areas){
+      //   if(this.areas[i].areaname==val.name)
+      //     this.areaV=this.areas[i].areakey
+      // }
     },
-    queryComp(val){
-      let self= this, acctok= localStorage.getItem("ACCESSTOKEN");
-      console.log(val)
-      this.axios({
-        method: 'get',
-        url: '/statistics/admin/areaCompany/'+ acctok+ '/'+ val,
-      }).then(function (res) {
-        console.log(res)
-        self.comList=res.data.data
-      })
-    }
+    // queryComp(val){
+    //   let self= this, acctok= localStorage.getItem("ACCESSTOKEN");
+    //   console.log(val)
+    //   this.axios({
+    //     method: 'get',
+    //     url: '/statistics/admin/areaCompany/'+ acctok+ '/'+ val,
+    //   }).then(function (res) {
+    //     console.log(res)
+    //     self.comList=res.data.data
+    //   })
+    // }
   }
 }
 </script>
