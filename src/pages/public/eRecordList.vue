@@ -8,14 +8,12 @@
              :link="[{name:'车主中心',to: '/center/perHome'},{name:'电子健康档案',to:''}]"></sub-title>
   <Form :model="formItem" :label-width="80" inline style="margin: 20px 0">
     <FormItem label="送修日期">
-      <DatePicker type="daterange" placement="bottom-end" placeholder="请选择日期范围" style="width: 200px"></DatePicker>
+      <DatePicker type="daterange" v-model="repDate" format="yyyy年MM月dd日" placeholder="请选择日期范围" style="width: 230px"></DatePicker>
     </FormItem>
     <FormItem label="结算日期">
-      <DatePicker type="daterange" placement="bottom-end" placeholder="请选择日期范围" style="width: 200px"></DatePicker>
+      <DatePicker type="daterange" v-model="setDate" format="yyyy年MM月dd日" placeholder="请选择日期范围" style="width: 230px"></DatePicker>
     </FormItem>
-    <FormItem>
       <Button type="primary" @click="search" >搜索</Button>
-    </FormItem>
   </Form>
 
   <Table :columns="columns" :data="data" border></Table>
@@ -30,8 +28,14 @@ export default {
   name: "e-record-list",
   data(){
     return{
+      repDate:[],
+      setDate: [],
       formItem:{
         accessToken: localStorage.getItem('ACCESSTOKEN'),
+        repairStartTime:'',
+        repairEndTime:'',
+        settleStartTime:'',
+        settleEndTime:'',
         vin: this.$route.query.id,
         limit: 10,
         page: 1
@@ -78,6 +82,14 @@ export default {
     },
     search(){
       let self= this
+      if(this.repDate.length){
+        this.formItem.repairStartTime= this.repDate[0]
+        this.formItem.repairEndTime= this.repDate[1]
+      }
+      if(this.setDate.length){
+        this.formItem.settleStartTime= this.setDate[0]
+        this.formItem.settleEndTime= this.setDate[1]
+      }
       this.axios({
         method: 'post',
         url: '/vehicle/carfile/query',

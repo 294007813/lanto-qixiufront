@@ -35,7 +35,7 @@
   <div class="res">查询结果：共<span>{{sum}}</span>条记录，请在企业列表或地图中选择查看</div>
   <ul>
     <li class="info" v-for="(item, key) in list" :key="key" @click.stop="openMapInfo(item.corpId)">
-      <img src="../assets/map/nopic.jpg">
+      <img :src="item.frontPhoto? item.frontPhoto:'/static/img/nopic.jpg'">
       <div class="list-right">
         <span class="name">{{item.corpName}}</span>
         <span>地址：{{item.corpAdd}}</span>
@@ -245,7 +245,7 @@
         let html=
           '<div class="info">' +
           '<div class="img">' +
-          '<img src="/static/img/nopic.jpg" width="170" height="140" alt="">' +
+          '<img src='+ (corp.frontPhoto? corp.frontPhoto: "/static/img/nopic.jpg") +' width="170" height="140" />' +
           '</div>' +
           '<ul>' +
           '<li><span>企业名称：</span>' + (corp.corpName?corp.corpName:"") + '</li>' +

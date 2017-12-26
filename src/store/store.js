@@ -15,13 +15,19 @@ const mutations={
 
 const getters = {
   loginName: function (state) {
-    return state.userInfo.telphone
+    return state.userInfo.mobile
+  },
+  userHead: function (state) {
+    return state.userInfo.head
+  },
+  nickName: function (state) {
+    return state.userInfo.nickname
   },
   userName: function (state){
-    return (state.userInfo.userName? state.userInfo.userName: state.userInfo.telphone);
+    return (state.userInfo.nickname?state.userInfo.nickname: state.userInfo.username? state.userInfo.username: state.userInfo.mobile);
   },
   userType: function (state) {
-    return state.userInfo.userRoleId;
+    return state.userInfo.roleid;
   },
   isDisabled: function (state) {
     return state.userInfo.isdisabled;

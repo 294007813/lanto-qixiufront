@@ -1,18 +1,18 @@
 <template>
   <div id="baseInfo">
-    <sub-title title="基本信息" :link="[{name:'车主中心',to: '/center/manHome'},{name:'基本信息',to:''}]"></sub-title>
+    <sub-title title="基本信息" :link="[{name: titleName(),to: ''},{name:'基本信息',to:''}]"></sub-title>
     <Form :model="formItem" :label-width="100" style='margin-left: 15px; height: 220px'>
       <FormItem label="用户账户" style='height: 32px; margin: 15px 0;'>
         <Input readonly v-model="formItem.account" style='width: 300px;'></Input>
       </FormItem>
       <FormItem label="用户昵称" style='height: 32px; margin-bottom: 15px'>
-        <Input v-model="formItem.userName" placeholder="请输入昵称" style='width: 300px; '></Input>
+        <Input v-model="formItem.nickName" placeholder="请输入昵称" style='width: 300px; '></Input>
       </FormItem>
-      <FormItem label="电子邮箱" style='height: 32px; margin-bottom: 15px'>
-        <Input v-model="formItem.email" prop='mail' placeholder="请输入电子邮箱" style='width: 300px;'></Input>
-      </FormItem>
+      <!--<FormItem label="电子邮箱" style='height: 32px; margin-bottom: 15px'>-->
+        <!--<Input v-model="formItem.email" prop='mail' placeholder="请输入电子邮箱" style='width: 300px;'></Input>-->
+      <!--</FormItem>-->
       <FormItem>
-        <Button type="primary" icon='edit'>确认修改</Button>
+        <Button type="primary" icon='edit' @click="edit">确认修改</Button>
       </FormItem>
     </Form>
     <div class='line'>
@@ -22,9 +22,9 @@
             :format="['jpg','png','jpeg','bmp']"
             :on-success="upsuccess"
             ref="upload">
-      <img src="../../assets/leftmenu/defaultUser.jpg" alt="" style='border-radius: 50%; width: 200px; height: 200px; margin: 30px 30px 0 30px'>
+      <img :src="url" alt="" style='border-radius: 50%; width: 200px; height: 200px; margin: 30px 30px 0 30px'>
     </Upload>
-    <div class='reminder'>图片文件小于1M(建议使用高质量图片)</div>
+    <div class='reminder'>头像将显示在车大夫、维修服务等板块</div>
   </div>
 </template>
 
@@ -35,15 +35,77 @@ export default {
     return{
       formItem: {
         account: this.$store.getters.loginName,
-        userName: '',
+        nickName: this.$store.getters.nickName? this.$store.getters.nickName: '',
         email: ''
       },
+      url: this.$store.getters.userHead? this.$store.getters.userHead: '/static/img/defaultUser.jpg',
       acctok: localStorage.getItem('ACCESSTOKEN')
     }
   },
-  methods:{
-    upsuccess(){
+  beforeMount(){
 
+  },
+  methods:{
+    titleName(){
+      // console.log(this.userType())
+      let name;
+      switch (this.userType()){
+        case 1: name= '车主中心'; break;
+        case 2: name= '企业中心'; break;
+        case 3: name= '管理中心'; break;
+      }
+      return name
+    },
+    edit(){
+      let self= this
+      if(!self.formItem.nickName.trim()) return
+      this.axios({
+        method: 'get',
+        url: '/user/useraccount/update/'+ self.acctok+ '/'+ self.formItem.nickName.trim(),
+      }).then(function (res) {
+        console.log(res.data)
+        if(res.data.code=='000000'){
+          self.$Message.success('修改成功')
+          self.upInfo()
+        }
+      })
+    },
+    upsuccess(res){
+      // console.log(res)
+      if(res.code='000000'){
+        let self= this, param={
+          accessToken: this.acctok,
+          url: res.data.picPath
+        }
+        this.axios({
+          method: 'post',
+          url: '/user/useraccount/upload',
+          headers: {'Content-type': 'application/json'},
+          data: JSON.stringify(param)
+        }).then(function (res) {
+          // console.log(res.data)
+          if(res.data.code=='000000'){
+            self.url= res.data.picPath
+            self.$Message.success('头像上传成功')
+            self.upInfo()
+          }else{
+            self.$Message.error('上传失败，请重试')
+          }
+        })
+      }
+    },
+    upInfo(){
+      let self= this
+      this.axios({
+        method: 'get',
+        url: '/user/useraccount/userinfo/'+ self.acctok,
+      }).then(function (res) {
+        console.log(res.data)
+        if(res.data.code=='000000'){
+          localStorage.setItem("USERINFO",JSON.stringify(res.data.data));
+          self.$store.commit("putUserInfo",res.data.data)
+        }
+      })
     }
   }
 }
