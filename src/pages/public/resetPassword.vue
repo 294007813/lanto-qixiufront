@@ -27,7 +27,7 @@
     data(){
       return{
         formItem: {
-          account: this.$store.getters.userName,
+          account: this.$store.getters.loginName,
           oldPassword: '',
           newPassword: '',
           renewPassword: ''

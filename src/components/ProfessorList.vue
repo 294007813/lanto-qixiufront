@@ -6,25 +6,15 @@
     </div>
     <div class="professors-wrap">
       <ul>
-        <li>
-          <a href="#/service/ProfessorDetail">
-            <img src="http://static.shanghaiqixiu.org/images/2017/11/7/pic_1512642706078.jpg" alt="" width=70 height=70>
+        <li v-for="(item, key) in list" :key="key">
+          <router-link tag="a" :to="{path: '/service/ProfessorDetail', query:{id: item.ownerId}}">
+            <img :src="item.photo?item.photo: '/static/img/defaultUser.jpg'" width=70 height=70>
             <div class="professor_r">
-              <a class="name">蔡振华<span></span></a>
-              <p>售后经理,注册工程师</p>
+              <a class="name">{{item.name}}<span></span></a>
+              <p>{{item.professor}}</p>
               <span class="askForHe">向TA提问</span>
             </div>
-          </a>
-        </li>
-        <li>
-          <a href="#/service/ProfessorDetail">
-            <img src="http://static.shanghaiqixiu.org/images/2017/11/7/pic_1512642706078.jpg" alt="" width=70 height=70>
-            <div class="professor_r">
-              <a class="name">蔡振华<span></span></a>
-              <p>售后经理,注册工程师</p>
-              <span class="askForHe">向TA提问</span>
-            </div>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -36,8 +26,18 @@ export default {
   name: "ProfessorList",
   data(){
     return{
-
+      list:[]
     }
+  },
+  beforeMount(){
+    let self=this;
+    this.axios({
+      method: 'get',
+      url: '/cdf/queryexpertlist/'+ localStorage.getItem('SYSTEMTOKEN')
+    }).then(res =>{
+      console.log(res.data)
+      self.list= res.data.data
+    })
   },
   methods:{
 
@@ -86,6 +86,7 @@ export default {
           float: right;
           width: 175px;
           height: 70px;
+          overflow: hidden;
           .name {
             color: #000;
             display: block;
@@ -102,6 +103,10 @@ export default {
           p {
             color: #c2c2c2;
             line-height: 26px;
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .askForHe {
             border: 1px solid #c2c2c2;

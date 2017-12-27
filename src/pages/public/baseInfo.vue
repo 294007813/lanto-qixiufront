@@ -19,6 +19,7 @@
       <div class='uploadHead'>上传头像</div>
     </div>
     <Upload :action="this.axios.defaults.baseURL+'/image/add/'+ acctok"
+            :show-upload-list="false"
             :format="['jpg','png','jpeg','bmp']"
             :on-success="upsuccess"
             ref="upload">
@@ -85,7 +86,6 @@ export default {
         }).then(function (res) {
           // console.log(res.data)
           if(res.data.code=='000000'){
-            self.url= res.data.picPath
             self.$Message.success('头像上传成功')
             self.upInfo()
           }else{
@@ -104,6 +104,7 @@ export default {
         if(res.data.code=='000000'){
           localStorage.setItem("USERINFO",JSON.stringify(res.data.data));
           self.$store.commit("putUserInfo",res.data.data)
+          self.url= self.$store.getters.userHead
         }
       })
     }

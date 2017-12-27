@@ -9,7 +9,18 @@
       <Input v-model="formItem.context" type="textarea" placeholder="请输入" class="textarea"></Input>
     </FormItem>
     <FormItem label="发送对象">
-      <Cascader :data="select" v-model="selectv" trigger="hover"></Cascader>
+      <!--<Cascader :data="select" v-model="selectv" trigger="hover"></Cascader>-->
+      <Select v-model="select1" style="width:100px;float: left;margin-right: 5px">
+        <Option value="all" >全部</Option>
+        <Option value="1" >车主</Option>
+        <Option value="2" >维修企业</Option>
+        <Option value="3" >管理部门</Option>
+      </Select>
+      <Select v-show="select1=='2'" v-model="select2" multiple style="width: 310px;float: left">
+        <Option value="43" >一类维修企业</Option>
+        <Option value="44" >二类维修企业</Option>
+        <Option value="45" >三类维修业户</Option>
+      </Select>
     </FormItem>
     <FormItem label="上传附件">
       <Upload :action="this.axios.defaults.baseURL+'/file/add/'+acctok"
@@ -51,7 +62,8 @@
             ]},
           {label: '管理部门', value: '3' },
         ],
-
+        select1:'',
+        select2:[]
       }
     },
     mounted(){
@@ -80,8 +92,12 @@
           this.$Message.error('请输入内容！');
           return
         }
-        if(this.selectv.length==0){
+        if(!this.select1){
           this.$Message.error('请选择发送对象！');
+          return
+        }
+        if(this.select1=='2' && this.select2.length==0){
+          this.$Message.error('请选择维修企业！');
           return
         }
         let self= this
@@ -90,8 +106,8 @@
           content: '<p>确定发送此通知？</p>',
           onOk: () => {
             //发送对象
-            let roleId= this.selectv[0], companyCategory=''
-            if (roleId=='2') companyCategory=this.selectv[1]
+            let roleId= this.select1, companyCategory=[]
+            if (roleId=='2') companyCategory=this.select2
 
             //附件
             let url=[], fileList= this.$refs.upload.fileList

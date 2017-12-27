@@ -24,7 +24,7 @@ const getters = {
     return state.userInfo.nickname
   },
   userName: function (state){
-    return (state.userInfo.nickname?state.userInfo.nickname: state.userInfo.username? state.userInfo.username: state.userInfo.mobile);
+    return (state.userInfo.nickname?state.userInfo.nickname:  state.userInfo.mobile);
   },
   userType: function (state) {
     return state.userInfo.roleid;

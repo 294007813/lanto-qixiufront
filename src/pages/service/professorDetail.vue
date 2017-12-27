@@ -6,53 +6,54 @@
         <div class="introduce_title">专家简介</div>
         <div class="introduce_content clearFix">
           <div class="img_wrap">
-            <img src="http://static.shanghaiqixiu.org/images/2017/11/7/pic_1512642706078.jpg" alt="">
+            <img :src="detail.photo? detail.photo: '/static/img/defaultUser.jpg'">
             <p>专家认证</p>
           </div>
           <ul>
             <li>
               <span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</span>
-              洪永楠
+              {{detail.name}}
             </li>
             <li>
               <span>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</span>
-              高级技师 注册工程师
+              {{detail.professor}}
             </li>
             <li>
               <span>就职企业:</span>
-              上海吴安综合服务中心
+              {{detail.empUnit}}
             </li>
             <li>
               <span>专业擅长:</span>
-              全国交通技术能手、第七届上海市杰出技术能手。 “洪永楠上海市技能大师工作室”上海市人力资源和社会保障局命名 上海市技师协会汽车修理专业委员会副主任、上海市技师协会理事、上海市职业技能鉴定中心汽车维修专业考评组组长、上海市汽车维修行业协会专家委员会组长、上海市高职高专院校汽车类专业教学指导委员会副主任、上海市消保委汽车专业办公室专业顾问、上海市职业技能鉴定研发工作咨询专家、上海市政府采购评审专家、全国机动车检测维修专业技术人员职业水平实际操作考官、上海大众汽车专家级技术经理认证考官、上海市交通运输企业安全生产标准化考评员、上海市交通委员会安全生产专家、上海市闵行区职业技能培训“助力导师团”导师、上海吴安综合服务中心汽修厂技术经理、上海开放大学汽车故障诊断课程特聘主持教师、上海电视台、第一财经广播FM97.7和上海交通广播105.7汽车类节目特邀嘉宾
+              {{detail.goodAt}}
             </li>
             <li>
               <span>主要荣誉:</span>
-              上海市一类大赛和上海市教委星光杯大赛裁判、裁判长；上海市一类大赛命题专家、上海市教委星光杯大赛命题专家、全国职业院校技能大赛裁判、全国职业院校技能大赛上海选拔赛裁判长、交通部全国交通运输行业职业技能竞赛裁判、第43届、第44届世界技能大赛上海市选拔赛命题专家、裁判：主编汽车维修工“1+X ”职业技术中级职业资格培训教材 中国劳动和社会保障部出版社 发明专利号：201010101303.4 “一种机动车坡道起停辅助安全系统”和 ZL201320126430.9 “刹车油更换机”等。
+              {{detail.honor}}
             </li>
           </ul>
         </div>
-        <div class="introduce_title">我要咨询</div>
-        <div class="problem_ask clearFix">
-          <p>问题咨询</p>
-          <textarea name="" id="" v-model="content"></textarea>
-          <span style="margin-right: 10px;">选择问题分类:</span>
-          <RadioGroup v-model="problemCategory" type="button" size="small">
-            <Radio v-for="(item, index) in problems" :key="index" :label="item.dictId">{{item.value}}</Radio>
-          </RadioGroup>
-          <div class="problem_select" style="float: right;">
-            <span style="margin-right: 10px">问题类别:</span>
-            <Select v-model="problemCategory2" style="width:120px">
-              <Option :value="'车辆故障诊断'"></Option>
-              <Option :value="'车辆维修指导'"></Option>
-            </Select>
-          </div>
-          <Button type="primary" size="large" @click="submit" style="position: absolute; right: 10px; bottom: 10px;">提交问题</Button>
-        </div>
-        <div class="introduce_title">咨询问答</div>
-        <div class="problem_jijin">
-          <Table border :columns="columns" :data="tableData"></Table>
-        </div>
+        <!--<div class="introduce_title">我要咨询</div>-->
+        <!--<div class="problem_ask clearFix">-->
+          <!--<p>问题咨询</p>-->
+          <!--<textarea name="" id="" v-model="content"></textarea>-->
+          <!--<span style="margin-right: 10px;">选择问题分类:</span>-->
+          <!--<RadioGroup v-model="problemCategory" type="button" size="small">-->
+            <!--<Radio v-for="(item, index) in problems" :key="index" :label="item.dictId">{{item.value}}</Radio>-->
+          <!--</RadioGroup>-->
+          <!--<div class="problem_select" style="float: right;">-->
+            <!--<span style="margin-right: 10px">问题类别:</span>-->
+            <!--<Select v-model="problemCategory2" style="width:120px">-->
+              <!--<Option :value="'车辆故障诊断'"></Option>-->
+              <!--<Option :value="'车辆维修指导'"></Option>-->
+            <!--</Select>-->
+          <!--</div>-->
+          <!--<Button type="primary" size="large" @click="submit" style="position: absolute; right: 10px; bottom: 10px;">提交问题</Button>-->
+        <!--</div>-->
+        <!--<div class="introduce_title">咨询问答</div>-->
+        <!--<div class="problem_jijin">-->
+          <!--<Table border :columns="columns" :data="tableData"></Table>-->
+        <!--</div>-->
+        <questions></questions>
       </div>
       <professor-list></professor-list>
     </div>
@@ -61,12 +62,16 @@
 
 <script>
 import ProfessorList from "../../components/ProfessorList";
+import Questions from "./Questions";
 
 export default {
-  components: {ProfessorList},
+  components: {
+    Questions,
+    ProfessorList},
   name: "professorDetail",
   data(){
     return{
+      detail: {},
       content: '',
       problems: [],
       problemCategory: '',
@@ -122,7 +127,14 @@ export default {
       self.problems= res.data.data
     })
 
+    this.getDetail()
+
     this.getList()
+  },
+  watch:{
+    $route:function (val){
+      this.getDetail()
+    }
   },
   methods: {
     submit(){
@@ -171,6 +183,15 @@ export default {
             id: datas[i].questionId
           })
         }
+      })
+    },
+    getDetail(){
+      let self=this, systok=localStorage.getItem("SYSTEMTOKEN")
+      this.axios({
+        method: 'get',
+        url: '/cdf/queryexpertdetail/'+ systok+ '/'+ self.$route.query.id,
+      }).then(function (res) {
+        self.detail= res.data.data
       })
     }
   },
