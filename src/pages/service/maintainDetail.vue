@@ -1,6 +1,6 @@
 <template>
 <div id="maintainDetail" class="my-frame">
-  <sub-title title="公司详情" :link="[{name:'公共服务',to: ''},{name:'公司详情',to:''}]"></sub-title>
+  <sub-title title="公司详情" :link="[{name:'维修服务',to: ''},{name:'公司详情',to:''}]"></sub-title>
   <div class="content">
     <div class="above">
       <div class="img">

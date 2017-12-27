@@ -25,7 +25,7 @@
             ref="upload">
       <img :src="url" alt="" style='border-radius: 50%; width: 200px; height: 200px; margin: 30px 30px 0 30px'>
     </Upload>
-    <div class='reminder'>头像将显示在车大夫、维修服务等板块</div>
+    <div class='reminder'>请上传小于2M图片，头像将显示在车大夫、维修服务等板块</div>
   </div>
 </template>
 

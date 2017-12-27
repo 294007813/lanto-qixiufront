@@ -12,7 +12,7 @@
          @on-enter="changeSelect">
     <Button slot="append" icon="ios-search" @click="changeSelect"></Button>
   </Input>
-  <div class="select-bar">
+  <div class="select-bar" v-show="this.type=='index'||(this.type=='maintain'&&this.typeV=='164')">
     <Select v-model="sortV" placeholder="企业排序" clearable @on-change="changeSelect">
       <Option value="1">信誉等级</Option>
       <Option value="2">服务评价</Option>
@@ -39,8 +39,9 @@
       <div class="list-right">
         <span class="name">{{item.corpName}}</span>
         <span>地址：{{item.corpAdd}}</span>
-        <span>电话：{{item.linkTel}}</span>
-        <span v-show="item.apart">距离：{{calcApart(item.apart)}}</span>
+        <!--<span>电话：{{item.linkTel}}</span>-->
+        <span>电话：******</span>
+        <span v-show="item.apart>=0">距离：{{calcApart(item.apart)}}</span>
       </div>
       <div class="appraise" @click.stop="appraise(item.corpId, item.corpName)">我要评价</div>
     </li>
@@ -473,6 +474,9 @@
     .inline{
       width: 69%;
       display: inline-table;
+    }
+    .select-bar{
+
     }
   }
   .right{

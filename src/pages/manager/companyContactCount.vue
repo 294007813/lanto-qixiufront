@@ -1,7 +1,7 @@
 <template>
 <div id="company-contact-count">
   <sub-title title="首页" :link="[{name:'管理中心',to: '/center/manHome'},{name:'区域对接情况',to:''}]"></sub-title>
-  <Select @on-change="selectChange" v-model="choosedArea" style="width:300px">
+  <Select @on-change="selectChange" v-model="choosedArea" style="width:100px">
     <Option v-for="(item, key) in areas" :value="item.areakey" :key="key">{{ item.areaname }}</Option>
   </Select>
   <Table border :columns="columns" :data="tableData"></Table>
@@ -15,7 +15,7 @@ export default {
   data(){
     return{
       areas: [
-        {areakey: '310000', areaname: '市辖区'},
+        {areakey: '310000', areaname: '上海市'},
         {areakey: '310115', areaname: '浦东新区'},
         {areakey: '310112', areaname: '闵行区'},
         {areakey: '310113', areaname: '宝山区'},
