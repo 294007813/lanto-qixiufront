@@ -1,6 +1,5 @@
 <template>
 <div class="problem">
-  <!--<sub-title title="车大夫门诊" :link="[{name:'公共服务',to: ''},{name:'车大夫门诊',to:''}]"></sub-title>-->
   <div class="problem_ask clearFix">
     <p>问题咨询</p>
     <textarea name="" id="" v-model="content"></textarea>
@@ -131,13 +130,7 @@
 
 <style scoped lang="scss">
 .problem {
-  /*width: 690px;*/
-  /*float: left;*/
-  /*border: 1px solid #d4d4d4;*/
-  /*padding: 10px;*/
-  /*margin-top: 10px;*/
   .problem_ask {
-    /*border: 1px solid #d4d4d4;*/
     margin-top: 10px;
     padding: 10px 10px 65px 10px;
     position: relative;

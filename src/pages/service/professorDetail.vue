@@ -32,27 +32,6 @@
             </li>
           </ul>
         </div>
-        <!--<div class="introduce_title">我要咨询</div>-->
-        <!--<div class="problem_ask clearFix">-->
-          <!--<p>问题咨询</p>-->
-          <!--<textarea name="" id="" v-model="content"></textarea>-->
-          <!--<span style="margin-right: 10px;">选择问题分类:</span>-->
-          <!--<RadioGroup v-model="problemCategory" type="button" size="small">-->
-            <!--<Radio v-for="(item, index) in problems" :key="index" :label="item.dictId">{{item.value}}</Radio>-->
-          <!--</RadioGroup>-->
-          <!--<div class="problem_select" style="float: right;">-->
-            <!--<span style="margin-right: 10px">问题类别:</span>-->
-            <!--<Select v-model="problemCategory2" style="width:120px">-->
-              <!--<Option :value="'车辆故障诊断'"></Option>-->
-              <!--<Option :value="'车辆维修指导'"></Option>-->
-            <!--</Select>-->
-          <!--</div>-->
-          <!--<Button type="primary" size="large" @click="submit" style="position: absolute; right: 10px; bottom: 10px;">提交问题</Button>-->
-        <!--</div>-->
-        <!--<div class="introduce_title">咨询问答</div>-->
-        <!--<div class="problem_jijin">-->
-          <!--<Table border :columns="columns" :data="tableData"></Table>-->
-        <!--</div>-->
         <questions></questions>
       </div>
       <professor-list></professor-list>

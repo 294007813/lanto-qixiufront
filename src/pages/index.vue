@@ -60,11 +60,11 @@
       <div class="left">
         <div class="picWrap">
           <img src="../assets/index/jiuzheng.jpg" alt="">
-          <a href="javascript:;" class="click_diagnose">点击就诊</a>
-          <div class="input_wrap">
-            <input type="text" placeholder='我的负担车型'>
-            <input type="text" placeholder='输入描述问题'>
-          </div>
+          <!--<a href="javascript:;" class="click_diagnose">点击就诊</a>-->
+          <!--<div class="input_wrap">-->
+            <!--<input type="text" placeholder='我的负担车型'>-->
+            <!--<input type="text" placeholder='输入描述问题'>-->
+          <!--</div>-->
         </div>
         <div class="problemWrap">
           <div class="problems">
