@@ -49,7 +49,14 @@
           {
             title: '问题',
             key: 'problem',
-            width: 350
+            render: (h, params) => {
+              return h('router-link',{
+                props: {
+                  tag: 'a',
+                  to: {path: '/service/carDoctorDetail', query: {id: params.row.id}}
+                }
+              }, params.row.problem)
+            }
           },
           {
             title: '时间',
@@ -60,29 +67,9 @@
           {
             title: '查看次数',
             key: 'count',
-            align: 'center'
+            align: 'center',
+            width: 80
           },
-          {title: '查看详情', key: 'id', align: 'center',
-            render: (h, params) => {
-              return h('div', [
-                h('Button', {
-                  props: {
-                    type: 'primary',
-                    size: 'small'
-                  },
-                  on: {
-                    click: () => {
-                      console.log(params.row.id)
-                      this.$router.push({
-                        path:'/service/carDoctorDetail',
-                        query:{id: params.row.id}
-                      })
-                    }
-                  }
-                }, '查看'),
-              ]);
-            }
-          }
         ],
         tableData: []
       }

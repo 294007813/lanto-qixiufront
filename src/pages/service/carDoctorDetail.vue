@@ -58,6 +58,8 @@
         .question{
           margin-left: 100px;
           .info{
+            overflow: hidden;
+            margin-bottom: 5px;
             li{
               width: 33%;
               float: left;
@@ -65,6 +67,10 @@
           }
           .content{
             min-height: 100px;
+            border: 1px solid #ededed;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
           }
         }
       }

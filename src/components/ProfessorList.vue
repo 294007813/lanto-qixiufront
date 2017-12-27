@@ -36,11 +36,11 @@ export default {
   name: "ProfessorList",
   data(){
     return{
-    
+
     }
   },
   methods:{
-  
+
   }
 }
 </script>
@@ -49,7 +49,7 @@ export default {
   #professors_list {
     width: 280px;
     float: right;
-    height: 800px;
+    min-height: 800px;
     margin-top: 10px;
     padding: 10px;
     border: 1px solid #d4d4d4;
