@@ -32,7 +32,7 @@
       <Button type="primary" @click="search" >搜索</Button>
     <!--</FormItem>-->
   </Form>
-  <Table :columns="columns" :data="data" border></Table>
+  <Table :columns="columns" :data="data" :loading="loading" border></Table>
   <Page :total="total" show-sizer style="margin: 10px 0" @on-change="onchange" @on-page-size-change="sizechange"></Page>
   </div>
 </div>
@@ -116,7 +116,7 @@ export default {
       ],
       data:[],
       total:0,
-
+      loading: true
     }
   },
   beforeMount(){
@@ -127,6 +127,7 @@ export default {
       return this.$store.getters.userType
     },
     search(){
+      this.loading=true
       let self= this
       this.axios({
         method: 'post',
@@ -149,6 +150,7 @@ export default {
             comname: datas[i].companyname
           })
         }
+        self.loading=false
       })
     },
     onchange(page){

@@ -13,7 +13,8 @@
     <FormItem label="结算日期">
       <DatePicker type="daterange" v-model="setDate" format="yyyy年MM月dd日" placeholder="请选择日期范围" style="width: 230px"></DatePicker>
     </FormItem>
-      <Button type="primary" @click="search" >搜索</Button>
+    <Button type="primary" @click="search" >搜索</Button>
+    <Button  @click="reset" >重置</Button>
   </Form>
 
   <Table :columns="columns" :data="data" border></Table>
@@ -85,10 +86,16 @@ export default {
       if(this.repDate.length){
         this.formItem.repairStartTime= this.repDate[0]
         this.formItem.repairEndTime= this.repDate[1]
+      }else{
+        this.formItem.repairStartTime= ''
+        this.formItem.repairEndTime= ''
       }
       if(this.setDate.length){
         this.formItem.settleStartTime= this.setDate[0]
         this.formItem.settleEndTime= this.setDate[1]
+      }else{
+        this.formItem.settleStartTime= ''
+        this.formItem.settleEndTime= ''
       }
       this.axios({
         method: 'post',
@@ -114,6 +121,11 @@ export default {
           })
         }
       })
+    },
+    reset(){
+      this.repDate=[]
+      this.setDate=[]
+      this.search()
     },
     onchange(page){
       console.log(page)

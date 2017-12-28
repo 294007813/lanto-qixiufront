@@ -24,11 +24,16 @@
         console.log(res)
         self.content=res.data.data.content
       })
+    },
+    mounted(){
+      $(".detail").on("contextmenu", "img",function(e){
+        return false;
+      });
     }
 	}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .detail{
   padding: 10px 20px;
   overflow: hidden;

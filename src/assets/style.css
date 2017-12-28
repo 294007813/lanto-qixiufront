@@ -42,3 +42,6 @@ img{vertical-align:top;border:none}
 .ivu-message .ivu-icon{
   font-size: 18px!important;
 }
+.ivu-page:after{
+  display: inline-block!important;
+}

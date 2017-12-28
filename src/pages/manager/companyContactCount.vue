@@ -4,8 +4,9 @@
   <Select @on-change="selectChange" v-model="choosedArea" style="width:100px">
     <Option v-for="(item, key) in areas" :value="item.areakey" :key="key">{{ item.areaname }}</Option>
   </Select>
-  <Table border :columns="columns" :data="tableData"></Table>
+  <Table border :columns="columns" :data="tableData" :loading="loading"></Table>
   <Page :total="total" show-elevator show-total @on-change="pageChange"></Page>
+  <Button type="primary" @click="back" >后退</Button>
 </div>
 </template>
 
@@ -54,7 +55,8 @@ export default {
       tableData: [],
       limit: 10,
       page: 1,
-      total: 0
+      total: 0,
+      loading: true
     }
   },
   created(){
@@ -69,6 +71,7 @@ export default {
   },
   methods:{
     getData(){
+      this.loading=true
        // 获取区域对接企业数量
       let self=this, param={
         accessToken: localStorage.getItem("ACCESSTOKEN"),
@@ -90,14 +93,16 @@ export default {
           for(let i = 0; i < msg.length; i++){
             self.tableData.push({
               number: i+1,
-              todayCount: msg[i].currentButt,
-              totalCount: msg[i].totalButt,
+              todayCount: msg[i].currentTotal,
+              totalCount: msg[i].buttTotal,
               companyName: msg[i].companyname,
             })
           }
+          self.loading=false
         }else{
           self.tableData=[]
           this.total=0
+          self.loading=false
         }
       })
 
@@ -109,6 +114,9 @@ export default {
       console.log(page)
       this.page= page
       this.getData()
+    },
+    back(){
+      this.$router.go(-1)
     }
   }
 }

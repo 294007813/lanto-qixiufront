@@ -55,18 +55,20 @@
       <!--忘记密码-->
       <Form ref="forgetFrom"
             :model="forgetFrom"  class="card-box reg-form" :label-width="60" v-show="this.$route.name=='forget'">
-        <Form-item label="手机">
+        <Form-item label="手机号">
           <Input size="large" type="text" v-model="forgetFrom.loginName" placeholder="用户名" ></Input>
         </Form-item>
         <Form-item label="验证码">
           <Input size="large" type="text" v-model="forgetFrom.code" placeholder="验证码" >
-          <p slot="append" class="get-code" @click="getCode">{{getCodeButton}}</p>
+          <p slot="append" class="get-code" @click="getForgetCode">{{getCodeButton}}</p>
           </Input>
         </Form-item>
-        <Form-item label="密码">
+        <Form-item label="输入密码">
           <Input size="large" type="password" v-model="forgetFrom.password" placeholder="密码" ></Input>
         </Form-item>
-
+        <Form-item label="确认密码">
+          <Input size="large" type="password" v-model="forgetFrom.repass" placeholder="密码" ></Input>
+        </Form-item>
         <Form-item>
           <Button size="large" type="primary" @click="handleForget('forgetFrom')" long>修改密码</Button>
         </Form-item>
@@ -99,6 +101,7 @@ export default {
       forgetFrom:{
         loginName:"",
         password:"",
+        repass:"",
         code:""
       },
       getCodeButton:"获取验证码",
@@ -245,7 +248,54 @@ export default {
 
       })
     },
-    handleForget(){},
+    handleForget(){
+      if( !/^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|17[0-9]{9}$|18[0-9]{9}$/.test(this.forgetFrom.loginName) ){
+        this.$Message.error('手机号不正确！');
+        return
+      }
+      if(! /(.+){6,18}$/.test(this.forgetFrom.password)){
+        this.$Message.error('密码必须6到18位！');
+        return
+      }
+      if(this.forgetFrom.password!= this.forgetFrom.repass){
+        this.$Message.error('两次密码不一致！');
+        return
+      }
+      if(!this.forgetFrom.code){
+        this.$Message.error('请输入验证码！');
+        return
+      }
+      let self= this
+      let data={
+        "captcha": this.forgetFrom.code,
+        "systemToken": localStorage.getItem('SYSTEMTOKEN'),
+        "newpassword": this.forgetFrom.password,
+        "usertel": this.forgetFrom.loginName
+      }
+      this.axios({
+        method: 'patch',
+        url: '/user/useraccount/findPassword',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        data: JSON.stringify(data)
+      }).then(function (response) {
+          console.log(response)
+          if(response.data.code=='000000'){
+            self.$Modal.success({
+              title: '成功',
+              content: '密码修改成功',
+              onOk: () => {
+                self.$router.push({
+                  path:'/login'
+                })
+              },
+            });
+          }else {
+            self.$Message.error(response.data.status);
+          }
+      })
+    },
     getCode(){
       if( !/^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|17[0-9]{9}$|18[0-9]{9}$/.test(this.regForm.loginName) ){
         this.$Message.error('手机号不正确！');
@@ -256,6 +306,46 @@ export default {
       this.axios({
         method: 'post',
         url: '/message/sms/sendcaptcha/'+ localStorage.getItem('SYSTEMTOKEN') + '/' + this.regForm.loginName,
+        headers: {
+          'Content-type': 'application/json'
+        }
+      }).then(function (response) {
+        console.log(response)
+        if(response.data.code=='000000'){
+          self.$Message.success('发送成功，请查收！');
+        }else {
+          self.$Message.error(response.data.status);
+        }
+      })
+
+      //计时器
+      const TIME_COUNT = 60;
+      let num= 0;
+      if (!this.timer) {
+        this.count = TIME_COUNT;
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= TIME_COUNT) {
+            num= this.count
+            this.getCodeButton= num+ "s"
+            this.count--;
+          } else {
+            clearInterval(this.timer);
+            this.getCodeButton= '获取验证码'
+            this.timer = null;
+          }
+        }, 1000)
+      }
+    },
+    getForgetCode(){
+      if( !/^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|17[0-9]{9}$|18[0-9]{9}$/.test(this.forgetFrom.loginName) ){
+        this.$Message.error('手机号不正确！');
+        return
+      }
+      if(this.timer) return;
+      let self= this
+      this.axios({
+        method: 'get',
+        url: '/user/useraccount/sendSmsForget/'+ localStorage.getItem('SYSTEMTOKEN') + '/' + this.forgetFrom.loginName,
         headers: {
           'Content-type': 'application/json'
         }

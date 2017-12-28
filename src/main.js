@@ -34,6 +34,12 @@ Vue.component('chart', ECharts)
 Vue.prototype.userType = function () {
   return store.getters.userType
 }
+
+Vue.filter('calcDate', function (val) {
+  if (!val) return ''
+  return (new Date(val).toISOString().split(".")[0].split("T")[0])
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -3,7 +3,7 @@
   <sub-title title="首页" :link="[{name:'管理中心',to: '/center/manHome'},{name:'首页',to:''}]"></sub-title>
   <div class="dblock">
     <h1 class="dtitle">电子健康档案状况</h1>
-    <Table :columns="columns1" :data="data1" width="500"></Table>
+    <Table :columns="columns1" :data="data1" :loading="loading" width="500"></Table>
     <chart :options="pie1" class="pie" id="pie1" ref="pie11"></chart>
   </div>
   <div class="dblock">
@@ -35,6 +35,7 @@ export default {
   name: "index",
   data(){
     return{
+      loading: true,
       columns1:[
         {title:'类型',key:'type'},
         {title:'总数',key:'sum'},
@@ -287,6 +288,8 @@ export default {
       ]
       // self.$refs.pie11.mergeOptions(self.pie1)
       $("#pie1").append("<div style='position: absolute;left: 75px;top: 130px;font-size: 28px'>总数："+data.repairCompanySum+"</div>")
+
+      self.loading= false
     })
 
     //区域对接情况
