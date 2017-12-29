@@ -67,7 +67,7 @@
     <Menu theme="light" class="left-menu"
           :active-name="this.$route.path" @on-select="select" >
       <MenuItem name="/center/eCarList"><Icon type="ios-paper"></Icon>爱车档案</MenuItem>
-      <MenuItem name="/center/perBindcar"><Icon type="ios-paper"></Icon>绑定车辆</MenuItem>
+      <!--<MenuItem name="/center/perBindcar"><Icon type="ios-paper"></Icon>绑定车辆</MenuItem>-->
       <MenuItem name="/center/notes"><Icon type="ios-paper"></Icon>通知管理</MenuItem>
       <MenuItem name="/center/perMyquestion"><Icon type="ios-paper"></Icon>我的咨询</MenuItem>
       <MenuItem name="/center/perMyvisit"><Icon type="ios-paper"></Icon>我的上门服务</MenuItem>

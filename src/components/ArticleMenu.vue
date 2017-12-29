@@ -77,7 +77,7 @@
       select(id){
 		    if(!id) return
         switch (id){
-          case '/center/eRecordList':{
+          case '/center/eCarList':{
             this.$router.push({
               path: id,
             })

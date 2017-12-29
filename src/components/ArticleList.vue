@@ -36,6 +36,11 @@
           url: '/article/writing/querylist/'+systok+'/'+id,
         }).then(function (res) {
           console.log(res)
+          if(res.data.data.length==1){
+            self.$router.replace({
+              path: self.path, query: {id: id, articleId: res.data.data[0].articleId}
+            })
+          }
           self.list= res.data.data
         })
       }

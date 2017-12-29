@@ -207,7 +207,7 @@ export default {
         content: '',
         id: '',
         list: []
-      }
+      },
     }
   },
   created(){
@@ -237,6 +237,9 @@ export default {
       datas.shift()
       self.article2.list= datas
     })
+  },
+  mounted(){
+
   },
   components: {
     myMap

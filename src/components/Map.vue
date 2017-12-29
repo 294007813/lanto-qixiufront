@@ -53,6 +53,12 @@
   <i @click="closeRates">×</i>
   <rate :comname="rateName" :comid="rateId" @success="closeRates"></rate>
 </div>
+
+<!--<Spin v-show="loading" fix >-->
+  <!--<Icon type="load-a" size=30 class="demo-spin-icon-load"></Icon>-->
+  <!--<div>Loading</div>-->
+<!--</Spin>-->
+  <Spin v-show="loading" size="large" fix></Spin>
 </div>
 </template>
 
@@ -91,7 +97,8 @@
         map: null,
         icon:null,
         rateName:"",
-        rateId: ""
+        rateId: "",
+        loading: true
       }
     },
     watch:{
@@ -171,6 +178,7 @@
       }
     },
     methods:{
+      //获取区域
       getArea(systok){
         let self=this
         this.axios({
@@ -181,6 +189,8 @@
           self.area= res.data.data
         })
       },
+
+      //获取左边列表数据
       getList(systok){
         let self= this,
           param = {
@@ -215,6 +225,8 @@
           }
         })
       },
+
+      //获取右边点数据
       getPoint(systok){
         let self= this,
           param = {
@@ -236,10 +248,12 @@
           for (let i in datas){
             let corp= datas[i]
             self.point(corp)
-
+            self.loading= false
           }
         })
       },
+
+      //将点渲染到地图
       point(corp){
         let self=this, point= new BMap.Point(corp.lng, corp.lat);
         let mar= new BMap.Marker(point, {icon: self.icon})
@@ -253,7 +267,7 @@
           '<li><span>经营范围：</span>' + (corp.companybusinessscope? corp.companybusinessscope: '') + '</li>' +
           // '<li><span>服务星级：</span>' + getStar(corp.STAR_LEVEL) + '</li>' +
           '<li><span>信誉等级：</span>' + (corp.creditLevel?corp.creditLevel:"" )+ '</li>' +
-          '<li><span>主修品牌：</span>' + (corp.vehicleband!="否"?corp.vehicleband: "") + '</li>' +
+          '<li><span>主修品牌：</span>' + (corp.vehicleband!="否"?corp.vehicleband?corp.vehicleband:"": "") + '</li>' +
           '<li><span>营业时间：</span>' + (corp.time?corp.time:"" )+ '</li>' +
           '<li><span>经营地址：</span>' + (corp.corpAdd? corp.corpAdd: "") + '</li>' +
           // '<li><span>联系电话：</span>' + (corp.linkTel?corp.linkTel:"") + '</li>' +
@@ -286,6 +300,8 @@
         this.map.addOverlay(mar);
         this.points[corp.corpId]= mar
       },
+
+      //计算显示距离
       calcApart(ap){
         let flap= parseFloat(ap)
         if(flap>=1000){
@@ -294,17 +310,21 @@
           return ap+' 米'
         }
       },
+      //地图上显示点信息
       openMapInfo(id){
         this.points[id].searchInfoWindow.open(this.points[id])
       },
+      //电机页码
       changePage(page){
         this.page= page
         this.getList()
       },
+      //点击选项
       changeSelect(){
         this.page=1
         this.getList()
       },
+      //重置地图点
       changeSelectAll(val){
         this.page=1
         this.map.clearOverlays();
@@ -313,6 +333,7 @@
           this.getPoint()
         }
       },
+      //打开评价
       appraise(id,name){
         let acctok= localStorage.getItem("ACCESSTOKEN"), self= this ;
         if(!acctok) {
@@ -323,6 +344,7 @@
         this.rateName= name
         $(".rates").show()
       },
+      //关闭评价
       closeRates(){
         $(".rates").hide()
       }
@@ -505,8 +527,14 @@
         width: 100%;
       }
     }
-    ul li{
-      line-height: 30px;
+    ul {
+      width: 300px;
+      li{
+        line-height: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
   .button{
@@ -536,4 +564,17 @@
 .map-frame .right .BMapLib_SearchInfoWindow table td:last-child{
   width: 120px;
 }
+
+.ivu-spin{
+  z-index: 889;
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
+}
+
 </style>

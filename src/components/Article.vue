@@ -15,20 +15,30 @@
         content:""
       }
     },
+    watch:{
+		  $route(newV){
+        this.getArticle()
+      }
+    },
     created(){
-		  let self=this, systok= localStorage.getItem('SYSTEMTOKEN'), id= this.$route.query.articleId
-      this.axios({
-        method: 'get',
-        url: '/article/writing/queryDetail/'+systok+'/'+id,
-      }).then(function (res) {
-        console.log(res)
-        self.content=res.data.data.content
-      })
+      this.getArticle()
     },
     mounted(){
       $(".detail").on("contextmenu", "img",function(e){
         return false;
       });
+    },
+    methods:{
+		  getArticle(){
+        let self=this, systok= localStorage.getItem('SYSTEMTOKEN'), id= this.$route.query.articleId
+        this.axios({
+          method: 'get',
+          url: '/article/writing/queryDetail/'+systok+'/'+id,
+        }).then(function (res) {
+          console.log(res)
+          self.content=res.data.data.content
+        })
+      }
     }
 	}
 </script>
@@ -41,7 +51,11 @@
   img{
     max-width: 100%;
   }
-  table td{border:1px solid #CCCCCC;}
+  table{
+    border:1px solid #CCCCCC;
+    border-collapse: collapse;
+    td{border:1px solid #CCCCCC;}
+  }
   a{
     font-weight: bold;
     font-size: 14px;

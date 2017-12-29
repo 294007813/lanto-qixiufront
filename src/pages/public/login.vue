@@ -1,6 +1,9 @@
 <template>
 <div class="login">
-  <div class="title"><h1>会员注册/登录</h1></div>
+  <div class="title">
+    <h1 v-show="this.$route.path!='/forget'">会员注册/登录</h1>
+    <h1 v-show="this.$route.path=='/forget'">找回密码</h1>
+  </div>
   <div class="under">
     <div class="left">
       <!--登录-->
