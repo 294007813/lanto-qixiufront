@@ -9,26 +9,26 @@
     <Option value="213">施救牵引企业</Option>
   </Select>
   <Input v-model="inputV" placeholder="输入企业名称/地址" :class="{inline: this.type=='maintain'}"
-         @on-enter="changeSelect">
-    <Button slot="append" icon="ios-search" @click="changeSelect"></Button>
+         @on-enter="changeSelectAll">
+    <Button slot="append" icon="ios-search" @click="changeSelectAll"></Button>
   </Input>
   <div class="select-bar" v-show="this.type=='index'||(this.type=='maintain'&&this.typeV=='164')">
-    <Select v-model="sortV" placeholder="企业排序" clearable @on-change="changeSelect">
+    <Select v-model="sortV" placeholder="企业排序" clearable @on-change="changeSelectAll">
       <Option value="1">信誉等级</Option>
       <Option value="2">服务评价</Option>
       <Option value="3">分数等级</Option>
     </Select>
-    <Select v-model="categoryV" placeholder="企业类型" clearable @on-change="changeSelect">
+    <Select v-model="categoryV" placeholder="企业类型" clearable @on-change="changeSelectAll">
       <Option value="43">一类维修企业</Option>
       <Option value="44">二类维修企业</Option>
       <Option value="45">三类维修业户</Option>
       <Option value="46">摩托车维修业户</Option>
       <Option value="47">汽车快修业户</Option>
     </Select>
-    <Select v-model="areaV" placeholder="企业区域" clearable @on-change="changeSelect">
+    <Select v-model="areaV" placeholder="企业区域" clearable @on-change="changeSelectAll">
       <Option v-for="(item, key) in area" :value="item.areakey" :key="key">{{item.areaname}}</Option>
     </Select>
-    <Select v-model="brandV" placeholder="输入品牌" clearable @on-change="changeSelect" filterable class="brand">
+    <Select v-model="brandV" placeholder="输入品牌" clearable @on-change="changeSelectAll" filterable class="brand">
       <Option v-for="(item, key) in brands" :value="item" :key="key"></Option>
     </Select>
   </div>
@@ -194,13 +194,13 @@
       getList(systok){
         let self= this,
           param = {
-          companycategory: this.categoryV,
           systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
+          companycategory: this.categoryV,
           corpAreaEq: this.areaV,
           corpName: this.inputV,
           magorBrandsLk: this.brandV,
           isort: parseInt(this.sortV),
-          starLevel:'',
+          // starLevel:'',
           type: this.typeV,
           limit: this.limit,
           page: this.page
@@ -232,6 +232,11 @@
           param = {
             systemToken: systok? systok: localStorage.getItem("SYSTEMTOKEN"),
             type: this.typeV,
+            companycategory: this.categoryV,
+            corpAreaEq: this.areaV,
+            corpName: this.inputV,
+            magorBrandsLk: this.brandV,
+            isort: parseInt(this.sortV),
             limit: 200,
             page: 1
           }
@@ -248,8 +253,8 @@
           for (let i in datas){
             let corp= datas[i]
             self.point(corp)
-            self.loading= false
           }
+          self.loading= false
         })
       },
 
@@ -314,7 +319,7 @@
       openMapInfo(id){
         this.points[id].searchInfoWindow.open(this.points[id])
       },
-      //电机页码
+      //点击页码
       changePage(page){
         this.page= page
         this.getList()
@@ -326,12 +331,13 @@
       },
       //重置地图点
       changeSelectAll(val){
+        this.loading= true
         this.page=1
         this.map.clearOverlays();
         this.getList()
-        if(val=='164'){
+        // if(val=='164'){
           this.getPoint()
-        }
+        // }
       },
       //打开评价
       appraise(id,name){

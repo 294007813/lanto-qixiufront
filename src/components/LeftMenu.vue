@@ -38,6 +38,7 @@
           :active-name="this.$route.path" @on-select="select" :open-names="['3','4','5','6']">
       <MenuItem name="/center/comHome"><Icon type="ios-paper"></Icon>首页</MenuItem>
       <MenuItem name="/center/eCarList"><Icon type="ios-paper"></Icon>电子健康档案</MenuItem>
+      <MenuItem name="/center/comUpRecord"><Icon type="ios-paper"></Icon>上传维修记录</MenuItem>
       <Submenu name="3">
         <template slot="title"><Icon type="ios-paper"></Icon>预约上门管理</template>
         <MenuItem name="/center/comVisit">上门服务管理</MenuItem>

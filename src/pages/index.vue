@@ -5,6 +5,11 @@
       <Carousel v-model="banner" loop autoplay :autoplay-speed="8000">
         <CarouselItem>
           <div class="content">
+            <img src="../assets/index/banner0.jpg"/>
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div class="content">
             <img src="../assets/index/banner1.jpg"/>
             <div class="words">
               <p>上海市机动车维修公共服务平台</p>

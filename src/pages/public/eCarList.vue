@@ -138,17 +138,19 @@ export default {
         data: JSON.stringify(self.formItem)
       }).then(function (response) {
         console.log(response)
-        let info= response.data.data, datas= response.data.data.content;
-        self.total=info.totalElements;
-        self.data=[]
-        for (let i in datas){
-          self.data.push({
-            id: datas[i].vehicleId,
-            order:  parseInt(i)+1,
-            card: datas[i].vehicleplatenumber,
-            vin: datas[i].vin,
-            comname: datas[i].companyname
-          })
+        if( response.data.code=='000000'){
+          let info= response.data.data, datas= response.data.data.content;
+          self.total=info.totalElements;
+          self.data=[]
+          for (let i in datas){
+            self.data.push({
+              id: datas[i].vehicleId,
+              order:  parseInt(i)+1,
+              card: datas[i].vehicleplatenumber,
+              vin: datas[i].vin,
+              comname: datas[i].companyname
+            })
+          }
         }
         self.loading=false
       })

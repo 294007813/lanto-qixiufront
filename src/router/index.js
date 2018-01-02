@@ -35,6 +35,7 @@ import ComAppoint from '@/pages/company/comappoint'
 import ComComplain from '@/pages/company/comcomplain'
 import ComUpload from '@/pages/company/comupload'
 import CompleteInfo from '@/pages/company/completeInfo'
+import comUpRecord from '@/pages/company/uploadRecord'
 
 //personal
 import BindCar from '@/pages/personal/bindcar'
@@ -118,6 +119,7 @@ export default new Router({
             {path: '/center/comAppoint', name: 'comAppoint', component: ComAppoint, meta: { requiresAuth: true }},
             {path: '/center/comComplain', name: 'comComplain', component: ComComplain, meta: { requiresAuth: true }},
             {path: '/center/comUpload', name: 'comUpload', component: ComUpload, meta: { requiresAuth: true }},
+            {path: '/center/comUpRecord', name: 'comUpRecord', component: comUpRecord, meta: { requiresAuth: true }},
 
             //车主中心
             {path: '/center/perBindcar', name: 'perBindcar', component: BindCar, meta: { requiresAuth: true }},

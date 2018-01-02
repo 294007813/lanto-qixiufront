@@ -45,3 +45,7 @@ img{vertical-align:top;border:none}
 .ivu-page:after{
   display: inline-block!important;
 }
+.ivu-row:after, .ivu-row:before{
+  /*display: inline-table!important;*/
+  display: none!important;
+}
