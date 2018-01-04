@@ -8,18 +8,35 @@
 
 <script>
   export default {
-    name: "myquestion",
+    name: "myvisit",
     data(){
       return{
         columns1:[
-          {title: '服务内容', key: 'qu'},
-          {title: '服务时间', key: 'time'},
-          {title: '服务状态', key: 'state'},
+          {title: '服务内容', key: 'content'},
+          {title: '服务状态', key: 'state', width: 100},
+          {title: '公司名称', key: 'comname', width: 250},
+          {title: '申请日期', key: 'time', width: 100},
         ],
         data1:[]
       }
     },
-
+    beforeMount(){
+      let self= this;
+      this.axios({
+        method: 'get',
+        url: '/company/serviceList/'+ localStorage.getItem("ACCESSTOKEN")
+      }).then(function (res) {
+        console.log(res.data)
+        for(let i in res.data.data){
+          let item= res.data.data[i]
+          self.data1.push({
+            content: item.content,
+            time: (new Date(item.servicetime).toISOString().split(".")[0].split("T")[0]),
+            comname: item.companyname
+          })
+        }
+      })
+    }
   }
 </script>
 

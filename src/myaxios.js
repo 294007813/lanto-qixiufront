@@ -13,7 +13,7 @@ axios.interceptors.response.use(
     // console.log(response);
     switch (response.data.code){
       //没有访问权限
-      case '130410':
+      // case '130410':
       //系统票据失效
       case '130411':{
         localStorage.removeItem("SYSTEMTOKEN")
@@ -43,7 +43,9 @@ axios.interceptors.response.use(
       }
       //票据非法
       case '130408':{}
-      //用户票据失效
+      //票据非法
+      case '130410':{}
+      //该用户没有访问权限
       case '130412':{
         localStorage.removeItem("ACCESSTOKEN");
         localStorage.removeItem("USERINFO");

@@ -13,8 +13,8 @@
         <li>联系电话：{{comTel}}</li>
         <li>联系人：{{comLinkName}}</li>
         <div>
-          <router-link tag="a" :to="{path: '/service/visitingService'}" class="to-visit">上门服务</router-link>
-          <router-link tag="a" :to="{path: '/service/reservationFix'}" class="to">预约服务</router-link>
+          <router-link tag="a" :to="{path: '/service/visitingService', query:{id: this.$route.query.id}}" class="to-visit">上门服务</router-link>
+          <router-link tag="a" :to="{path: '/service/reservationFix', query:{id: this.$route.query.id}}" class="to">预约服务</router-link>
         </div>
       </ul>
     </div>

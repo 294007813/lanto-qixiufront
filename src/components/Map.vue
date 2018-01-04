@@ -205,6 +205,9 @@
           limit: this.limit,
           page: this.page
         }
+        if(this.typeV!='164'){
+          param.companycategory= param.corpAreaEq= param.corpName= param.magorBrandsLk= param.isort= ''
+        }
         this.axios({
           method: 'post',
           url: '/maintain/getRangeCorps',
@@ -240,6 +243,9 @@
             limit: 200,
             page: 1
           }
+        if(this.typeV!='164'){
+          param.companycategory= param.corpAreaEq= param.corpName= param.magorBrandsLk= param.isort= ''
+        }
         this.axios({
           method: 'post',
           url: '/maintain/getRangeCorps',
@@ -281,8 +287,8 @@
           '</ul>' +
           '</div>' +
           '<div class="button">' +
-          '<a class=""  href="/#/service/visitingService" >上门服务</a>' +
-          '<a class=""  href="/#/service/reservationFix" >预约服务</a>' +
+          '<a class=""  href="/#/service/visitingService?id=' + corp.corpId + '" >上门服务</a>' +
+          '<a class=""  href="/#/service/reservationFix?id=' + corp.corpId + '" >预约服务</a>' +
           '<a class="blue"  href="/#/maintainDetail?id=' + corp.corpId + '">查看详情</a>' +
 
           '</div>';

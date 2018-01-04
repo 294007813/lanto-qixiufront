@@ -46,6 +46,6 @@ img{vertical-align:top;border:none}
   display: inline-block!important;
 }
 .ivu-row:after, .ivu-row:before{
-  /*display: inline-table!important;*/
-  display: none!important;
+  display: inline-table!important;
+  /*display: none!important;*/
 }

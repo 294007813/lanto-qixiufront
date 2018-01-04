@@ -163,8 +163,8 @@ export default new Router({
         {path: '/supervision/complaint', name: 'complaint', component: Complaint},
 
         // 公共服务
-        {path: '/service/visitingService', name: 'visitingService', component: VisitingService},
-        {path: '/service/reservationFix', name: 'reservationFix', component: ReservationFix},
+        {path: '/service/visitingService', name: 'visitingService', component: VisitingService, meta: { requiresAuth: true }},
+        {path: '/service/reservationFix', name: 'reservationFix', component: ReservationFix, meta: { requiresAuth: true }},
         {path: '/service/carDoctor', name: 'carDoctor', component: CarDoctor},
         {path: '/service/carDoctorDetail', name: 'carDoctorDetail', component: CarDoctorDetail},
         {path: '/service/questionSearch', name: 'questionSearch', component: QuestionSearch},

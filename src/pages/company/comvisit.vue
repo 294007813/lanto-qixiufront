@@ -18,10 +18,31 @@
           {title: '服务地址', key: 'address'},
           {title: '服务内容', key: 'content'},
           {title: '服务状态', key: 'state'},
+          {title: '申请日期', key: 'time'},
         ],
         data1:[]
       }
     },
+    beforeMount(){
+		  let self= this
+      this.axios({
+        method: 'get',
+        url: '/company/comServiceList/'+ localStorage.getItem("ACCESSTOKEN")
+      }).then(function (res) {
+        console.log(res.data)
+        for(let i in res.data.data) {
+          let item = res.data.data[i]
+          self.data1.push({
+            name: item.linkman,
+            phone: item.linktel,
+            address: item.address,
+            content: item.content,
+            state: item.status,
+            time: (new Date(item.servicetime).toISOString().split(".")[0].split("T")[0])
+          })
+        }
+      })
+    }
 	}
 </script>
 
