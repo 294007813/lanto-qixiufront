@@ -5,7 +5,7 @@ import store from './store/store'
 axios.defaults.timeout = 10000;
 // axios.defaults.baseURL = 'http://product.qixiu.shanghaiqixiu.org';
 // axios.defaults.baseURL = 'http://api.dev.shanghaiqixiu.org:8080/'
-axios.defaults.baseURL = 'http://192.168.169.105:9092/provider/'
+axios.defaults.baseURL = 'http://192.168.169.106:9092/provider/'
 
 // http response 拦截器
 axios.interceptors.response.use(

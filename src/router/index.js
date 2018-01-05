@@ -17,6 +17,7 @@ import Notes from '@/pages/public/notes'
 import NoteDetail from '@/pages/public/noteDetail'
 import BaseInfo from '@/pages/public/baseInfo'
 import ResetPassword from '@/pages/public/resetPassword'
+import Rank from '@/pages/public/rank'
 
 //manage
 import ManageHome from '@/pages/manager/home'
@@ -97,6 +98,7 @@ export default new Router({
         {path: '/public', name: 'public', component: ArticleMenu, children:[
             {path: '/public/articleList', name: 'articleList', component: ArticleList},
             {path: '/public/article', name: 'article', component: Article},
+            {path: '/public/rank', name: 'rank', component: Rank},
           ]},
         {path: '/association', name: 'association', component: ArticleMenu, children:[
             {path: '/association/articleList', name: 'assArticleList', component: ArticleList},

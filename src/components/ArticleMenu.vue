@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="overflow: hidden">
 <Row>
   <div class="left-block" v-show="patch()=='/public'">
     <div class="title">公共管理</div>
@@ -20,7 +20,8 @@
         <MenuItem name="/center/eCarList">电子维修档案</MenuItem>
         <MenuItem name="">客货运车辆技术管理</MenuItem>
         <MenuItem name="">企业合格证使用信息管理</MenuItem>
-        <MenuItem name="14">质量信誉考核信息</MenuItem>
+        <!--<MenuItem name="14">质量信誉考核信息</MenuItem>-->
+        <MenuItem name="/public/rank">质量信誉考核信息</MenuItem>
         <MenuItem name="15">违法违规公告</MenuItem>
       </Submenu>
       <Submenu name="3">
@@ -81,6 +82,13 @@
             this.$router.push({
               path: id,
             })
+            break
+          }
+          case '/public/rank':{
+            this.$router.push({
+              path: "/public/rank",
+            })
+            this.activeName="/public/rank"
             break
           }
           default :{

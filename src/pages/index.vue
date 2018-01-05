@@ -224,7 +224,7 @@ export default {
       // console.log(res)
       let datas= res.data.data
       self.article1.title= datas[0].title
-      self.article1.content= datas[0].content.replace(/<[^>]+>/g,"").substring(0,100)+'...'
+      self.article1.content= datas[0].content.replace(/<[^>]+>/g,"").substring(0,60)+'...'
       self.article1.id = datas[0].articleId
       datas.shift()
       self.article1.list= datas
@@ -237,7 +237,7 @@ export default {
       // console.log(res)
       let datas= res.data.data
       self.article2.title= datas[0].title
-      self.article2.content= datas[0].content.replace(/<[^>]+>/g,"").substring(0,100)+'...'
+      self.article2.content= datas[0].content.replace(/<[^>]+>/g,"").substring(0,60)+'...'
       self.article2.id = datas[0].articleId
       datas.shift()
       self.article2.list= datas
@@ -499,6 +499,7 @@ export default {
               }
               p {
                 color: #999;
+                font-size: 12px;
                 a {
                   font-size: 16px;
                   color: #4ba7f5;

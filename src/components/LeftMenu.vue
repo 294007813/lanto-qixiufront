@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="overflow: hidden">
 <Row>
   <div class="left-block" v-if="userType()==3">
     <div class="title">管理中心</div>
