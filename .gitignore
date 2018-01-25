@@ -3,6 +3,13 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.project
+.vscode
+.history
+.DS_Store
+.settings/
+build/env.js
+dist/
 
 # Editor directories and files
 .idea
